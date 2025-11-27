@@ -9,6 +9,43 @@ import {
 // img
 import SitMan from "../images/SitMan.png";
 import Black from "../images/blackshirt.png";
+import B_shirt from "../images/Black_shirt.png";
+import Blus_Tishert from "../images/pw_Tishirt.png";
+import butyBlack from "../images/back.png";
+
+import T_shirt from "../images/t-shirt.png";
+import Tsmall_shirt from "../images/small.png";
+
+const products = [
+  {
+    id: 1,
+    title: "Sneakers",
+    price: "$49.99",
+    material: "Leather",
+    img: butyBlack,
+  },
+  {
+    id: 2,
+    title: "Backpack",
+    price: "$29.99",
+    material: "Leather",
+    img: T_shirt,
+  },
+  {
+    id: 3,
+    title: "Sunglasses",
+    price: "$19.99",
+    material: "Plastic",
+    img: Tsmall_shirt,
+  },
+  {
+    id: 4,
+    title: "Headphones",
+    price: "$79.99",
+    material: "Metal & Plastic",
+    img: Blus_Tishert,
+  },
+];
 
 function Home() {
   return (
@@ -88,10 +125,70 @@ function Home() {
               className=" text-center mx-3 my-5 cursor-pointer hover:bg-[#b0b0b0] hover:scale-90 "
             />
           </div>
+
+          {/*   2nd New  this week */}
+
+          <div>
+            <div className="flex items-end justify-between">
+              <section className="font-show">
+                <h3 className="text-2xl font-bold text-[#282828]">NEW </h3>
+                <h3 className="text-2xl font-bold text-[#282828]">
+                  THIS WEEK{" "}
+                </h3>
+              </section>
+              {/* SECOND SECTION */}
+              <article className="text-blue-900  cursor-pointer hover:underline">
+                <a href="#" className="text-[#5E5E5E] font-gork text-sm">
+                  see all
+                </a>
+              </article>
+
+              {/* title ends here */}
+            </div>
+
+            <div>
+              <div className="w-full overflow-x-auto md:flex md:gap-4 no-scrollbar">
+                <div className="grid grid-cols-2 gap-4 md:flex md:gap-4">
+                  {products.map((item) => (
+                    <div
+                      key={item.id}
+                      className="p-3  rounded-lg hover:shadow-md transition"
+                    >
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="w-full rounded-md "
+                      />
+
+                      <div className="mt-2 flex items-center justify-between">
+                        <div>
+                          <h3 className="text-sm font-gork font-[600] ">
+                            {item.title}
+                          </h3>
+                          <p className="text-xs opacity-70 ">{item.price}</p>
+                          {/* end here */}
+                        </div>
+                        <p className="text-gray-500  font-gork font-[300] text-sm">
+                          {item.material}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/*  cloth sections endss here */}
+            </div>
+          </div>
         </div>
       </div>
     </>
   );
 }
+
+//  <img src={T_shirt} alt="" /> <img src={butyBlack} alt="" />
+//  <img src={Tsmall_shirt} alt="" />
+// <img src={Blus_Tishert} alt="" />
+//
 
 export default Home;
