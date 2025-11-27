@@ -1,5 +1,10 @@
 import React from "react";
-import { Search, ArrowRight } from "lucide-react";
+import {
+  Search,
+  ArrowRight,
+  MoveRight,
+  ArrowRightFromLine,
+} from "lucide-react";
 
 // img
 import SitMan from "../images/SitMan.png";
@@ -42,13 +47,10 @@ function Home() {
               </div>
 
               {/* Subtitle */}
-              <p className="text-lg text-gray-600">Summer</p>
+              <p className="text-lg text-black-600 font-show">Summer</p>
 
+              <p className=" text-gray-600 text-show">2024</p>
               {/* Go to shop */}
-              <button className="flex items-center gap-2 text-black mt-4">
-                Go to shop
-                <ArrowRight className="w-5 h-5" />
-              </button>
             </div>
 
             {/* RIGHT SIDE — IMAGES SECTION */}
@@ -65,6 +67,26 @@ function Home() {
                 className="w-[50%] rounded-md object-cover"
               />
             </div>
+          </div>
+
+          <div>
+            <button
+              className="flex items-center text-[#000] font-show gap-2 text-black mt-4 px-5 rounded-lg 
+          py-3 bg-[#b0b0b0] w-[80%]"
+            >
+              Go to shop
+              <ArrowRight className="w-5 hidden md:block lg:block   h-5" />
+            </button>
+          </div>
+          <div
+            //   w-[30%]
+            //   py-3 bg-[#b0b0b0] rounded-xl
+            className=" flex items-center gap-2 "
+          >
+            <MoveRight
+              width={50}
+              className=" text-center mx-3 my-5 cursor-pointer hover:bg-[#b0b0b0] hover:scale-90 "
+            />
           </div>
         </div>
       </div>
