@@ -45,6 +45,34 @@ const products = [
     material: "Metal & Plastic",
     img: Blus_Tishert,
   },
+  {
+    id: 2,
+    title: "Backpack",
+    price: "$29.99",
+    material: "Leather",
+    img: T_shirt,
+  },
+  {
+    id: 2,
+    title: "Backpack",
+    price: "$29.99",
+    material: "Leather",
+    img: B_shirt,
+  },
+  {
+    id: 2,
+    title: "Backpack",
+    price: "$29.99",
+    material: "Leather",
+    img: SitMan,
+  },
+  {
+    id: 1,
+    title: "Sneakers",
+    price: "$49.99",
+    material: "Leather",
+    img: butyBlack,
+  },
 ];
 
 function Home() {
@@ -148,32 +176,21 @@ function Home() {
 
             <div>
               <div className="w-full overflow-x-auto md:flex md:gap-4 no-scrollbar">
-                <div className="grid grid-cols-2 gap-4 md:flex md:gap-4">
-                  {products.map((item) => (
-                    <div
-                      key={item.id}
-                      className="p-3  rounded-lg hover:shadow-md transition"
-                    >
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        className="w-full rounded-md "
-                      />
+                {/*  */}
 
-                      <div className="mt-2 flex items-center justify-between">
-                        <div>
-                          <h3 className="text-sm font-gork font-[600] ">
-                            {item.title}
-                          </h3>
-                          <p className="text-xs opacity-70 ">{item.price}</p>
-                          {/* end here */}
-                        </div>
-                        <p className="text-gray-500  font-gork font-[300] text-sm">
-                          {item.material}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                <div className="relative flex items-center">
+                  <div
+                    id=""
+                    className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smoth"
+                  >
+                    {products.map((items) => (
+                      <img
+                        src={items.img}
+                        alt={items.alt}
+                        className="w-[220px] inline-block p-2 cursor-pointer hover:scale-108   ease-in-out duration-300  "
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -185,10 +202,38 @@ function Home() {
     </>
   );
 }
-
+//
 //  <img src={T_shirt} alt="" /> <img src={butyBlack} alt="" />
 //  <img src={Tsmall_shirt} alt="" />
 // <img src={Blus_Tishert} alt="" />
 //
 
 export default Home;
+
+//   <div className="grid md:gap-4">
+//   {products.map((item) => (
+//     <div
+//       key={item.id}
+//       className="p-3  rounded-lg hover:shadow-md transition"
+//     >
+//       <img
+//         src={item.img}
+//         alt={item.title}
+//         className="w-full rounded-md "
+//       />
+
+//       <div className="mt-2 flex items-center justify-between">
+//         <div>
+//           <h3 className="text-sm font-gork font-[600] ">
+//             {item.title}
+//           </h3>
+//           <p className="text-xs opacity-70 ">{item.price}</p>
+//           {/* end here */}
+//         </div>
+//         <p className="text-gray-500  font-gork font-[300] text-sm">
+//           {item.material}
+//         </p>
+//       </div>
+//     </div>
+//   ))}
+// </div>
