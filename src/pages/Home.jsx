@@ -184,11 +184,29 @@ function Home() {
                     className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smoth"
                   >
                     {products.map((items) => (
-                      <img
-                        src={items.img}
-                        alt={items.alt}
-                        className="w-[220px] inline-block p-2 cursor-pointer hover:scale-108   ease-in-out duration-300  "
-                      />
+                      <div className="inline-block w-[220px] h-[330px]  p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300">
+                        {/* */}
+                        <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between ">
+                          <img
+                            src={items.img}
+                            alt={items.alt}
+                            className="w-full h-48 object-cover rounded-md "
+                          />
+                          <div className="flex items-start gap-5  mt-2 px-2">
+                            <div>
+                              <h3 className="text-lg font-semibold truncate">
+                                {items.title}
+                              </h3>
+                              <p className="text-sm text-gray-500 truncate">
+                                {items.material}
+                              </p>
+                            </div>
+                            <p className="text-pink-600 font-bold">
+                              ${items.price}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
