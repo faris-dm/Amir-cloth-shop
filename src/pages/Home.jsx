@@ -2,6 +2,7 @@ import React from "react";
 import {
   Search,
   ArrowRight,
+  ArrowLeft,
   MoveRight,
   ArrowRightFromLine,
 } from "lucide-react";
@@ -76,6 +77,16 @@ const products = [
 ];
 
 function Home() {
+  let Slide = document.getElementById("slide");
+  const slideLeft = () => {
+    Slide = document.getElementById("slide");
+    Slide.scrollLeft = Slide.scrollLeft - 500;
+  };
+  const rightSlide = () => {
+    let Slide = document.getElementById("slide");
+    Slide.scrollLeft = Slide.scrollLeft = Slide.scrollLeft + 500;
+  };
+
   return (
     <>
       <div>
@@ -175,29 +186,33 @@ function Home() {
             </div>
 
             <div>
-              <div className="w-full overflow-x-auto md:flex md:gap-4 no-scrollbar">
+              <div className="w-full overflow-x-auto md:flex md:gap-4 no-scrollbar mb-8">
                 {/*  */}
 
                 <div className="relative flex items-center">
+                  <ArrowLeft onClick={slideLeft} />
                   <div
-                    id=""
+                    id="slide"
                     className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smoth"
                   >
                     {products.map((items) => (
-                      <div className="inline-block w-[220px] h-[330px]  p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300">
+                      <div
+                        key={items.id}
+                        className="inline-block w-[220px] h-[330px]  p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
+                      >
                         {/* */}
                         <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between ">
                           <img
                             src={items.img}
                             alt={items.alt}
-                            className="w-full h-48 object-cover rounded-md "
+                            className="w-full h-48 rounded-md "
                           />
-                          <div className="flex items-start gap-5  mt-2 px-2">
+                          <div className="flex items-start gap-5  px-2">
                             <div>
-                              <h3 className="text-lg font-semibold truncate">
+                              <h3 className="text-lg font-show truncate">
                                 {items.title}
                               </h3>
-                              <p className="text-sm text-gray-500 truncate">
+                              <p className=" text- text-sm text-gray-500  font-gork truncate">
                                 {items.material}
                               </p>
                             </div>
@@ -208,7 +223,13 @@ function Home() {
                         </div>
                       </div>
                     ))}
+                    <style>
+                      {`
+                    .no-scrollbar::-webkit-scrollbar { display: none; }
+                     .no-scrollbar { scrollbar-width: none; }  `}
+                    </style>{" "}
                   </div>
+                  <ArrowRight onClick={rightSlide} />
                 </div>
               </div>
 

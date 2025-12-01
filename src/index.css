@@ -6,3 +6,7 @@
   --font-show: "Playfair Display SC", serif;
   --font-gork: "Space Grotesk", sans-serif;
 }
+body {
+  background-color: cyan;
+  padding: 50px;
+}
