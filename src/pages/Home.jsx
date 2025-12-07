@@ -255,10 +255,10 @@ function Home() {
           <h3 className="text-2xl font-[900] text-[#282828]">COLLECTIONS</h3>
           <h3 className="text-2xl font-[200] text-[#282828]">23-24</h3>
           <div className="flex items-center gap-5 text-sm my-4 text-[#b0b0b0]">
-            <h4> ALL</h4>
-            <h4> Men</h4>
-            <h4> Women</h4>
-            <h4> Kid</h4>
+            <h4 className=" hover:underline cursor-pointer"> ALL</h4>
+            <h4 className=" hover:underline cursor-pointer"> Men</h4>
+            <h4 className=" hover:underline cursor-pointer"> Women</h4>
+            <h4 className=" hover:underline cursor-pointer"> Kid</h4>
           </div>
         </section>
         <article className="text-blue-900 cursor-pointer hover:underline text-right">
@@ -301,7 +301,7 @@ function Home() {
           </div>
         ))}
       </div>
-      <div className="flex justify-center items-center space-x-4 mt-6 mb-7">
+      <div className="flex justify-center items-center space-x-4 mt-6 mb-10">
         <ArrowLeft
           onClick={NewslideLeft}
           // Styling for black arrow, rounded corners, and shadow
@@ -315,7 +315,20 @@ function Home() {
         />
       </div>
       <footer>
-        <h2>Our Approch To Fashion DEsign</h2>
+        <h2 className="text-center capitaliz font-gork   font-[400] text-2xl my-6 text-[#282828]">
+          Our Approch To Fashion DEsign
+        </h2>
+
+        <p className=" text-center mx-[5%]">
+          <p>
+            {" "}
+            at the wlwgant vogue, we blend creativity with craftsmanship to
+            create
+          </p>
+          <p> fashion that transcends trend and stands the test of time each</p>
+          <p> design is metculously crafted ,ensuring the highest quelity</p>
+          exqulsite finish{" "}
+        </p>
       </footer>
     </div>
   );
