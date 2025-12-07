@@ -2,17 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
 @import "tailwindcss";
-
-/*
- * This is the only way to universally hide the scrollbar 
- * while keeping the overflow and scrolling functionality.
- */
+@theme {
+  --font-show: "Playfair Display SC", serif;
+  --font-gork: "Space Grotesk", sans-serif;
+}
+/* body {
+  background-color: cyan;
+  padding: 50px;
+} */
 
 #slide::-webkit-scrollbar {
   display: none;
 }
-
 #slide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
