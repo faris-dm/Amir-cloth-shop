@@ -12,6 +12,34 @@ import butyBlack from "../images/back.png";
 import T_shirt from "../images/t-shirt.png";
 import Tsmall_shirt from "../images/small.png";
 
+import WhiteMan from "../images/whiteMan.png";
+import glass from "../images/glass.png";
+import { title } from "framer-motion/client";
+
+const smallImages = [
+  {
+    id: 10,
+    title: "Basic Heavy T-Shirt",
+    price: "$199.99",
+    material: "cotton",
+    img: glass,
+  },
+  {
+    id: 11,
+    title: "Stright Fit Jeans",
+    price: "$299.99",
+    material: "Cotton Jeans",
+    img: SitMan,
+  },
+  {
+    id: 12,
+    title: "Basic Heavy T-Shirt",
+    price: "$299.99",
+    material: "Cotton Jeans",
+    img: WhiteMan,
+  },
+];
+
 const products = [
   // ... products data (kept as is) ...
   {
@@ -225,6 +253,40 @@ function Home() {
             see all
           </a>
         </article>
+      </div>
+      <div
+        ref={slideRef}
+        id="slide"
+        // Scrollbar must be hidden via external CSS
+        className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
+      >
+        {smallImages.map((items) => (
+          <div
+            key={items.id}
+            className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)] h-[300px] mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
+          >
+            <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between my-5">
+              <img
+                src={items.img}
+                alt={items.alt}
+                className="w-full h-48 rounded-md"
+              />
+              <div className="flex justify-between items-start gap-5 px-2">
+                <div>
+                  <h3 className="text-lg font-show truncate text-sm">
+                    {items.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 font-gork truncate ">
+                    {items.material}
+                  </p>
+                </div>
+                <p className="text-pink-600 font-bold text-xs">
+                  ${items.price}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
