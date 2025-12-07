@@ -102,6 +102,7 @@ const products = [
 
 function Home() {
   const slideRef = useRef(null);
+  const NewSlide = useRef(null);
   const SCROLL_AMOUNT = 320;
 
   const slideLeft = () => {
@@ -113,6 +114,18 @@ function Home() {
   const slideRight = () => {
     if (slideRef.current) {
       slideRef.current.scrollLeft += SCROLL_AMOUNT;
+    }
+  };
+
+  const NewslideLeft = () => {
+    if (NewSlide.current) {
+      NewSlide.current.scrollLeft -= SCROLL_AMOUNT;
+    }
+  };
+
+  const NewslideRight = () => {
+    if (NewSlide.current) {
+      NewSlide.current.scrollLeft += SCROLL_AMOUNT;
     }
   };
 
@@ -167,7 +180,7 @@ function Home() {
       </div>
 
       {/* Go to shop button (FIXED: w-40% for all screens, ArrowRight class simplified) */}
-      <button className="flex items-center text-[#000] font-show gap-2 text-black mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0] w-[35%]">
+      <button className="flex items-center text-[#000] font-show gap-2 text-black mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%]">
         Go to shop
         <ArrowRight className="w-5 h-5" />
       </button>
@@ -225,13 +238,13 @@ function Home() {
           <ArrowLeft
             onClick={slideLeft}
             // Styling for black arrow, rounded corners, and shadow
-            className="w-10 h-10 text-black bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
+            className="w-8 h-8 text-[#B0B0B0] bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
           />
 
           <ArrowRight
             onClick={slideRight}
             // Styling for black arrow, rounded corners, and shadow
-            className="w-10 h-10 text-black bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
+            className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
           />
         </div>
       </div>
@@ -255,7 +268,7 @@ function Home() {
         </article>
       </div>
       <div
-        ref={slideRef}
+        ref={NewSlide}
         id="slide"
         // Scrollbar must be hidden via external CSS
         className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
@@ -288,6 +301,22 @@ function Home() {
           </div>
         ))}
       </div>
+      <div className="flex justify-center items-center space-x-4 mt-6 mb-7">
+        <ArrowLeft
+          onClick={NewslideLeft}
+          // Styling for black arrow, rounded corners, and shadow
+          className="w-8 h-8 text-[#B0B0B0] bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
+        />
+
+        <ArrowRight
+          onClick={NewslideRight}
+          // Styling for black arrow, rounded corners, and shadow
+          className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
+        />
+      </div>
+      <footer>
+        <h2>Our Approch To Fashion DEsign</h2>
+      </footer>
     </div>
   );
 }
