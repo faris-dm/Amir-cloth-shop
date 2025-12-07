@@ -8,10 +8,10 @@ import Js_Filter from "./pages/Js_Filter";
 function App() {
   return (
     <div>
-      {/* <Navbar /> */}
-      {/* <Home /> */}
+      <Navbar />
+      <Home />
       {/* <Js_Filter /> */}
-      <Counter />
+      {/* <Counter /> */}
     </div>
   );
 }

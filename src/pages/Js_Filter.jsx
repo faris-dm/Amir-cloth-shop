@@ -4,7 +4,10 @@ function Js_Filter() {
   const [inputValue, New_inputVallue] = useState("");
   const Li_Style = "bg-red-400 p-5 pl-3 m-1 rounded-lg";
   const All_Li = document.querySelectorAll("ul > li");
-  const Choose = ["Banana", "orange", "coconat", "apple", ""];
+  const Choose = ["Banana", "Avocado", "orange", "coconat", "apple", ""];
+  const filterList = Choose.filter((ite) =>
+    ite.toLowerCase().includes(inputValue.toLowerCase())
+  );
 
   return (
     <div>
@@ -20,11 +23,13 @@ function Js_Filter() {
             id=""
             placeholder=""
           />
-          {Choose.map((items) => (
-            <ul>
-              <li>{items}</li>
-            </ul>
-          ))}
+          <ul className=" space-y-2">
+            {Choose.length < 0 ? (
+              Choose.map((item) => <li>{item}</li>)
+            ) : (
+              <li> No items match your search. </li>
+            )}
+          </ul>
 
           {/* <ul>
             <li> Mango</li>

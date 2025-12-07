@@ -1,46 +1,38 @@
 import React, { useState } from "react";
 
 function counter() {
-  const [clicked, setCliked] = useState(0);
+  const [clicked, SetClicked] = useState(0);
+  function Added() {
+    SetClicked(clicked + 1);
+  }
+  function RemovedOne() {
+    SetClicked(clicked - 1);
+  }
 
-  const Added = () => {
-    setCliked(clicked + 1);
-  };
-
-  const Remove = () => {
-    setCliked(clicked - 1);
-  };
-  const Zero = () => {
-    setCliked(0);
-  };
+  function Zero() {
+    SetClicked(0);
+  }
+  const style = " px-7 py-2 bg-cyan-400 rounded-lg text-white";
 
   return (
     <div>
-      <div className="flex gap-5 items-center justify-around">
-        <button
-          className=" px-8 py-1  bg-cyan-400 rounded-lg text-white"
-          onClick={Added}
-        >
-          {" "}
-          Add
-        </button>
-        <button
-          onClick={Remove}
-          className=" px-8 py-1  bg-cyan-400 rounded-lg text-white"
-        >
-          {" "}
-          Remove
-        </button>
-        <button
-          onClick={Zero}
-          className=" px-8 py-1  bg-cyan-400 rounded-lg text-white"
-        >
-          {" "}
-          Zero
-        </button>
-      </div>
-      <div className=" text-center my-6">
-        <p>{clicked < 0 ? "Negative is Not Allowed" : clicked}</p>
+      <div className=" text-center">
+        <div className="flex gap-7">
+          <button onClick={Added} className={style}>
+            {" "}
+            Add{" "}
+          </button>
+          <button onClick={RemovedOne} className={style}>
+            Remove{" "}
+          </button>
+          <button onClick={Zero} className={style}>
+            {" "}
+            Zero
+          </button>
+        </div>
+        <div className="">
+          <p>{clicked < 0 ? "Negative is not allowed " : clicked}</p>
+        </div>
       </div>
     </div>
   );
