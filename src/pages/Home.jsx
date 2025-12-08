@@ -42,6 +42,20 @@ const smallImages = [
     material: "Cotton Jeans",
     img: WhiteMan,
   },
+  {
+    id: 12,
+    title: "Basic Heavy T-Shirt",
+    price: "$299.99",
+    material: "Cotton Jeans",
+    img: WhiteMan,
+  },
+  {
+    id: 11,
+    title: "Stright Fit Jeans",
+    price: "$299.99",
+    material: "Cotton Jeans",
+    img: SitMan,
+  },
 ];
 
 //   this  is final array
@@ -267,9 +281,9 @@ function Home() {
 
       <div className="flex items-end justify-between my-7">
         <section className="font-gork">
-          <h3 className="text-2xl font-[1000] text-[#282828]">XlV</h3>
-          <h3 className="text-2xl font-[900] text-[#282828]">COLLECTIONS</h3>
-          <h3 className="text-2xl font-[200] text-[#282828]">23-24</h3>
+          <h3 className="text-3xl  font-[1000] text-[#282828]">XlV</h3>
+          <h3 className="text-3xl  font-[900] text-[#282828]">COLLECTIONS</h3>
+          <h3 className="text-3xl py-1 font-[200] text-[#282828]">23-24</h3>
           <div className="flex items-center gap-5 text-sm my-4 text-[#b0b0b0]">
             <h4 className=" hover:underline cursor-pointer"> ALL</h4>
             <h4 className=" hover:underline cursor-pointer"> Men</h4>
@@ -292,24 +306,24 @@ function Home() {
         {smallImages.map((items) => (
           <div
             key={items.id}
-            className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)] h-[300px] mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
+            className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)]  mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
           >
             <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between my-5">
               <img
                 src={items.img}
                 alt={items.alt}
-                className="w-full h-48 rounded-md"
+                className="w-full h-80 rounded-md"
               />
               <div className="flex justify-between items-start gap-5 px-2">
-                <div>
-                  <h3 className="text-lg font-show truncate text-sm">
+                <div className="py-5">
+                  <h3 className="text-lg font-show truncate text-sm ">
                     {items.title}
                   </h3>
                   <p className="text-xs text-gray-500 font-gork truncate ">
                     {items.material}
                   </p>
                 </div>
-                <p className="text-pink-600 font-bold text-xs">
+                <p className="text-pink-600 font-bold text-xs py-5">
                   ${items.price}
                 </p>
               </div>
@@ -332,7 +346,7 @@ function Home() {
       </div>
 
       <h2 className="text-center capitaliz font-gork   font-[400] text-2xl my-6 text-[#282828]">
-        Our Approch To Fashion DEsign
+        Our Approch To Fashion Design
       </h2>
 
       <div className="lowercase text-gray-500  font-gork text-sm ">
