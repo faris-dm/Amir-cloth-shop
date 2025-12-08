@@ -5,6 +5,10 @@ import "./home.css";
 
 // img imports (kept as is)
 import SitMan from "../images/SitMan.png";
+import stand from "../images/standMan.png";
+import half from "../images/halfCloth.png";
+import slow from "../images/slow.png";
+
 import Black from "../images/blackshirt.png";
 import B_shirt from "../images/Black_shirt.png";
 import Blus_Tishert from "../images/pw_Tishirt.png";
@@ -40,6 +44,18 @@ const smallImages = [
   },
 ];
 
+//   this  is final array
+const fooetImages = [
+  {
+    img: slow,
+  },
+  {
+    img: stand,
+  },
+  {
+    img: half,
+  },
+];
 const products = [
   // ... products data (kept as is) ...
   {
@@ -204,29 +220,29 @@ function Home() {
           ref={slideRef}
           id="slide"
           // Scrollbar must be hidden via external CSS
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
+          className="w-full h-fit overflow-x-scroll whitespace-nowrap scroll-smooth"
         >
           {products.map((items) => (
             <div
               key={items.id}
-              className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)] h-[300px] mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
+              className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)] mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
             >
-              <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between my-5">
+              <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between my-10  ">
                 <img
                   src={items.img}
                   alt={items.alt}
-                  className="w-full h-48 rounded-md"
+                  className="w-full h-[42vh] rounded-md"
                 />
-                <div className="flex justify-between items-start gap-5 px-2">
-                  <div>
-                    <h3 className="text-lg font-show truncate">
+                <div className="flex justify-between items-start gap-5 px-2 ">
+                  <div className="">
+                    <h3 className="text-lg font-show truncate pt-5">
                       {items.title}
                     </h3>
                     <p className="text-sm text-gray-500 font-gork truncate">
                       {items.material}
                     </p>
                   </div>
-                  <p className="text-pink-600 font-bold">${items.price}</p>
+                  <p className="text-pink-600 pt-5 font-bold">${items.price}</p>
                 </div>
               </div>
             </div>
@@ -314,12 +330,13 @@ function Home() {
           className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
         />
       </div>
-      <footer>
-        <h2 className="text-center capitaliz font-gork   font-[400] text-2xl my-6 text-[#282828]">
-          Our Approch To Fashion DEsign
-        </h2>
 
-        <p className=" text-center mx-[5%]">
+      <h2 className="text-center capitaliz font-gork   font-[400] text-2xl my-6 text-[#282828]">
+        Our Approch To Fashion DEsign
+      </h2>
+
+      <div className="lowercase text-gray-500  font-gork text-sm ">
+        <p className=" text-center  mx-[5%]">
           <p>
             {" "}
             at the wlwgant vogue, we blend creativity with craftsmanship to
@@ -329,7 +346,14 @@ function Home() {
           <p> design is metculously crafted ,ensuring the highest quelity</p>
           exqulsite finish{" "}
         </p>
-      </footer>
+      </div>
+      <div>
+        <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
+          <div class="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] h-auto mt-0">
+            <img src={half} alt="" />{" "}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
