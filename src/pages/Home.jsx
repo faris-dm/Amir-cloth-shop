@@ -18,6 +18,7 @@ import Tsmall_shirt from "../images/small.png";
 
 import WhiteMan from "../images/whiteMan.png";
 import glass from "../images/glass.png";
+import standMan from "../images/standMan.png";
 import { title } from "framer-motion/client";
 
 const smallImages = [
@@ -373,6 +374,12 @@ function Home() {
         <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
           <div class="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] h-auto mt-0">
             <img src={half} alt="" />{" "}
+          </div>
+          <div class="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] h-auto mt-0">
+            <img src={standMan} alt="" />{" "}
+          </div>
+          <div class="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] h-auto mt-0">
+            <img src={SitMan} alt="" />{" "}
           </div>
         </div>
       </div>
