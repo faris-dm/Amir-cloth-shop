@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "gc": "nodemon App.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

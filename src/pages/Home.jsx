@@ -352,14 +352,20 @@ function Home() {
       </h2>
 
       <div className="lowercase text-gray-500  font-gork text-sm ">
-        <p className=" text-center  mx-[5%]">
-          <p>
+        <p className=" text-center   text-xs w-[95%] my-5">
+          <p className="pb-1 ">
             {" "}
-            at the wlwgant vogue, we blend creativity with craftsmanship to
+            at the alagant vogue, we blend creativity with craftsmanship to
             create
           </p>
-          <p> fashion that transcends trend and stands the test of time each</p>
-          <p> design is metculously crafted ,ensuring the highest quelity</p>
+          <p className="pb-1">
+            {" "}
+            fashion that transcends trend and stands the test of time each
+          </p>
+          <p className="pb-1">
+            {" "}
+            design is metculously crafted ,ensuring the highest quelity
+          </p>
           exqulsite finish{" "}
         </p>
       </div>
