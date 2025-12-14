@@ -23,3 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 explain.txt
+node_modules/
