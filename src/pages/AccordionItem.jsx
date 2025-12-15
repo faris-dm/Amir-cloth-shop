@@ -9,15 +9,13 @@ const AccordionItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const contentRef = useRef(null);
-  const ShowImages = () => {
-    show(!hidden);
-  };
+
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="border-b border-gray-200 hidden">
+    <div className="`border-b border-gray-200 ">
       {/* Header Button */}
       <button
         className="flex justify-between items-center w-full p-4 text-left font-semibold text-lg text-gray-800 hover:bg-gray-50 focus:outline-none transition duration-150"

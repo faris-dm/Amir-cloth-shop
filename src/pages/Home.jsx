@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 // Removed MoveRight as it's not used
 import { Search, ArrowRight, ArrowLeft } from "lucide-react";
 import "./home.css";
@@ -59,7 +59,6 @@ const smallImages = [
     img: SitMan,
   },
 ];
-
 //   this  is final array
 const fooetImages = [
   {
@@ -141,6 +140,10 @@ function Home() {
     if (slideRef.current) {
       slideRef.current.scrollLeft -= SCROLL_AMOUNT;
     }
+  };
+  const [isAccordionVisible, setIsAccordionVisible] = useState(true);
+  const handleToggle = () => {
+    setIsAccordionVisible((prev) => !prev);
   };
 
   const slideRight = () => {
@@ -353,10 +356,16 @@ function Home() {
             className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
           />
         </div>
-        <div className="inline *:">
-          <Icon className="" />
-          <Accordion />
+        <div className="mb-4">
+          <Icon onClick={handleToggle} isOpen={isAccordionVisible} />
         </div>
+
+        {/* ⭐ ADD THIS SECTION ⭐ */}
+        {isAccordionVisible && (
+          <div className="w-full max-w-2xl mx-auto">
+            <Accordion />
+          </div>
+        )}
         <h2 className="text-center capitaliz font-gork   font-normal text-2xl my-6 text-[#282828]">
           Our Approch To Fashion Design
         </h2>

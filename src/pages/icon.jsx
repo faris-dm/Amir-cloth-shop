@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 
 function Icon() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState();
 
   return (
     <div>
