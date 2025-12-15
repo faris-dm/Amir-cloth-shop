@@ -1,15 +1,14 @@
 import React from "react";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
-import Counter from "./pages/counter";
-
-import Js_Filter from "./pages/Js_Filter";
+import Icon from "./pages/icon";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Home />
+
       {/* <Js_Filter /> */}
       {/* <Counter /> */}
     </div>

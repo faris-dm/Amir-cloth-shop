@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 // Removed MoveRight as it's not used
 import { Search, ArrowRight, ArrowLeft } from "lucide-react";
 import "./home.css";
+import Accordion from "./Accordion";
 
 // img imports (kept as is)
 import SitMan from "../images/SitMan.png";
@@ -19,8 +20,7 @@ import Tsmall_shirt from "../images/small.png";
 import WhiteMan from "../images/whiteMan.png";
 import glass from "../images/glass.png";
 import standMan from "../images/standMan.png";
-import Footer from "../images/VR.svg";
-import { div, title } from "framer-motion/client";
+import Icon from "./icon";
 
 const smallImages = [
   {
@@ -214,7 +214,7 @@ function Home() {
           </div>
 
           {/* Go to shop button (FIXED: w-40% for all screens, ArrowRight class simplified) */}
-          <button className="flex items-center  lg:text-right text-[#000] font-show gap-2 text-black mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%]">
+          <button className="flex items-center  lg:text-right text-black font-show gap-2 mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%]">
             Go to shop
             <ArrowRight className="w-5 h-5" />
           </button>
@@ -271,7 +271,7 @@ function Home() {
           </div>
 
           {/* 2. ARROWS SECTION (New Location: BELOW the slider, CENTERED, Black, Rounded) */}
-          <div className="flex justify-center items-center space-x-4 mt-6">
+          <div className="flex justify-center items-center space-x-4 mt-6 ">
             <ArrowLeft
               onClick={slideLeft}
               // Styling for black arrow, rounded corners, and shadow
@@ -289,8 +289,10 @@ function Home() {
         <div className="flex items-end justify-between my-7">
           <section className="font-gork">
             <h3 className="text-3xl  font-[1000] text-[#282828]">XlV</h3>
-            <h3 className="text-3xl  font-[900] text-[#282828]">COLLECTIONS</h3>
-            <h3 className="text-3xl py-1 font-[200] text-[#282828]">23-24</h3>
+            <h3 className="text-3xl  font-black text-[#282828]">COLLECTIONS</h3>
+            <h3 className="text-3xl py-1 font-extralight text-[#282828]">
+              23-24
+            </h3>
             <div className="flex items-center gap-5 text-sm my-4 text-[#b0b0b0]">
               <h4 className=" hover:underline cursor-pointer"> ALL</h4>
               <h4 className=" hover:underline cursor-pointer"> Men</h4>
@@ -319,11 +321,11 @@ function Home() {
                 <img
                   src={items.img}
                   alt={items.alt}
-                  className="w-full h-80 rounded-md"
+                  className="w-full h-65 rounded-md"
                 />
-                <div className="flex justify-between items-start gap-5 px-2">
+                <div className="flex justify-between items-start gap-3 px-2">
                   <div className="py-5">
-                    <h3 className="text-lg font-show truncate text-sm ">
+                    <h3 className="font-show truncate text-xs ">
                       {items.title}
                     </h3>
                     <p className="text-xs text-gray-500 font-gork truncate ">
@@ -338,7 +340,7 @@ function Home() {
             </div>
           ))}
         </div>
-        <div className="flex justify-center items-center space-x-4 mt-6 mb-10">
+        <div className="hidden justify-center items-center space-x-4 mt-6 mb-10 ">
           <ArrowLeft
             onClick={NewslideLeft}
             // Styling for black arrow, rounded corners, and shadow
@@ -351,18 +353,21 @@ function Home() {
             className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
           />
         </div>
-
-        <h2 className="text-center capitaliz font-gork   font-[400] text-2xl my-6 text-[#282828]">
+        <div className="inline *:">
+          <Icon className="" />
+          <Accordion />
+        </div>
+        <h2 className="text-center capitaliz font-gork   font-normal text-2xl my-6 text-[#282828]">
           Our Approch To Fashion Design
         </h2>
 
         <div className="lowercase text-gray-500  font-gork text-sm ">
           <p className=" text-center   text-xs w-[95%] my-5">
-            <p className="pb-1 ">
+            <div className="pb-1 ">
               {" "}
               at the alagant vogue, we blend creativity with craftsmanship to
               create
-            </p>
+            </div>
             <p className="pb-1">
               {" "}
               fashion that transcends trend and stands the test of time each
@@ -404,9 +409,9 @@ function Home() {
       {/* grid grid-cols-2 place-items-center h-40 justify-around */}
       <footer className="bg-[#EBEBEB]  pb-6">
         <div className="grid grid-cols-2 items-center px-6">
-          <div className="text-[6px] text-[#9a9393]  font-lg  grid gap-5">
+          <div className="text-[8px] text-[#9a9393]  font-lg  grid gap-5 pt-6 hover:underline">
             <div className=" ">
-              <p>INFO</p>
+              <p className="hover:underline">INFO</p>
               <section>
                 <p>PRICING</p>
                 <p>ABOUT</p>
