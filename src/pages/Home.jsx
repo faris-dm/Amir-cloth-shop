@@ -5,7 +5,7 @@ import "./home.css";
 import Accordion from "./Accordion";
 
 // img imports (kept as is)
-import SitMan from "../images/SitMan.png";
+import SitMan from "../images/sitMan.png";
 import stand from "../images/standMan.png";
 import half from "../images/halfCloth.png";
 import slow from "../images/slow.png";
