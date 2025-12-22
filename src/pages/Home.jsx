@@ -172,7 +172,7 @@ function Home() {
             {/* LEFT SIDE — TITLE/SEARCH SECTION */}
             <div className="title space-y-4 w-full md:w-1/2 lg:w-1/2">
               {/* Small heading (kept as is) */}
-              <div className="text-sm uppercase tracking-widest font-[300]">
+              <div className="text-sm uppercase tracking-widest font-light">
                 <p>NEW</p>
                 <p>WOMEN</p>
                 <p>KIDS</p>
@@ -193,7 +193,7 @@ function Home() {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-show">
                   NEW
                 </h1>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-[900] font-show text-[#282828]">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-show text-[#282828]">
                   COLLECTION
                 </h1>
               </div>
@@ -361,35 +361,62 @@ function Home() {
         </div>
 
         {/* ⭐ ADD THIS SECTION ⭐ */}
-        {isAccordionVisible && (
+        {/* {isAccordionVisible && (
           <div className="w-full max-w-2xl mx-auto">
             <Accordion />
           </div>
-        )}
-        <h2 className="text-center capitaliz font-gork   font-normal text-2xl my-6 text-[#282828]">
-          Our Approch To Fashion Design
+        )} */}
+        <h2
+          className="text-center capitalize font-gork font-normal text-2xl my-6 text-[#282828]
+               md:text-3xl md:my-8 
+               lg:text-4xl lg:my-10  mt-25 pt-12"
+        >
+          Our Approach To Fashion Design
         </h2>
 
-        <div className="lowercase text-gray-500  font-gork text-sm ">
-          <p className=" text-center   text-xs w-[95%] my-5">
-            <div className="pb-1 ">
-              {" "}
-              at the alagant vogue, we blend creativity with craftsmanship to
+        <div
+          className="lowercase text-gray-500 font-gork text-sm 
+                md:text-base 
+                lg:text-lg pb-15"
+        >
+          <div
+            className="text-center mx-auto my-5 
+                  md:w-[90%] 
+                  lg:w-[80%] lg:max-w-2xl"
+          >
+            <p
+              className="text-xs pb-1 
+                  md:text-sm 
+                  lg:text-base"
+            >
+              At The Alagant Vogue, we blend creativity with craftsmanship to
               create
-            </div>
-            <p className="pb-1">
-              {" "}
-              fashion that transcends trend and stands the test of time each
             </p>
-            <p className="pb-1">
-              {" "}
-              design is metculously crafted ,ensuring the highest quelity
+            <p
+              className="text-xs pb-1 
+                  md:text-sm 
+                  lg:text-base"
+            >
+              fashion that transcends trends and stands the test of time. Each
             </p>
-            exqulsite finish{" "}
-          </p>
+            <p
+              className="text-xs pb-1 
+                  md:text-sm 
+                  lg:text-base"
+            >
+              design is meticulously crafted, ensuring the highest quality and
+            </p>
+            <p
+              className="text-xs 
+                  md:text-sm 
+                  lg:text-base"
+            >
+              exquisite finish.
+            </p>
+          </div>
         </div>
-        <div>
-          <div className="flex gap-5 w-full my-7">
+        <div className="">
+          <div className="flex gap-5 w-full my-7 mb-30">
             {/* w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] h-auto mt-0 */}
             <div class="w-1/3 ">
               <img
@@ -416,23 +443,35 @@ function Home() {
         </div>
       </div>
       {/* grid grid-cols-2 place-items-center h-40 justify-around */}
-      <footer className="bg-[#EBEBEB]  pb-6">
+      <footer className="bg-[#EBEBEB]   pt-6 pb-8">
         <div className="grid grid-cols-2 items-center px-6">
-          <div className="text-[8px] text-[#9a9393]  font-lg  grid gap-5 pt-6 hover:underline">
-            <div className=" ">
-              <p className="hover:underline">INFO</p>
+          <div className="text-[9px] text-[#9a9393]  font-lg   grid gap-5 pt-6 ">
+            <div className="mb-7 lowrcase ">
+              <p className="hover:underline text-[10px] py-1">INFO</p>
               <section>
-                <p>PRICING</p>
-                <p>ABOUT</p>
-                <p>CONTACT</p>
+                <p className="hover:underline text-[10px] md:text-[12px] py-px">
+                  PRICING
+                </p>
+                <p className="hover:underline text-[10px] md:text-[12px] py-px">
+                  ABOUT
+                </p>
+                <p className="hover:underline text-[10px] md:text-[12px] py-px">
+                  CONTACT
+                </p>
               </section>
             </div>
             <div>
-              <p>LANGUAGE</p>
-              <section>
-                <p>ENG</p>
-                <p>ESP</p>
-                <p>SVE</p>
+              <p className="hover:underline text-[12px] py-1">LANGUAGE</p>
+              <section className="text-[10px] md:text-[15px]">
+                <p className="hover:underline text-[10px] md:text-[12px] py-px">
+                  ENG
+                </p>
+                <p className="hover:underline text-[10px] md:text-[12px] py-px">
+                  ESP
+                </p>
+                <p className="hover:underline text-[10px] md:text-[12px] py-px">
+                  SVE
+                </p>
               </section>
             </div>
           </div>
