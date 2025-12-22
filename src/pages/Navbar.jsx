@@ -1,9 +1,7 @@
 import React from "react";
 import { Menu, User, Heart, ShoppingBag } from "lucide-react";
 
-//  imges
-
-import PlayLogo from "../images/PlayLogo.png";
+import PlayLogo from "../images/playLogo.png";
 
 function Navbar() {
   return (
