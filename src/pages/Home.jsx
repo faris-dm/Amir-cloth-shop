@@ -9,7 +9,7 @@ import SitMan from "../images/sitMan.png";
 import stand from "../images/standMan.png";
 import half from "../images/halfCloth.png";
 import slow from "../images/slow.png";
-import PlayLogo from "../images/PlayLogo.png";
+import PlayLogo from "../images/playLogo.png";
 import Black from "../images/blackshirt.png";
 import B_shirt from "../images/Black_shirt.png";
 import Blus_Tishert from "../images/pw_Tishirt.png";
