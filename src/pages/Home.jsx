@@ -257,14 +257,14 @@ function Home() {
                   />
                   <div className="flex justify-between items-start gap-5 px-2 ">
                     <div className="">
-                      <h3 className="text-lg font-show truncate pt-5">
+                      <h3 className="text-lg  md:text-xs lg:text-lg  font-show truncate pt-5 ">
                         {items.title}
                       </h3>
-                      <p className="text-sm text-gray-500 font-gork truncate">
+                      <p className="text-sm md:text-xs text-gray-500 font-gork truncate py-2">
                         {items.material}
                       </p>
                     </div>
-                    <p className="text-pink-600 pt-5 font-bold">
+                    <p className="text-pink-600 pt-5 font-bold md:text-xs">
                       {items.price}
                     </p>
                   </div>
@@ -328,10 +328,10 @@ function Home() {
                 />
                 <div className="flex justify-between items-start gap-3 px-2">
                   <div className="py-5">
-                    <h3 className="font-show truncate text-xs ">
+                    <h3 className="font-show truncate text-[6px]">
                       {items.title}
                     </h3>
-                    <p className="text-xs text-gray-500 font-gork truncate ">
+                    <p className="text-xs text-[10px] text-gray-500 font-gork truncate ">
                       {items.material}
                     </p>
                   </div>
@@ -444,7 +444,7 @@ function Home() {
       </div>
       {/* grid grid-cols-2 place-items-center h-40 justify-around */}
       <footer className="bg-[#EBEBEB]   pt-6 pb-8">
-        <div className="grid grid-cols-2 items-center px-6">
+        <div className="grid grid-cols-2 items-center px-6 pb-8">
           <div className="text-[9px] text-[#9a9393]  font-lg   grid gap-5 pt-6 ">
             <div className="mb-7 lowrcase ">
               <p className="hover:underline text-[10px] py-1">INFO</p>

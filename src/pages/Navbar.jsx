@@ -7,11 +7,11 @@ function Navbar() {
   return (
     <>
       <div>
-        <nav className="flex items-center justify-between  px-5 py-6">
+        <nav className="flex items-center justify-between  px-9 py-6">
           <div className="flex ">
-            <Menu />
-            <div className=" hidden">
-              <ul>
+            <Menu className="mr-7 md:hidden" />
+            <div className=" hidden md:block">
+              <ul className="flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer">
                 <li> Home</li>
                 <li> Collection</li>
                 <li>New</li>
@@ -23,14 +23,14 @@ function Navbar() {
             <img src={PlayLogo} alt="" />
           </div>
           {/* logo finsihs here */}
-          <div>
-            <div className="hidden">
+          <div className="hidden  md:flex items-center gap-4">
+            <div className="flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer ">
               <Heart />
               <h3>Cart</h3>
               <ShoppingBag />
             </div>
             <User
-              className="text-[#b0b0b0]  bg-[#000] p-1 rounded-xl  "
+              className="text-[#b0b0b0]  bg-black p-1 rounded-xl  "
               size={25}
             />
           </div>
