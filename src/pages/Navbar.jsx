@@ -24,7 +24,7 @@ function Navbar() {
           </div>
           {/* logo finsihs here */}
           <div className="  md:flex items-center gap-4">
-            <div className="hidden  md:flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer ">
+            <div className="hidden md:flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer ">
               <Heart />
               <h3>Cart</h3>
               <ShoppingBag />

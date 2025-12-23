@@ -198,7 +198,7 @@ function Home() {
                 </h1>
               </div>
               <p className="text-lg text-black-600 font-show">Summer</p>
-              <p className="text-gray-600 text-show">2024</p>
+              <p className="text-gray-600 text-show">2026</p>
             </div>
 
             {/* RIGHT SIDE — IMAGES SECTION (kept as is) */}
@@ -217,7 +217,7 @@ function Home() {
           </div>
 
           {/* Go to shop button (FIXED: w-40% for all screens, ArrowRight class simplified) */}
-          <button className="flex md:flex items-center  lg:text-right text-black font-show gap-2 mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%] lg:w-[20%]">
+          <button className="flex md:flex items-center  lg:text-right text-black font-show gap-2 mt-10 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%] lg:w-[20%]">
             Go to shop
             <ArrowRight className="w-5 h-5 hidden md:block lg:block" />
           </button>
@@ -360,6 +360,9 @@ function Home() {
           />
         </div>
         <div className="mb-4">
+          <p className="text-center font-gork text-sm text-[#262626] ml-5">
+            Show more
+          </p>
           <Icon onClick={handleToggle} isOpen={isAccordionVisible} />
         </div>
 
