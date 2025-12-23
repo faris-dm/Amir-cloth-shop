@@ -3,11 +3,6 @@
 import { React, useState } from "react";
 import AccordionItem from "./AccordionItem"; // Import the item component
 
-// const [hidden, show] = useState("hidden");
-
-const ShowImages = () => {
-  show(!hidden);
-};
 import Icon from "./icon";
 // Data source for the FAQ
 const faqData = [
@@ -34,9 +29,6 @@ const faqData = [
 export default function Accordion() {
   return (
     <div className="w-full max-w-5xl bg-white shadow-xl rounded-lg overflow-hidden my-1 mx-auto">
-      <h1 className="text-2xl font-bold p-4"></h1>
-
-      {/* Map over the data and render an item for each entry */}
       {faqData.map((item) => (
         <AccordionItem
           key={item.id}

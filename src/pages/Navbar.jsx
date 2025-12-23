@@ -9,7 +9,7 @@ function Navbar() {
       <div>
         <nav className="flex items-center justify-between  px-9 py-6">
           <div className="flex ">
-            <Menu className="mr-7 md:hidden" />
+            <Menu className="mr-7 " />
             <div className=" hidden md:block">
               <ul className="flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer">
                 <li> Home</li>
@@ -23,8 +23,8 @@ function Navbar() {
             <img src={PlayLogo} alt="" />
           </div>
           {/* logo finsihs here */}
-          <div className="hidden  md:flex items-center gap-4">
-            <div className="flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer ">
+          <div className="  md:flex items-center gap-4">
+            <div className="hidden  md:flex items-center  gap-5 font-gork text-[#282828] font-medium  last:cursor-pointer ">
               <Heart />
               <h3>Cart</h3>
               <ShoppingBag />

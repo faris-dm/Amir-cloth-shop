@@ -167,7 +167,7 @@ function Home() {
   return (
     <div>
       <div className="w-full p-6 md:p-10 lg:p-16">
-        <div className="mb-[30%] md:mb-[20%]">
+        <div className="mb-[30%] md:mb-[20%] relative">
           <div className="block md:flex lg:flex gap-10 ">
             {/* LEFT SIDE — TITLE/SEARCH SECTION */}
             <div className="title space-y-4 w-full md:w-1/2 lg:w-1/2">
@@ -179,7 +179,7 @@ function Home() {
               </div>
 
               {/* Search bar (kept as is) */}
-              <div className="flex items-center rounded-md px-3 py-2 w-full max-w-sm bg-[#b0b0b0]">
+              <div className="flex items-center rounded-md px-3 py-2 w-full max-w-lg bg-[#b0b0b0]">
                 <Search className="w-5 h-5 text-gray-500" />
                 <input
                   type="text"
@@ -217,10 +217,13 @@ function Home() {
           </div>
 
           {/* Go to shop button (FIXED: w-40% for all screens, ArrowRight class simplified) */}
-          <button className="flex items-center  lg:text-right text-black font-show gap-2 mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%]">
+          <button className="flex md:flex items-center  lg:text-right text-black font-show gap-2 mt-4 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%] lg:w-[20%]">
             Go to shop
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-5 h-5 hidden md:block lg:block" />
           </button>
+          <div className=" absolute left-50">
+            <ArrowRight className="w-5 h-5 my-8 md:hidden lg:hidden text-center" />
+          </div>
         </div>
 
         {/* --- PRODUCT SLIDER SECTION --- */}
