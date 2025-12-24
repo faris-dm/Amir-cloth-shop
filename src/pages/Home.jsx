@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 // Removed MoveRight as it's not used
-import { Search, ArrowRight, ArrowLeft } from "lucide-react";
+import { Search, ArrowRight, ArrowLeft, Heading1 } from "lucide-react";
 import "./home.css";
 import Accordion from "./Accordion";
 
@@ -164,13 +164,49 @@ function Home() {
     }
   };
 
+  //  styles
+  const smallTitle = "title space-y-4 w-full md:w-1/2 lg:w-1/2";
+  const searchDev =
+    "flex items-center rounded-md px-3 py-2 w-full max-w-lg bg-[#b0b0b0]";
+  const searchInputStyle =
+    "ml-2 w-full outline-none cursor-pointer bg-transparent";
+  const headingH1 = "text-4xl md:text-5xl lg:text-6xl font-bold font-show";
+  const collectionHeading =
+    "text-4xl md:text-5xl lg:text-6xl font-black font-show text-[#282828]";
+  const rightSideImages =
+    "images flex gap-4 mt-10 md:mt-0 w-full md:w-1/2 lg:w-1/2";
+  const RightImagesStyle = "w-[50%] rounded-md object-cover";
+  const fristSectionTitle = "text-2xl font-bold text-[#282828]";
+  const GoToShopButton =
+    "flex md:flex items-center  lg:text-right text-black font-show gap-2 mt-10 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%] lg:w-[20%]";
+  const ImageSLideContainer =
+    "inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)] mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300";
+  const ImagesChildeDiv =
+    "bg-white rounded-md shadow-md h-full flex flex-col justify-between my-10  ";
+  const imageDescribtionContainer =
+    "flex justify-between items-start gap-5 px-2 ";
+  const imagesMapTitle =
+    "text-lg  md:text-[14px] lg:text-lg  font-show truncate pt-5 ";
+  const materialName =
+    "text-xs md:text-[12px] text-gray-500 font-gork truncate py-2";
+  const itemPrice = "text-pink-600 pt-5 font-bold md:text-xs";
+  //    frist images Arrow
+  const LeftArrow =
+    "w-8 h-8 text-[#B0B0B0] bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150";
+  // second section of images 23-34
+  const xlv = "text-3xl  font-black text-[#282828]";
+  ("text-3xl  font-black text-[#282828]");
+
+  //  section of filtering ck=loth with Gender
+  const genderFilter = " hover:underline cursor-pointer";
+
   return (
     <div>
       <div className="w-full p-6 md:p-10 lg:p-16">
         <div className="mb-[30%] md:mb-[20%] relative">
           <div className="block md:flex lg:flex gap-10 ">
             {/* LEFT SIDE — TITLE/SEARCH SECTION */}
-            <div className="title space-y-4 w-full md:w-1/2 lg:w-1/2">
+            <div className={smallTitle}>
               {/* Small heading (kept as is) */}
               <div className="text-sm uppercase tracking-widest font-light">
                 <p>NEW</p>
@@ -179,45 +215,33 @@ function Home() {
               </div>
 
               {/* Search bar (kept as is) */}
-              <div className="flex items-center rounded-md px-3 py-2 w-full max-w-lg bg-[#b0b0b0]">
+              <div className={searchDev}>
                 <Search className="w-5 h-5 text-gray-500" />
                 <input
                   type="text"
                   placeholder="Search"
-                  className="ml-2 w-full outline-none cursor-pointer bg-transparent"
+                  className={searchInputStyle}
                 />
               </div>
 
               {/* Big brand name and subtitles (kept as is) */}
               <div className="mt-10">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-show">
-                  NEW
-                </h1>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-show text-[#282828]">
-                  COLLECTION
-                </h1>
+                <h1 className={headingH1}>NEW</h1>
+                <h1 className={collectionHeading}>COLLECTION</h1>
               </div>
               <p className="text-lg text-black-600 font-show">Summer</p>
               <p className="text-gray-600 text-show">2026</p>
             </div>
 
             {/* RIGHT SIDE — IMAGES SECTION (kept as is) */}
-            <div className="images flex gap-4 mt-10 md:mt-0 w-full md:w-1/2 lg:w-1/2">
-              <img
-                src={SitMan}
-                alt="Image 1"
-                className="w-[50%] rounded-md object-cover"
-              />
-              <img
-                src={Black}
-                alt="Image 2"
-                className="w-[50%] rounded-md object-cover"
-              />
+            <div className={rightSideImages}>
+              <img src={SitMan} alt="Image 1" className={RightImagesStyle} />
+              <img src={Black} alt="Image 2" className={RightImagesStyle} />
             </div>
           </div>
 
           {/* Go to shop button (FIXED: w-40% for all screens, ArrowRight class simplified) */}
-          <button className="flex md:flex items-center  lg:text-right text-black font-show gap-2 mt-10 px-5 rounded-lg py-3 bg-[#b0b0b0]  w-[45%] md:w-[35%] lg:w-[20%]">
+          <button className={GoToShopButton}>
             Go to shop
             <ArrowRight className="w-5 h-5 hidden md:block lg:block" />
           </button>
@@ -230,8 +254,8 @@ function Home() {
         <div className="mt-10">
           <div className="flex items-end justify-between mb-4">
             <section className="font-show">
-              <h3 className="text-2xl font-bold text-[#282828]">NEW</h3>
-              <h3 className="text-2xl font-bold text-[#282828]">THIS WEEK</h3>
+              <h3 className={fristSectionTitle}>NEW</h3>
+              <h3 className={fristSectionTitle}>THIS WEEK</h3>
             </section>
             <article className="text-blue-900 cursor-pointer hover:underline">
               <a href="#" className="text-[#5E5E5E] font-gork text-sm">
@@ -248,28 +272,19 @@ function Home() {
             className="w-full h-fit overflow-x-scroll whitespace-nowrap scroll-smooth"
           >
             {products.map((items) => (
-              <div
-                key={items.id}
-                className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)] mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
-              >
-                <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between my-10  ">
+              <div key={items.id} className={ImageSLideContainer}>
+                <div className={ImagesChildeDiv}>
                   <img
                     src={items.img}
                     alt={items.alt}
                     className="w-full h-[42vh] rounded-md"
                   />
-                  <div className="flex justify-between items-start gap-5 px-2 ">
+                  <div className={imageDescribtionContainer}>
                     <div className="">
-                      <h3 className="text-lg  md:text-xs lg:text-lg  font-show truncate pt-5 ">
-                        {items.title}
-                      </h3>
-                      <p className="text-sm md:text-xs text-gray-500 font-gork truncate py-2">
-                        {items.material}
-                      </p>
+                      <h3 className={imagesMapTitle}>{items.title}</h3>
+                      <p className={materialName}>{items.material}</p>
                     </div>
-                    <p className="text-pink-600 pt-5 font-bold md:text-xs">
-                      {items.price}
-                    </p>
+                    <p className={itemPrice}>{items.price}</p>
                   </div>
                 </div>
               </div>
@@ -281,29 +296,29 @@ function Home() {
             <ArrowLeft
               onClick={slideLeft}
               // Styling for black arrow, rounded corners, and shadow
-              className="w-8 h-8 text-[#B0B0B0] bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
+              className={LeftArrow}
             />
 
             <ArrowRight
               onClick={slideRight}
               // Styling for black arrow, rounded corners, and shadow
-              className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
+              className={LeftArrow}
             />
           </div>
         </div>
 
         <div className="flex items-end justify-between my-7">
           <section className="font-gork">
-            <h3 className="text-3xl  font-[1000] text-[#282828]">XlV</h3>
-            <h3 className="text-3xl  font-black text-[#282828]">COLLECTIONS</h3>
+            <h3 className={xlv}>XlV</h3>
+            <h3 className={xlv}>COLLECTIONS</h3>
             <h3 className="text-3xl py-1 font-extralight text-[#282828]">
               23-24
             </h3>
             <div className="flex items-center gap-5 text-sm my-4 text-[#b0b0b0]">
-              <h4 className=" hover:underline cursor-pointer"> ALL</h4>
-              <h4 className=" hover:underline cursor-pointer"> Men</h4>
-              <h4 className=" hover:underline cursor-pointer"> Women</h4>
-              <h4 className=" hover:underline cursor-pointer"> Kid</h4>
+              <h4 className={genderFilter}> ALL</h4>
+              <h4 className={genderFilter}> Men</h4>
+              <h4 className={genderFilter}> Women</h4>
+              <h4 className={genderFilter}> Kid</h4>
             </div>
           </section>
           <article className="text-blue-900 cursor-pointer hover:underline text-right">
@@ -323,7 +338,7 @@ function Home() {
               key={items.id}
               className="inline-block w-1/2 sm:w-1/3 md:w-[calc(25%-1rem)]  mx-3 p-2 align-top cursor-pointer hover:scale-105 ease-in-out duration-300"
             >
-              <div className="bg-white rounded-md shadow-md h-full flex flex-col justify-between my-5">
+              <div className={ImagesChildeDiv}>
                 <img
                   src={items.img}
                   alt={items.alt}
@@ -331,10 +346,10 @@ function Home() {
                 />
                 <div className="flex justify-between items-start gap-3 px-2">
                   <div className="py-5">
-                    <h3 className="font-show truncate text-[6px]">
+                    <h3 className="font-grok truncate text-[13px]">
                       {items.title}
                     </h3>
-                    <p className="text-xs text-[10px] text-gray-500 font-gork truncate ">
+                    <p className="text-xs  text-gray-500 font-gork truncate ">
                       {items.material}
                     </p>
                   </div>
@@ -346,7 +361,7 @@ function Home() {
             </div>
           ))}
         </div>
-        <div className="hidden justify-center items-center space-x-4 mt-6 mb-10 ">
+        {/* <div className=" justify-center items-center space-x-4 mt-6 mb-10 ">
           <ArrowLeft
             onClick={NewslideLeft}
             // Styling for black arrow, rounded corners, and shadow
@@ -358,7 +373,7 @@ function Home() {
             // Styling for black arrow, rounded corners, and shadow
             className="w-8 h-8 text-[#B0B0B0]  bg-gray-300 p-2 rounded-lg shadow-lg cursor-pointer hover:bg-gray-400 transition duration-150"
           />
-        </div>
+        </div> */}
         <div className="mb-4">
           <p className="text-center font-gork text-sm text-[#262626] ml-5">
             Show more
