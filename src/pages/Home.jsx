@@ -199,7 +199,13 @@ function Home() {
 
   //  section of filtering ck=loth with Gender
   const genderFilter = " hover:underline cursor-pointer";
-
+  const ApprochHeading =
+    "text-center capitalize font-gork font-normal text-2xl my-6 text-[#282828] md:text-3xl md:my-8  lg:text-4xl lg:my-10 mt-25 pt-12";
+  const appriochText = "text-xs pb-1 md:text-sm lg:text-base";
+  const footerImages = "w-full h-48  md:h-[70vh] object-cover";
+  const fotterDev = "grid grid-cols-2 items-center px-6 pb-8 ";
+  const footerLinks = "hover:underline  font-bold text-[12px] py-1";
+  const footerBrand = "font-show text-[30px]  font-black text-[#262626] mt-7";
   return (
     <div>
       <div className="w-full p-6 md:p-10 lg:p-16">
@@ -387,13 +393,7 @@ function Home() {
             <Accordion />
           </div>
         )} */}
-        <h2
-          className="text-center capitalize font-gork font-normal text-2xl my-6 text-[#282828]
-               md:text-3xl md:my-8 
-               lg:text-4xl lg:my-10  mt-25 pt-12"
-        >
-          Our Approach To Fashion Design
-        </h2>
+        <h2 className={ApprochHeading}>Our Approach To Fashion Design</h2>
 
         <div
           className="lowercase text-gray-500 font-gork text-sm 
@@ -413,102 +413,62 @@ function Home() {
               At The Alagant Vogue, we blend creativity with craftsmanship to
               create
             </p>
-            <p
-              className="text-xs pb-1 
-                  md:text-sm 
-                  lg:text-base"
-            >
+            <p className={appriochText}>
               fashion that transcends trends and stands the test of time. Each
             </p>
-            <p
-              className="text-xs pb-1 
-                  md:text-sm 
-                  lg:text-base"
-            >
+            <p className={appriochText}>
               design is meticulously crafted, ensuring the highest quality and
             </p>
-            <p
-              className="text-xs 
-                  md:text-sm 
-                  lg:text-base"
-            >
-              exquisite finish.
-            </p>
+            <p className={appriochText}>exquisite finish.</p>
           </div>
         </div>
         <div className="">
           <div className="flex gap-5 w-full my-7 mb-30">
             {/* w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] h-auto mt-0 */}
             <div class="w-1/3 ">
-              <img
-                src={slow}
-                alt=""
-                class="w-full h-48  md:h-[70vh] object-cover"
-              />{" "}
+              <img src={slow} alt="" class={footerImages} />{" "}
             </div>
             <div class="w-1/3">
-              <img
-                src={standMan}
-                alt=""
-                class="w-full h-48  md:h-[70vh] object-cover"
-              />{" "}
+              <img src={standMan} alt="" class={footerImages} />{" "}
             </div>
             <div class="w-1/3">
-              <img
-                src={SitMan}
-                class="w-full h-48  md:h-[70vh] object-cover"
-                alt=""
-              />{" "}
+              <img src={SitMan} class={footerImages} alt="" />{" "}
             </div>
           </div>
         </div>
       </div>
       {/* grid grid-cols-2 place-items-center h-40 justify-around */}
       <footer className="bg-[#EBEBEB]   pt-6 pb-8">
-        <div className="grid grid-cols-2 items-center px-6 pb-8">
-          <div className="text-[9px] text-[#9a9393]  font-lg   grid gap-5 pt-6 ">
+        <div className={fotterDev}>
+          <div className="text-[9px] text-[#9a9393]  font-lg   grid gap-5 pt-6 m-15 md:mx-40">
             <div className="mb-7 lowrcase ">
-              <p className="hover:underline text-[10px] py-1">INFO</p>
+              <p className="hover:underline text-[12px] py-1">INFO</p>
               <section>
-                <p className="hover:underline text-[10px] md:text-[12px] py-px">
-                  PRICING
-                </p>
-                <p className="hover:underline text-[10px] md:text-[12px] py-px">
-                  ABOUT
-                </p>
-                <p className="hover:underline text-[10px] md:text-[12px] py-px">
-                  CONTACT
-                </p>
+                <p className={footerLinks}>PRICING</p>
+                <p className={footerLinks}>ABOUT</p>
+                <p className={footerLinks}>CONTACT</p>
               </section>
             </div>
             <div>
               <p className="hover:underline text-[12px] py-1">LANGUAGE</p>
               <section className="text-[10px] md:text-[15px]">
-                <p className="hover:underline text-[10px] md:text-[12px] py-px">
-                  ENG
-                </p>
-                <p className="hover:underline text-[10px] md:text-[12px] py-px">
-                  ESP
-                </p>
-                <p className="hover:underline text-[10px] md:text-[12px] py-px">
-                  SVE
-                </p>
+                <p className={footerLinks}>ENG</p>
+                <p className={footerLinks}>ESP</p>
+                <p className={footerLinks}>SVE</p>
               </section>
             </div>
           </div>
           {/*   this dev is for text */}
-          <div className="">
-            <article className="">
-              {" "}
-              <h3 className="text-xs text-[#D6D6D6]">TECHNOLOGIES</h3>
-              <div className="font-show text-[30px]  font-black text-[#262626] mt-7">
-                <img src={PlayLogo} alt="" />
+          <article className="">
+            {" "}
+            <h3 className="text-xs text-[#D6D6D6]">TECHNOLOGIES</h3>
+            <div className={footerBrand}>
+              <img src={PlayLogo} alt="" />
 
-                <h2 className="">XlV</h2>
-                <h3 className="mt">QR</h3>
-              </div>
-            </article>
-          </div>
+              <h2 className="">XlV</h2>
+              <h3 className="mt">QR</h3>
+            </div>
+          </article>
         </div>
       </footer>
 
