@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(uuid()) @db.Uuid // 👈 Native UUID
+  email     String    @unique
+  name      String?
+  role      String
+  posts     Post[]
+  variants  Variant[] // 👈 Added this so User knows about its variants
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Post {
+  id          String   @id @default(uuid()) @db.Uuid
+  title       String   @db.VarChar
+  description String?
+  
+  authorId    String   @db.Uuid // 👈 FIXED: Changed to @db.Uuid to match User.id
+  author      User     @relation(fields: [authorId], references: [id])
+
+  createdAt   DateTime @default(now())  
+  updatedAt   DateTime @updatedAt
+
+  @@map("posts")
+}
+
+model Product { // 👈 FIXED: Capitalized model name
+  id          String @id @default(uuid()) @db.Uuid
+  title       String
+  description String
+  price       Int
+  Category    String
+}
+
+model Variant {
+  id     String @id @default(uuid()) @db.Uuid
+  
+  userId String @db.Uuid // 👈 FIXED: Renamed to camelCase and matched UUID type
+  user   User   @relation(fields: [userId], references: [id]) // 👈 FIXED: Added explicit relation
+}
