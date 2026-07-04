@@ -15,7 +15,7 @@ function App() {
       {/* <Navbar /> */}
       {/*   <Props /> */}
       {/* <Home /> */}
-      <Sidebar />
+      {/* <Sidebar /> */}
       {/* <Accordion /> */}
       {/* <counter /> */}
       {/* <Products /> */}

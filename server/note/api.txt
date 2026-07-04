@@ -1,0 +1,11 @@
+fetch options
+   this are addtional fetch options  that allow  you to confiure  the data
+   A:Method
+ this allow  you to add   which https  you want to use get,post put delete
+ B body
+ if  yoi modified the  the  https  then  yu need  to send  the request which is called  body
+ body:JSON,stringfly({name:"solo})
+body:JSON.stringlfy({name:"solo})
+
+headers:
+ 
