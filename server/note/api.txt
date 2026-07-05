@@ -8,4 +8,61 @@ fetch options
 body:JSON.stringlfy({name:"solo})
 
 headers:
+
+
+ok in this  files   which https  shpuld  be  found 
+
+"src/
+
+└── routes/
+
+    ├── product.js     # ONLY handles product catalog actions
+
+    ├── cart.js        # ONLY handles adding/removing items from shopping carts
+
+    ├── user.js        # ONLY handles profiles, registration, and logins
+
+    └── order.js       # ONLY handles checkout history and invoices"
+
+    GET /products — Loads the full list of products for the shop page.
+
+    ===> this are the  basic  http needed  in the pages
+
+GET /products/:id — Loads a single product’s detailed view page.
+
+POST /products — Used by an Admin to add a brand-new product to the store.
+
+PUT / PATCH /products/:id — Used by an Admin to edit a product’s price, description, or stock levels.
+
+DELETE /products/:id — Used by an Admin to completely remove a product from the catalog.
+
+     This is  the file  that the    shop file   should have
+
+and  it should  contains  some  http,  ahd  should have  some logics  and  this are
+     
  
+
+products.js =>  shoppers  to view  items
+         => get: see items and get/:id  load or search single products
+         =>post:post new items  for admins or suppliers
+         =>put: for admins  to edit products
+         =>delete: to delete products
+
+cart==:==>  this handle  items  intented to be bought
+      => get:fetch or get the items ,
+      =>post:add some items
+      =>pathch:add the quatitty of item  that like edit the  how many
+      =>DELETE /cart/:itemId — Removes a specific item completely from the cart (the trash can button).
+      => DELETE /cart — Clears the entire cart at once (useful right after a successful checkout).
+
+      User 
+        => post: create New Accounts
+        =>post:logins
+        =>get:get user info or accounts and profiles
+        =>patch:update spacific information   in the profiles
+    Orders.js
+      => POST /orders — Converts the user's current cart into a permanent purchase (the actual "Checkout" button).
+
+GET /orders — Fetches the complete order history list for the logged-in user's profile page.
+
+GET /orders/:id — Fetches a single, specific past invoice/receipt breakdown by its unique order number.
