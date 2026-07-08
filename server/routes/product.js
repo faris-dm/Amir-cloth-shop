@@ -73,6 +73,37 @@ router.post("/product", async (req, res) => {
   }
 });
 
+// put  route  to make  the the edit
+ router.put("/produt/:id",(req,res)=> {
+    const UpdatedItemId=parseInt(req.params.id)
+    const itemLocation=ApiNew.find(item=>item.id=UpdatedItemId)
+    if(!itemLocation) {
+      return res.status(404).json(" this item does  in the products")
+    }
+      const {title,price,description,catagory,images,rate,count}=req.body
+   if(!title || !price) {
+    return res.status(400).json("title and Price  and   required   for updates")
+   }
+
+
+   const updatedItem= {
+   id: productId, // Keep the same ID!
+      title: title,
+      price: price,
+      description: description || ApiNew.description, // Fallback to old description if not provided
+      catagory: catagory || ApiNew.catagory,
+      images: images || ApiNew.images,
+      rating: {
+        rate: rate || ApiNew.rating.rate,
+        count: count || ApiNew.rating.count
+      }
+   }
+      
+ })
+ 
+
+
+
 
 
 export default router;
