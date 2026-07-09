@@ -41,8 +41,8 @@ router.post("/products", async (req, res) => {
   
   try {
     
-  const {title,price,description,catagory,images,rate,count}=req.body
-  if(!title || !price || !description || !catagory) {
+  const {title,price,description,category,images,}=req.body
+  if(!title || !price || !description || !category) {
     return res.status(400).json("please  fill the  informations  correctly")
   }
     const foundItem=ApiNew.find(item=>item.title===title)
@@ -105,20 +105,33 @@ router.post("/products", async (req, res) => {
       
  })
 
+
+
  
 
 
-// router.delete("/products",(req,res)=> {
-//   const RemoveId=parint(req.params.id)
-//    const REmoveItem=NewApi.find(item=>item.id===RemoveId)
-//    if(REmoveItem) {
-//     return res.status(404).json("Item  with this id does not   found")
-//    }
-//    const WillDeleteItemIndex=ApiNew.findIndex(REmoveItem);
-//   delete ApiNew[WillDeleteItemIndex]
+router.delete("/products/:id",(req,res)=> {
+ const itemId=parseInt(req.params.id)
+  const itemFound=ApiNew.find(item=> item.id===itemId)
+  if(!itemFound) {
+    return res.status(404).json("item  does  not  found")
+  }
+  const indexItem=ApiNew.indexOf(itemFound)
+  // delete ApiNew[indexItem]
+  // return res.json(201).json(`item ${itemFound} deleted succefully`)
 
 
-// })
+  const deletedItem = ApiNew.splice(indexItem, 1);
+ return res.status(200).json({
+    message: "Deleted successfully",
+    item: deletedItem[0]
+  });
+
+
+})
+
+
+
 
 
 export default router;
