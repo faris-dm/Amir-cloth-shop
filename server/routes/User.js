@@ -22,7 +22,7 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
 
 
 
-  router.post("/api/register",(req,res)=> {
+  router.post("/api/register", async (req,res)=> {
     const {username,email,password,confirmPassword} =req.body
     const cleanEmail=email.trim().toLowerCase()
     if(password!==confirmPassword) {
@@ -90,8 +90,9 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
    } catch (error) {
      console.error(error);
     return res.status(500).json({ message: "Server error" });
-  }
+  
     
-   
+   }
 
   })
+  export default router

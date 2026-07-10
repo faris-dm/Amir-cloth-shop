@@ -14,7 +14,7 @@ function App() {
     <div>
       {/* <Navbar /> */}
       {/*   <Props /> */}
-      {/* <Home /> */}
+      <Home />
       {/* <Sidebar /> */}
       {/* <Accordion /> */}
       {/* <counter /> */}
