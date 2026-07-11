@@ -1,3 +1,19 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE authors (
     -- Fixed: Added SERIAL data type, removed hanging DEFAULT
     user_id SERIAL PRIMARY KEY,
