@@ -5,7 +5,7 @@ import crypto  from "crypto"
 const router = express.Router();
 router.use(cookiesparser());
 import bcrypt  from "bcrypt"
-import strict from "assert/strict";
+import Pool from "../config/db";
 const UserStorage=[]
 
 
@@ -31,16 +31,45 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
          message: "Password is not simmilar filed",
        });
     }
-    if(UserStorage.has(cleanEmail)) {
-       return res.status(409).json({
-         success: false,
-         message: "User already exists. Please log in.",
-       });
-    }
+    // if(UserStorage.has(cleanEmail)) {
+    //    return res.status(409).json({
+    //      success: false,
+    //      message: "User already exists. Please log in.",
+    //    });
+    // }
+
 
    try {
+    const checkEmail="SELECT id,username,email FROM  authors WHERE username =$2 OR email=$1"
+  
+   const resultCheck=await db.query(checkEmail,[username,email])
+
+
+   if (resultCheck.rows.length > 0) {
+     console.log("⚠️ Username or Email is already taken.");
+     return res
+       .status(400)
+       .json({ error: "Username or Email is already registered." });
+   }
+
+
     const HashedPassword=await bcrypt.hash(password,10)
         let UserId = crypto.randomUUID();
+
+
+        const saveData= `
+        INSERT INTO authors (email,username,password)
+        VALUES ($1,$2,$3)
+         RETURNING id,uername,email
+        `
+
+
+        const result= await db.query(saveData,[email,username])
+        const created=result.rows[0]
+        return res.status(201).json({
+          message: "Author registered successfully!",
+          author: createdAuthor,
+        });
          const UserPayLoad = {
     id: UserId,
     email: cleanEmail,
