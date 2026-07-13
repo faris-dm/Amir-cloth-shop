@@ -1,12 +1,12 @@
 import  express  from "express"
 import jwt from "jsonwebtoken"
-import cookiesparser  from "cookiesparser"
+import cookiesparser  from "cookie-parser"
 import crypto  from "crypto"
 const router = express.Router();
 router.use(cookiesparser());
 import bcrypt  from "bcrypt"
-import Pool from "../config/db";
-const UserStorage=[]
+import db from "../config/db";
+
 
 
 router.use(express.json());
@@ -23,12 +23,12 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
 
 
   router.post("/api/register", async (req,res)=> {
-    const {username,email,password,confirmPassword} =req.body
+    const {username,email,password} =req.body
     const cleanEmail=email.trim().toLowerCase()
-    if(password!==confirmPassword) {
+    if(!password  || password.trim() ==='' ) {
        return res.status(400).json({
          success: false,
-         message: "Password is not simmilar filed",
+         message: "Password  must be  filed",
        });
     }
     // if(UserStorage.has(cleanEmail)) {
@@ -40,9 +40,9 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
 
 
    try {
-    const checkEmail="SELECT id,username,email FROM  authors WHERE username =$2 OR email=$1"
+    const checkEmail=`SELECT id,username,email FROM  authors WHERE username =$1 OR email=$2`
   
-   const resultCheck=await db.query(checkEmail,[username,email])
+   const resultCheck=await Pool.query(checkEmail,[username,email])
 
 
    if (resultCheck.rows.length > 0) {
@@ -57,20 +57,23 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
         let UserId = crypto.randomUUID();
 
 
-        const saveData= `
-        INSERT INTO authors (email,username,password)
+        const saveData = `
+        INSERT INTO authors (email,username,HashedPassword)
         VALUES ($1,$2,$3)
-         RETURNING id,uername,email
-        `
+         RETURNING id,username,HashedPassword
+        `;
 
 
-        const result= await db.query(saveData,[email,username])
+        const result = await db.query(saveData, [
+          email,
+          username,
+          HashedPassword,
+        ]);
         const created=result.rows[0]
-        return res.status(201).json({
-          message: "Author registered successfully!",
-          author: createdAuthor,
-        });
-         const UserPayLoad = {
+      
+
+      
+   const UserPayLoad = {
     id: UserId,
     email: cleanEmail,
   
@@ -90,7 +93,7 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
     password:HashedPassword,
     email:cleanEmail
   }
-  UserStorage.set(cleanEmail,NewUser)
+  // UserStorage.set(cleanEmail,NewUser)
 
 
   res.cookie("token",accessToken,{
@@ -109,7 +112,7 @@ let RefreshTokenSecret = "W%&7=-^#-v}XL";
       success: true,
       message: "Registration successful",
       user: {
-        id: UserId,
+        id: created.id,
         email: cleanEmail,
         name: username,
   
