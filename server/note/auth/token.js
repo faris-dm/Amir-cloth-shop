@@ -13,7 +13,7 @@ function generateAccess(user) {
 
 }
 
-router.post("token",(rew,res)=> {
+router.post("token",(req,res)=> {
     const IncomingTokens = req.body.token || req.cookies.refreshToken;
     if(!IncomingTokens) {
         return res.status(401).json('No Refresh Token  found')
@@ -24,9 +24,25 @@ router.post("token",(rew,res)=> {
         if(err) {
             return res.status(403).json("Invalid Refresh Tokens")
         }
-        const userInfoStorge=userInfoStorge.get(decorded.email)
+        const userInfoStorge=UserStorage.get(decorded.email)
+           if(!userInfoStorge || userInfoStorge.refreshToken !== IncomingTokens) {
+        return res.status(403)
+        .json({message:"toen is not recogized"})
+       
+    }
+     const payLoad = {
+       id: crypto.userInfoStorge.id,
+       email: userInfoStorge.email,
+       username: userInfoStorge.username,
+     };
+
+     const accessToken=generateAccess(payLoad)
+     res.status(201).json({success:true,accessToken})
     })
+
+    // we have to check   the suer info  found  and  the  tokens are  correct in the database
+ 
 })
 
 
-
+export default router
