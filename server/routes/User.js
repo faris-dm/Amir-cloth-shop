@@ -27,12 +27,7 @@ router.post("/register", async (req, res) => {
       message: "Password  must be  filed",
     });
   }
-  // if(UserStorage.has(cleanEmail)) {
-  //    return res.status(409).json({
-  //      success: false,
-  //      message: "User already exists. Please log in.",
-  //    });
-  // }
+ 
 
   try {
     const checkEmail = `SELECT user_id,username,email FROM  Users WHERE username =$1 OR email=$2`;
@@ -47,7 +42,7 @@ router.post("/register", async (req, res) => {
     }
 
     const HashedPassword = await bcrypt.hash(password, 10);
-    let user_id = crypto.randomUUID();
+
 
     const saveData = `
         INSERT INTO Users (email,username,password_hash)
@@ -74,12 +69,7 @@ router.post("/register", async (req, res) => {
     const refreshToken = jwt.sign(userPayRefreshTokens, RefreshTokenSecret, {
       expiresIn: "7d",
     });
-    const NewUser = {
-      id: created.user_id,
-      name: username,
-      password: HashedPassword,
-      email: cleanEmail,
-    };
+ 
     // UserStorage.set(cleanEmail,NewUser)
 
     res.cookie("token", accessToken, {
@@ -100,8 +90,7 @@ router.post("/register", async (req, res) => {
       message: "Registration successful",
       user: {
         id: created.user_id,
-        email: cleanEmail,
-        name: username,
+      
       },
     });
   } catch (error) {
