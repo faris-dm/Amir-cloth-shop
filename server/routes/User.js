@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
   // }
 
   try {
-    const checkEmail = `SELECT user_id,username,email FROM  authors WHERE username =$1 OR email=$2`;
+    const checkEmail = `SELECT user_id,username,email FROM  Users WHERE username =$1 OR email=$2`;
 
     const resultCheck = await Pool.query(checkEmail, [username, email]);
 
@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
     let user_id = crypto.randomUUID();
 
     const saveData = `
-        INSERT INTO authors (email,username,password_hash)
+        INSERT INTO Users (email,username,password_hash)
         VALUES ($1,$2,$3)
          RETURNING user_id,username,password_hash
         `;
