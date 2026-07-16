@@ -74,7 +74,8 @@ GET /orders/:id — Fetches a single, specific past invoice/receipt breakdown by
 
 
 
-
+npm run seed:admin
+which creates admin@example.com / ChangeMe123! by default, or your own values if you set ADMIN_EMAIL/ADMIN_PASSWORD first. Full details are in the updated README in the zip above.
 
 
 
