@@ -4,8 +4,8 @@ import Pool from "../config/db"
 import bcrypt from "bcrypt"
 const router =express.Router()
 import cookiesParter from "cookie-parser"
-routher.use(express.json())
-router.use(cookiesParter())
+router.use(express.json());
+router.use(cookiesParter());
 let secret = "W$q4=25*8%v-}UV";
 let RefreshTokenSecret = "W%&7=-^#-v}XL";
 
@@ -19,20 +19,23 @@ function generateRefresh(user) {
 }
 
  router.post("/login", async (req,res)=> {
- const {email,password ,}=req.body
- if(email===" " || password==="" ) {
-    res.status(209).json({
-        sucess:false,
-        message:"Please  fill the inputs correctly"
-    })
+ const {email,password}=req.body
+  if (!email || password.trim() === "") {
+    return res.status(400).json({
+      success: false,
+      message: "inputes  must be  filed",
+    });
+  }
     const cleanEmail=email.trim()
 
     try {
-        const UserQuery = `SELECT user_id,email FROM Users WHERE username=$1 OR email=$2 `;
-        const Username=UserQuery.Username
+        const UserQuery = `SELECT user_id,email,username,password_hash FROM Users WHERE username=$1 OR email=$2 `;
+        
           const resultCheck = await Pool.query(UserQuery, [
             cleanEmail,
-            Username,
+            cleanEmail,
+
+            
           ]);
           const result=resultCheck.rows[0]
           if(!result) {
@@ -42,10 +45,21 @@ function generateRefresh(user) {
             })
             
           }
+
+        const isValidPassword=  await  bcrypt.compare(password,result.password_hash) 
+        if(!isValidPassword) {
+            return res.status(401).json({
+                success:false,
+                message:"Incorrect password"
+            })
+        }
+
+
+
           const payload = {
             id: result.user_id,
             email: result.email,
-            Username:result.Username
+            Username:result.username,
           };
           const accessToken=generateAccess(payload)
           console.log("accessToken created in Login")
@@ -85,7 +99,7 @@ console.log("incorrect password");
   
         
     }
- }
+ 
  })
 
 
