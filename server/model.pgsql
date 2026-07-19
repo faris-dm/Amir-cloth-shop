@@ -13,7 +13,6 @@
 
 
 
-
 CREATE TABLE authors (
     -- Fixed: Added SERIAL data type, removed hanging DEFAULT
     user_id SERIAL PRIMARY KEY,
@@ -24,4 +23,16 @@ CREATE TABLE authors (
     is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+-- DROP TABLE IF EXISTS products
+
+
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) UNIQUE NOT NULL, -- Increased 60 to 255 because long API titles will break 60!
+    price DECIMAL(10,2) NOT NULL,
+    description TEXT,                   -- Fixed spelling
+    category VARCHAR(100),              -- Fixed spelling
+    image TEXT,
+    rating JSONB                        -- Fixed to JSONB and removed the trailing comma
 );

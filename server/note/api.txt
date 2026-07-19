@@ -60,6 +60,9 @@ cart==:==>  this handle  items  intented to be bought
         =>post:logins
         =>get:get user info or accounts and profiles
         =>patch:update spacific information   in the profiles
+
+
+
     Orders.js
       => POST /orders — Converts the user's current cart into a permanent purchase (the actual "Checkout" button).
 
@@ -67,8 +70,8 @@ GET /orders — Fetches the complete order history list for the logged-in user's
 
 GET /orders/:id — Fetches a single, specific past invoice/receipt breakdown by its unique order number.
 
-
-
+   
+substack
 
 
 
@@ -79,7 +82,7 @@ which creates admin@example.com / ChangeMe123! by default, or your own values if
 
 
 
-
+openai_api_key+ak
 
 
 
@@ -96,7 +99,7 @@ router.use(express.json());
 
 router.get("/products", async (req, res) => {
   const url = "https://fakestoreapi.com/products";
-  const response = await fetch(url);
+  const operesponse = await fetch(url);
   if (!response.ok) {
     throw new Error(" failed  to get the data  for the api");
   }

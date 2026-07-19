@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import cookiesparser from "cookie-parser";
-import crypto from "crypto";
+
 const router = express.Router();
 router.use(cookiesparser());
 import bcrypt from "bcrypt";
@@ -21,7 +21,7 @@ let generateAccess = (UserPayLoad) => {
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   const cleanEmail = email.trim().toLowerCase();
-  if (!password || password.trim() === "") {
+  if (!email || password.trim() === "") {
     return res.status(400).json({
       success: false,
       message: "Password  must be  filed",
