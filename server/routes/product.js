@@ -1,10 +1,11 @@
-import express from "express";
+import express, { json } from "express";
 
 
 const router = express.Router();
 import ApiNewData from "../api.json" with { type: "json" };
 // import ApiNew from "../api.json" with {type :"json"};
 let ApiNew = [...ApiNewData];
+import Pool from "../config/db.js";
 
 
 router.use(express.json());
@@ -50,6 +51,18 @@ router.post("/products", async (req, res) => {
       return res.status(409).json("Item aready found ")
     }
 
+
+const InsertQuery=`
+INSERT INTO products (title,price,description,category,image,rating)
+  VALUES ($1,$2,$3,$4,$5,$6,$8)
+   RETURNING *
+`
+ const queyItems= [
+  title,price,description,category,images,JSON.stringify(rating)
+ ]
+const dbResult=await Pool.query(InsertQuery,queyItems)
+ const dbRow=dbResult.rows[0]
+
   const newItem = {
     id: ApiNew.length+1,
     title: req.body.title,
@@ -72,6 +85,8 @@ router.post("/products", async (req, res) => {
     
   }
 });
+
+
 
 // put  route  to make  the the edit
  router.put("/products/:id",(req,res)=> {
@@ -106,7 +121,6 @@ router.post("/products", async (req, res) => {
  })
 
 
-
  
 
 
@@ -129,6 +143,13 @@ router.delete("/products/:id",(req,res)=> {
 
 
 })
+
+
+
+
+
+
+
 
 
 
