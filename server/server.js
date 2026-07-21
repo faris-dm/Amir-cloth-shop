@@ -14,17 +14,6 @@ app.get("/", (req, res) => {
   res.json({ message: "It is  working Now" });
 });
 
-app.get("/dbase", async (req, res) => {
-  try {
-    const result = await Pool.query("SELECT * FROM products");
-    res.json(result.rows);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Database query failed" });
-  
-  }
-});
-
 app.listen(port, () => {
   console.log(`http://:localhost:${port}`);
 });
