@@ -231,12 +231,6 @@ router.delete("/products/:id",(req,res)=> {
 
 
 
-
-
-
-
-
-
 export default router;
 
 
@@ -268,17 +262,3 @@ export default router;
 
 
 
-// router.get("/products/:id", async (req, res) => {
-//   const id = req.params.id.toLowerCase();
-
-//   try {
-//     const response = await fetch("https://fakestoreapi.com/products");
-//     const item_id = response.forEach((item) => item.id === id);
-//     if (!item_id) {
-//       return res.status(404).send("tgere is no much in this  list");
-//     }
-//     return res.status("201").send(item_id);
-//   } catch (error) {
-//     return res.status(401).send("internal Error");
-//   }
-// });
