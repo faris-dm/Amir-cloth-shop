@@ -12,15 +12,7 @@ import { resume } from "react-dom/server";
 
 router.use(express.json());
 
-// router.get("/products", async (req, res) => {
-//   const url = "https://fakestoreapi.com/products";
-//   const response = await fetch(url);
-//   if (!response.ok) {
-//     throw new Error(" failed  to get the data  for the api");
-//   }
-//   const data = await response.json();
-//   return res.status(201).json(data);
-// });
+
 
 
 // 1. GET ALL PRODUCTS (From PostgreSQL)
@@ -136,78 +128,79 @@ router.get("/products/:id", async (req, res) => {
 //     return res.status(500).json("Internal server error");
 //   }
 // });
-router.post("/products",  async (req,res)=> {
-  try {
+// router.post("/products",  async (req,res)=> {
+//   try {
     
-   const {title,price,category,description,image,rating}=req.body
+//    const {title,price,category,description,image,rating}=req.body
 
-   if (!title || !price || !description || !category || isNaN((price)) ||price==="" ) {
-      return res.status(400).json("Please fill in all required information correctly.");
-    }
-    const QuryResult= await Pool.query(
-      "SELECT title,price,category,description FROM products WHERE title =$1",
-      [title]
-    )
+//    if (!title || !price || !description || !category || isNaN((price)) ||price===undefined ) {
+//       return res.status(400).json("Please fill in all required information correctly.");
+//     }
+//     const QuryResult= await Pool.query(
+//       "SELECT title,price,category,description FROM products WHERE title =$1",
+//       [title]
+//     )
 
-    if(QuryResult.rows.length > 0) {
-       return res.status(409).json({
-        success: false,
-        message: `Product with  ${title}  found `
-      });
+//     if(QuryResult.rows.length > 0) {
+//        return res.status(409).json({
+//         success: false,
+//         message: `Product with  ${title}  found `
+//       });
 
-    }
-     const NewItem=`
-     INSERT INTO products (title,price,category,description,image,rating)
-     VALUES ($1,$2,$3,$4,$5,$6)
-     RETURNING *;
-   `
- const Result= await Pool.query(NewItem,[title,price,category,description,image,rating])
-     console.log(Result)
-return res.status(201).json({
-      message: "Item created successfully.",
-      product: Result.rows[0]
-    });
+//     }
+//      const NewItem=`
+//      INSERT INTO products (title,price,category,description,image,rating)
+//      VALUES ($1,$2,$3,$4,$5,$6)
+//      RETURNING *;
+//    `
+//  const Result= await Pool.query(NewItem,[title,price,category,description,image,rating])
+//      console.log(Result)
+// return res.status(201).json({
+//       message: "Item created successfully.",
+//       product: Result.rows[0]
+//     });
  
 
-  } catch (error) {
-    console.error("Postgres Insert Error:", error);
-    return res.status(500).json({ error: "Internal server error." });
-  }
+//   } catch (error) {
+//     console.error("Postgres Insert Error:", error);
+//     return res.status(500).json({ error: "Internal server error." });
+//   }
   
-})
+// })
+
 
 
 // put  route  to make  the the edit,
- router.put("/products/:id",  async (req,res)=> {
-    const UpdatedItemId=parseInt(req.params.id)
-   const itemLocation = ApiNew.find(item => item.id === UpdatedItemId)
-    if(!itemLocation) {
-      return res.status(404).json(" this item does not  found in the products")
-    }
-      const {title,price,description,catagory,images,rate,count}=req.body
-   if(!title || !price) {
-    return res.status(400).json("title and Price  and   required   for updates")
-   }
+//  router.put("/products/:id",  async (req,res)=> {
+//     const UpdatedItemId=parseInt(req.params.id)
+//    const itemLocation = ApiNew.find(item => item.id === UpdatedItemId)
+//     if(!itemLocation) {
+//       return res.status(404).json(" this item does not  found in the products")
+//     }
+//       const {title,price,description,catagory,images,rate,count}=req.body
+//    if(!title || !price) {
+//     return res.status(400).json("title and Price  and   required   for updates")
+//    }
 
 
-   const updatedItem= {
-   id: UpdatedItemId, // Keep the same ID!
-      title: title || itemLocation.title,
-      price: price ||itemLocation.price,
-      description: description || itemLocation.description, // Fallback to old description if not provided
-      catagory: catagory || itemLocation.catagory,
-      images: images || itemLocation.images,
-      rating: {
-        rate: rate || itemLocation.rating.rate,
-        count: count || itemLocation.rating.count
-      }
-   }
-   const itemIndex=ApiNew.indexOf(itemLocation)
-  //  findindex is  array methods andn we  are using objects so
-   ApiNew[itemIndex]=updatedItem
-   return res.status(201).json(updatedItem)
+//    const updatedItem= {
+//    id: UpdatedItemId, // Keep the same ID!
+//       title: title || itemLocation.title,
+//       price: price ||itemLocation.price,
+//       description: description || itemLocation.description, // Fallback to old description if not provided
+//       catagory: catagory || itemLocation.catagory,
+//       images: images || itemLocation.images,
+//       rating: {
+//         rate: rate || itemLocation.rating.rate,
+//         count: count || itemLocation.rating.count
+//       }
+//    }
+//    const itemIndex=ApiNew.indexOf(itemLocation)
+//   //  findindex is  array methods andn we  are using objects so
+//    ApiNew[itemIndex]=updatedItem
+//    return res.status(201).json(updatedItem)
       
- })
+//  })
 
 
  
