@@ -171,38 +171,81 @@ return res.status(201).json({
 
 
 // put  route  to make  the the edit,
- router.put("/products/:id",  async (req,res)=> {
-    const UpdatedItemId=parseInt(req.params.id)
-   const itemLocation = ApiNew.find(item => item.id === UpdatedItemId)
-    if(!itemLocation) {
-      return res.status(404).json(" this item does not  found in the products")
-    }
-      const {title,price,description,catagory,images,rate,count}=req.body
-   if(!title || !price) {
-    return res.status(400).json("title and Price  and   required   for updates")
-   }
+//  router.put("/products/:id",  async (req,res)=> {
+//     const UpdatedItemId=parseInt(req.params.id)
+//    const itemLocation = ApiNew.find(item => item.id === UpdatedItemId)
+//     if(!itemLocation) {
+//       return res.status(404).json(" this item does not  found in the products")
+//     }
+//       const {title,price,description,catagory,images,rate,count}=req.body
+//    if(!title || !price) {
+//     return res.status(400).json("title and Price  and   required   for updates")
+//    }
 
 
-   const updatedItem= {
-   id: UpdatedItemId, // Keep the same ID!
-      title: title || itemLocation.title,
-      price: price ||itemLocation.price,
-      description: description || itemLocation.description, // Fallback to old description if not provided
-      catagory: catagory || itemLocation.catagory,
-      images: images || itemLocation.images,
-      rating: {
-        rate: rate || itemLocation.rating.rate,
-        count: count || itemLocation.rating.count
-      }
-   }
-   const itemIndex=ApiNew.indexOf(itemLocation)
-  //  findindex is  array methods andn we  are using objects so
-   ApiNew[itemIndex]=updatedItem
-   return res.status(201).json(updatedItem)
+//    const updatedItem= {
+//    id: UpdatedItemId, // Keep the same ID!
+//       title: title || itemLocation.title,
+//       price: price ||itemLocation.price,
+//       description: description || itemLocation.description, // Fallback to old description if not provided
+//       catagory: catagory || itemLocation.catagory,
+//       images: images || itemLocation.images,
+//       rating: {
+//         rate: rate || itemLocation.rating.rate,
+//         count: count || itemLocation.rating.count
+//       }
+//    }
+//    const itemIndex=ApiNew.indexOf(itemLocation)
+//   //  findindex is  array methods andn we  are using objects so
+//    ApiNew[itemIndex]=updatedItem
+//    return res.status(201).json(updatedItem)
       
+//  })
+
+
+router.put("/products/:id", async (req,res)=> {
+
+  const {id}=req.params
+   const {title,price,category,description,image,rating} =req.body
+ try {
+  
+ if(isNaN(id) || id==="") {
+  return res.status(500).json("Please Insert Valid inputs")
+ }
+  if(!title||price ||!description) {
+  return res.status(400).json("Please Insert Valid inputs")
+ }
+const Result= await Pool.query ("SELECT id,title,price,category,description,image,rating  FROM products WHERE id=$1",[id])
+
+if(Result.rows.length ===0 ) {
+ return  res.status(404).json({
+    success:false,
+    message:`there is no item  with ${id}  `
+  })
+}
+const ExitingProducet=Result.rows[0]
+const UpdatedItems=`
+UPDATE products  SET title=$1,price=$2,category=$3,description=$4,image=$5,rating=$6 WHERE id =$7 RETURNING* `
+   
+const FinalResult= await Pool.query(UpdatedItems,[
+  title|| ExitingProducet.title,
+  price||ExitingProducet.price,
+  category|| ExitingProducet.category,
+  description|| ExitingProducet.description,
+  image||ExitingProducet.image,
+  rating||ExitingProducet.rating
+])
+ return res.status(200).json({
+  success:true,
+  data:FinalResult.rows[0]
  })
+ 
 
-
+ } catch (error) {
+  console.error(error)
+  return res.status(500).json("Intrnal Server error")
+ }
+})
  
 
 
