@@ -4,6 +4,6 @@ export default {
     path: "prisma/migrations",
   },
   datasource: {
-    url: "postgresql://postgres:admin@localhost:5433/sell",
+    url: "postgresql://postgres:admin@localhost:5432/ecom",
   },
 };
