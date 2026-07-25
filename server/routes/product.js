@@ -210,11 +210,11 @@ router.put("/products/:id", async (req,res)=> {
  try {
   
  if(isNaN(id) || id==="") {
-  return res.status(500).json("Please Insert Valid inputs")
- }
-  if(!title||price ||!description) {
   return res.status(400).json("Please Insert Valid inputs")
  }
+//   if(!title|| !price ||!description) {
+//   return res.status(400).json("Please Insert Valid inputs")
+//  }
 const Result= await Pool.query ("SELECT id,title,price,category,description,image,rating  FROM products WHERE id=$1",[id])
 
 if(Result.rows.length ===0 ) {
@@ -225,15 +225,17 @@ if(Result.rows.length ===0 ) {
 }
 const ExitingProducet=Result.rows[0]
 const UpdatedItems=`
-UPDATE products  SET title=$1,price=$2,category=$3,description=$4,image=$5,rating=$6 WHERE id =$7 RETURNING* `
+UPDATE products  SET  title=$1,price=$2,category=$3,description=$4,image=$5,rating=$6 WHERE id =$7 RETURNING* `
    
 const FinalResult= await Pool.query(UpdatedItems,[
+   ExitingProducet.id,
   title|| ExitingProducet.title,
-  price||ExitingProducet.price,
+  price ||ExitingProducet.price,
   category|| ExitingProducet.category,
   description|| ExitingProducet.description,
   image||ExitingProducet.image,
-  rating||ExitingProducet.rating
+  rating? JSON.stringify(rating) :ExitingProducet.rating
+ 
 ])
  return res.status(200).json({
   success:true,
@@ -249,25 +251,58 @@ const FinalResult= await Pool.query(UpdatedItems,[
  
 
 
-router.delete("/products/:id",(req,res)=> {
- const itemId=parseInt(req.params.id)
-  const itemFound=ApiNew.find(item=> item.id===itemId)
-  if(!itemFound) {
-    return res.status(404).json("item  does  not  found")
-  }
-  const indexItem=ApiNew.indexOf(itemFound)
-  // delete ApiNew[indexItem]
-  // return res.json(201).json(`item ${itemFound} deleted succefully`)
+// router.delete("/products/:id",(req,res)=> {
+//  const itemId=parseInt(req.params.id)
+//   const itemFound=ApiNew.find(item=> item.id===itemId)
+//   if(!itemFound) {
+//     return res.status(404).json("item  does  not  found")
+//   }
+//   const indexItem=ApiNew.indexOf(itemFound)
+//   // delete ApiNew[indexItem]
+//   // return res.json(201).json(`item ${itemFound} deleted succefully`)
 
 
-  const deletedItem = ApiNew.splice(indexItem, 1);
- return res.status(200).json({
-    message: "Deleted successfully",
-    item: deletedItem[0]
-  });
+//   const deletedItem = ApiNew.splice(indexItem, 1);
+//  return res.status(200).json({
+//     message: "Deleted successfully",
+//     item: deletedItem[0]
+//   });
 
 
-})
+
+  router.delete("/produts/:id", async (req,res)=> {
+ try {
+   const {id}=req.params
+   if(isNaN(id) || id==="") {
+  return res.status(400).json("Please Insert Valid inputs")
+ }
+
+const result= await Pool.query(`
+  SELECT id,title,price,category,description,image,rating FROM products WHERE id=$1`,[id])
+ const Rows=result.rows.length
+if(Rows ===0) {
+
+ return  res.status(404).json({
+    success:false,
+    message:`there is no item  with ${id}  `
+  })
+ }
+ 
+
+ } catch (error) {
+  console.error(error)
+  return res.status(500).json("Intrnal server error")
+  
+ }
+
+
+
+  }) 
+
+
+
+
+
 
 
 
