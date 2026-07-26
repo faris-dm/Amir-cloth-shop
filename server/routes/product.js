@@ -281,13 +281,22 @@ const result= await Pool.query(`
   SELECT id,title,price,category,description,image,rating FROM products WHERE id=$1`,[id])
  const Rows=result.rows.length
 if(Rows ===0) {
+ 
 
  return  res.status(404).json({
     success:false,
     message:`there is no item  with ${id}  `
   })
  }
- 
+ const ResultId=  `
+DELETE  *  FROM products WHERE id=$1,[id]
+`
+return  res.status(201).json({
+  success:true,
+
+  data:ResultId.rows[0]
+})
+
 
  } catch (error) {
   console.error(error)
