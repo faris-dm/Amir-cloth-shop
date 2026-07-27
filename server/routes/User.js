@@ -98,4 +98,77 @@ router.post("/register", async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 });
+
+router.get("/profile/:id",  async (req,res)=> {
+  try {
+    const {id}=req.params
+    const UserInfo= `SELECT * FROM products WHERE id=$1`
+    const Result=await Pool.query(UserInfo,[id])
+    
+
+    return res.status(200).json({
+      success: true,
+      count: Result.rows.length,
+      data: Result.rows,
+    });
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      success:false,
+      message:"Internal server error"
+    })
+    
+  }
+})
+
+router.patch("/profile/edit/:id",async (req,res)=> {
+ try {
+   const { id } = req.params;
+
+   if (isNaN(id) || id === "") {
+     return res.status(400).json("Please Insert Valid inputs");
+   }
+   //   if(!title|| !price ||!description) {
+   //   return res.status(400).json("Please Insert Valid inputs")
+   //  }
+   const Result = await Pool.query(
+     "SELECT user_id,username,email,password,Images  FROM Users WHERE id=$1",
+     [id]
+   );
+
+   if (Result.rows.length === 0) {
+     return res.status(404).json({
+       success: false,
+       message: `there is no item  with ${id}  `,
+     });
+   }
+   const exitingProfile = Result.rows[0];
+   const ItemsUpdates = `
+UPDATE Users SET username=$1,email=$2,password=$3,image=$4 WHERE user_id=$5  RETURNING *`;
+
+   const FinalResult = await Pool.query(ItemsUpdates, [
+     exitingProfile.user_id,
+     username || exitingProfile.username,
+     email || exitingProfile.email,
+     password || exitingProfile.password,
+     images || exitingProfile.images,
+   ]);
+
+   return res.status(200).json({
+     success: true,
+     data: FinalResult.rows[0],
+   });
+ 
+ } catch (error) {
+   console.error(error);
+   return res.status(500).json("Intrnal server error");
+ }
+})
+
+
 export default router;
+
+
+
+// post,post==login and registoer
+// get,patch =show info and uppdate infocons
