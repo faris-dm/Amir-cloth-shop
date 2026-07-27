@@ -1,6 +1,4 @@
 import express, { json } from "express";
-
-
 const router = express.Router();
 import ApiNewData from "../api.json" with { type: "json" };
 // import ApiNew from "../api.json" with {type :"json"};
@@ -251,26 +249,9 @@ const FinalResult= await Pool.query(UpdatedItems,[
  
 
 
-// router.delete("/products/:id",(req,res)=> {
-//  const itemId=parseInt(req.params.id)
-//   const itemFound=ApiNew.find(item=> item.id===itemId)
-//   if(!itemFound) {
-//     return res.status(404).json("item  does  not  found")
-//   }
-//   const indexItem=ApiNew.indexOf(itemFound)
-//   // delete ApiNew[indexItem]
-//   // return res.json(201).json(`item ${itemFound} deleted succefully`)
 
 
-//   const deletedItem = ApiNew.splice(indexItem, 1);
-//  return res.status(200).json({
-//     message: "Deleted successfully",
-//     item: deletedItem[0]
-//   });
-
-
-
-  router.delete("/produts/:id", async (req,res)=> {
+  router.delete("/products/:id", async (req,res)=> {
  try {
    const {id}=req.params
    if(isNaN(id) || id==="") {
@@ -278,7 +259,7 @@ const FinalResult= await Pool.query(UpdatedItems,[
  }
 
 const result= await Pool.query(`
-  SELECT id,title,price,category,description,image,rating FROM products WHERE id=$1`,[id])
+  DELETE  FROM products WHERE id=$1 RETURNING *`,[id])
  const Rows=result.rows.length
 if(Rows ===0) {
  
@@ -288,13 +269,10 @@ if(Rows ===0) {
     message:`there is no item  with ${id}  `
   })
  }
- const ResultId=  `
-DELETE  *  FROM products WHERE id=$1,[id]
-`
-return  res.status(201).json({
-  success:true,
 
-  data:ResultId.rows[0]
+return  res.status(200).json({
+  success:true,
+  data:result.rows[0]
 })
 
 
