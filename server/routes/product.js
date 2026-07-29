@@ -67,65 +67,6 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 
-// router.post("/products", async (req, res) => {
-//   try {
-//     const { title, price, description, category, images, rate, count } = req.body;
-
-//     if (!title || !price || !description || !category) {
-//       return res.status(400).json("Please fill in all required information correctly.");
-//     }
-
-//     // const foundItem = ApiNew.find((item) => item.title === title);
-//     // if (foundItem) {
-//     //   return res.status(409).json("Item already found.");
-//     // }
-  
-
-//     // 1. Corrected SQL placeholders to match 6 columns ($1 through $6)
-//     const InsertQuery = `
-//       INSERT INTO products (title, price, description, category, image, rating)
-//       VALUES ($1, $2, $3, $4, $5, $6)
-//       RETURNING *
-//     `;
-
-//     // 2. Safe rating object handling
-//     const ratingObj = {
-//       rate: rate || 3.4,
-//       count: count || 211
-//     };
-
-//     const queryItems = [
-//       title,
-//       price,
-//       description,
-//       category,
-//       images || null,
-//       JSON.stringify(ratingObj)
-//     ];
-
-//     const dbResult = await Pool.query(InsertQuery, queryItems);
-//     const dbRow = dbResult.rows[0];
-
-//     const newItem = {
-//       id: ApiNew.length + 1,
-//       title,
-//       price,
-//       description,
-//       category,
-//       images,
-//       rating: ratingObj
-//     };
-    
-//     ApiNew.push(newItem);
-//     console.log("Done adding new item");
-    
-//     return res.status(201).json(dbRow || newItem);
-
-//   } catch (error) {
-//     console.error("Error inserting product:", error); // Fixed variable name from 'err' to 'error'
-//     return res.status(500).json("Internal server error");
-//   }
-// });
 router.post("/products",  async (req,res)=> {
   try {
     
@@ -168,37 +109,7 @@ return res.status(201).json({
 
 
 
-// put  route  to make  the the edit,
-//  router.put("/products/:id",  async (req,res)=> {
-//     const UpdatedItemId=parseInt(req.params.id)
-//    const itemLocation = ApiNew.find(item => item.id === UpdatedItemId)
-//     if(!itemLocation) {
-//       return res.status(404).json(" this item does not  found in the products")
-//     }
-//       const {title,price,description,catagory,images,rate,count}=req.body
-//    if(!title || !price) {
-//     return res.status(400).json("title and Price  and   required   for updates")
-//    }
 
-
-//    const updatedItem= {
-//    id: UpdatedItemId, // Keep the same ID!
-//       title: title || itemLocation.title,
-//       price: price ||itemLocation.price,
-//       description: description || itemLocation.description, // Fallback to old description if not provided
-//       catagory: catagory || itemLocation.catagory,
-//       images: images || itemLocation.images,
-//       rating: {
-//         rate: rate || itemLocation.rating.rate,
-//         count: count || itemLocation.rating.count
-//       }
-//    }
-//    const itemIndex=ApiNew.indexOf(itemLocation)
-//   //  findindex is  array methods andn we  are using objects so
-//    ApiNew[itemIndex]=updatedItem
-//    return res.status(201).json(updatedItem)
-      
-//  })
 
 
 router.put("/products/:id", async (req,res)=> {
@@ -210,9 +121,7 @@ router.put("/products/:id", async (req,res)=> {
  if(isNaN(id) || id==="") {
   return res.status(400).json("Please Insert Valid inputs")
  }
-//   if(!title|| !price ||!description) {
-//   return res.status(400).json("Please Insert Valid inputs")
-//  }
+
 const Result= await Pool.query ("SELECT id,title,price,category,description,image,rating  FROM products WHERE id=$1",[id])
 
 if(Result.rows.length ===0 ) {
