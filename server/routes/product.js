@@ -1,7 +1,7 @@
 import express, { json } from "express";
 const router = express.Router();
 import ApiNewData from "../api.json" with { type: "json" };
-// import ApiNew from "../api.json" with {type :"json"};
+
 let ApiNew = [...ApiNewData];
 import Pool from "../config/db.js";
 import { Query } from "pg";
@@ -92,7 +92,8 @@ router.post("/products",  async (req,res)=> {
      VALUES ($1,$2,$3,$4,$5,$6)
      RETURNING *;
    `
- const Result= await Pool.query(NewItem,[title,price,category,description,image,rating])
+const fromatRatings=  rating ?(typeof rating ==="object" ? JSON.stringify(rating):rating) :null
+ const Result= await Pool.query(NewItem,[title,price,category,description,image,fromatRatings])
      console.log(Result)
 return res.status(201).json({
       message: "Item created successfully.",
@@ -135,14 +136,14 @@ const UpdatedItems=`
 UPDATE products  SET  title=$1,price=$2,category=$3,description=$4,image=$5,rating=$6 WHERE id =$7 RETURNING* `
    
 const FinalResult= await Pool.query(UpdatedItems,[
-   ExitingProducet.id,
+
   title|| ExitingProducet.title,
   price ||ExitingProducet.price,
   category|| ExitingProducet.category,
   description|| ExitingProducet.description,
   image||ExitingProducet.image,
-  rating? JSON.stringify(rating) :ExitingProducet.rating
- 
+  rating? JSON.stringify(rating) :ExitingProducet.rating,
+    ExitingProducet.id
 ])
  return res.status(200).json({
   success:true,
