@@ -1,6 +1,6 @@
 import express from "express"
 import jwt from "jsonwebtoken"
-import Pool from "../config/db"
+import Pool from "../config/db.js"
 import bcrypt from "bcrypt"
 const router =express.Router()
 import cookiesParter from "cookie-parser"
@@ -29,7 +29,7 @@ function generateRefresh(user) {
     const cleanEmail=email.trim()
 
     try {
-        const UserQuery = `SELECT user_id,email,username,password_hash FROM Users WHERE username=$1 OR email=$2 `;
+        const UserQuery = `SELECT user_id,email,username,password_hash FROM authors WHERE username=$1 OR email=$2 `;
         
           const resultCheck = await Pool.query(UserQuery, [
             cleanEmail,

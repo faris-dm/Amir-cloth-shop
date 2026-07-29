@@ -1,13 +1,14 @@
 import express from "express";
 import productZRoute from "./routes/product.js";
 import User from "./routes/User.js";
-
+import Login  from "./routes/login.js"
 // import Pool from "./config/db.js";
 import Pool from "./config/db.js";
 const app = express();
 app.use(express.json());
 app.use("/api/", productZRoute);
 app.use("/api", User);
+app.use("/api",Login)
 const port = 2300;
 
 app.get("/", (req, res) => {
@@ -16,6 +17,4 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`http://:localhost:${port}`);
-
- 
 });
