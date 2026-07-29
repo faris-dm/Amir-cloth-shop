@@ -1,4 +1,4 @@
-uyt765import express from "express"
+import express from "express"
 import jwt from "jsonwebtoken"
 import Pool from "../config/db"
 import bcrypt from "bcrypt"
