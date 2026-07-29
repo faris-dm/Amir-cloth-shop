@@ -36,3 +36,23 @@ CREATE TABLE products (
     image TEXT,
     rating JSONB                        -- Fixed to JSONB and removed the trailing comma
 );
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL REFERENCES users(id), -- Changed from authors(id) to users(id)
+  amount NUMERIC(10,2) NOT NULL,
+  status VARCHAR(60) DEFAULT 'pending',
+  address VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL REFERENCES authors(user_id), -- Changed from authors(id) to users(id)
+  amount NUMERIC(10,2) NOT NULL,
+  status VARCHAR(60) DEFAULT 'pending',
+  address VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
