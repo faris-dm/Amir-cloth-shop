@@ -13,7 +13,7 @@ router.use(express.urlencoded({ extended: true }));
     const saveItem =
     `INSERT INTO products (id,title,price,description,category,image,rating)
     VALUES ($1,$2,$3,$4,$5,$6,$7)
-    
+   
     `
  for (const items of Api) {
     await Pool.query(saveItem,[
