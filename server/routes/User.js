@@ -21,13 +21,20 @@ let generateAccess = (UserPayLoad) => {
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
   const cleanEmail = email.trim().toLowerCase();
-  if (!email || password.trim() === "") {
+  if (!email || password.trim() === "")  {
     return res.status(400).json({
       success: false,
-      message: "Password  must be  filed",
+      message: "Password/email  is required",
     });
   }
+  if(!username || username.trim()=== "") {
 
+
+  return res.status(400).json({
+    success: false,
+    message: "username is  required",
+  });
+  }
   try {
     const checkEmail = `SELECT user_id,username,email FROM  authors WHERE username =$1 OR email=$2`;
 
