@@ -34,3 +34,12 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 
 
+CREATE TABLE Cart (
+    id  SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES authors(user_id) ON DELETE CASCADE,
+    item_id INT NOT NULL REFERENCES products(id) ON  DELETE CASCADE,
+    qantity INT NOT NULL DEFAULT 1 CHECK (qantity > 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(user_id, item_id)
+)
+

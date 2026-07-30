@@ -1,14 +1,24 @@
+  we   go to the  cart page
+      so what we  means is   the user  send some user in the car  mean it add them then the front  send the dats  to the backend   then the backend  check if the items  exist or not  and   if they  found  , then th  data will be stored in the db in the cart items  them  when the user  goes to the cart page  the front  send the get request then the db will send the datas  then thw cart page will display the   items  and so own
+like   how can  the user know how  this items are his ,he knowa  when the user  login the jwt  verify and send  the  idand some emails  then useing it emails we can access it  databse then retrive it infos
+  so by extractecing infos  from the cookes  it get our infos
+
+## 
+
+ this this the database 
+ SELECT 
+  cart_items.quantity, 
+  products.title, 
+  products.price, 
+  (products.price * cart_items.quantity) AS subtotal 
+FROM cart_items 
+JOIN products ON cart_items.product_id = products.id 
+WHERE cart_items.user_id = $1;
 
 
+(products.price * cart_items.quantity) AS subtotal
+ this  means   after the   calicuations is done it create some tepral table  and store the values asa  subtotta;
 
-npm run seed:admin
-which creates admin@example.com / ChangeMe123! by default, or your own values if you set ADMIN_EMAIL/ADMIN_PASSWORD first. Full details are in the updated README in the zip above.
+FROM cart_items :means   strat   your search   from this  cart_item table and  the join help to connect two tables as a one  
 
-
-
-openai_api_key+ak
-
-
-
-
-
+WHERE cart_items.user_id = $1;: this  used as filteronly tosend some data  that neede

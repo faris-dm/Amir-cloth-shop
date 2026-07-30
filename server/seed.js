@@ -22,9 +22,5 @@ router.use(express.urlencoded({ extended: true }));
  }
  console.log("Item Stored  succefully")
 }
-// for of user as  aloop in db in map and objects
-//  error :we removed  the retruing item blc in is asking dome id
-//  and  added callbacks  in the catch
-
 
 Seed().catch(err=> console.error("error creating seedind Database",err))
