@@ -1,10 +1,6 @@
 -- ✅ Corrected SQL:
-ALTER TABLE "orders"
-  ADD COLUMN shipping_address TEXT NOT NULL DEFAULT 'Not Provided',
-  ADD COLUMN payment_method VARCHAR(60) NOT NULL DEFAULT 'Cash on Delivery';
 CREATE TABLE authors (
 user_id SERIAL PRIMARY KEY,
-
 email VARCHAR(60) UNIQUE NOT NULL,
 password_hash VARCHAR(255) NOT NULL,
 is_active BOOLEAN DEFAULT TRUE,
@@ -26,10 +22,12 @@ CREATE TABLE products (
 
 CREATE  TABLE orders (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES authors(id),
+    user_id INT NOT NULL REFERENCES authors(user_id),
     amount NUMERIC(10,2) NOT NULL,
-    status VAR(60) DEFAULT 'pending',
-    address VARCHAR(100)
+    status VARCHAR(60) DEFAULT 'pending',
+    address VARCHAR(100),
+    shipping_address TEXT NOT NULL,                                   -- Unified address field name
+    payment_method VARCHAR(60) NOT NULL DEFAULT 'Cash on Delivery',
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
@@ -44,3 +42,13 @@ CREATE TABLE Cart (
   UNIQUE(user_id, item_id)
 )
 
+
+CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INT NOT NULL,
+  product_id INT NOT NULL,
+  quantity INT NOT NULL CHECK (quantity > 0),
+  price_at_purchase DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
+);
