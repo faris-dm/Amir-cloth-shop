@@ -1,6 +1,7 @@
-
-
-
+-- ✅ Corrected SQL:
+ALTER TABLE "orders"
+  ADD COLUMN shipping_address TEXT NOT NULL DEFAULT 'Not Provided',
+  ADD COLUMN payment_method VARCHAR(60) NOT NULL DEFAULT 'Cash on Delivery';
 CREATE TABLE authors (
 user_id SERIAL PRIMARY KEY,
 
