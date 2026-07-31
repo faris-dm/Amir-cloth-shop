@@ -102,9 +102,73 @@ return res.status(200).json({
     }
   })
 
+router.delete("remove/:id", async(req,res)=> {
+  try {
+    const Id=req.params
+    const UserId=req.user.user_id
+
+     if (!Id || isNaN(Id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid Product ID is required",
+      });
+    }
+
+const deleteItem=`
+DELETE FROM Cart WHERE user_id =$1 AND  item_id =$2 RETURNING * `
+
+const Result =await Pool.query(deleteItem,[Id,UserId])
+    
+ if(Result.rows.length === 0) {
+  return res.status(404).json({ success: false, message: "Item not found in cart" });
+ }
+
+ return res.status(200).json({
+  success:true,
+  message:` the item with ${Id} from the storage`
+ })
 
 
+  } catch (error) {
+     return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+})
 
+router.put("/update", async (req,res)=> {
+ try {
+   const UserId=req.user.user_id
+  const { item_id,qantity}=req.body
+
+  if (! item_id || !qantity || qantity < 1) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid item ID and quantity (> 0) are required",
+      });
+    }
+const updateQery=
+`
+ UPDATE Cart SET  qantity=$1  WHERE  user_id=$2 AND  item_id=$3
+ RETURNING *
+`
+if (Result.rows.length === 0) {
+      return res.status(404).json({ success: false, message: "Item not found in cart" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Cart updated",
+      data: Result.rows[0],
+    });
+const Result =await Pool.query(updateQery,[qantity,UserId,item_id])
+ } catch (error) {
+  console.error("Update Cart Error:", error);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  
+ }
+})
 
 
 
