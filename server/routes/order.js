@@ -5,6 +5,72 @@ import Pool from "../config/db.js"
 const router=expres.Router()
 router.use(expres.json())
 
+
+ router.get("/ordersHistory",async (req,res)=> {
+ try {
+  
+  const UserID = req.user.user_id;
+  const query = `SELECT id,amount,status,created_at FROM orders   WHERE user_id=$1 ORDER  BY  created_at DESC
+  
+  `;
+
+  const resuktQuery = await Pool.query(query, [UserID]);
+
+  return res.status(200).json({
+    success: true,
+    count: result.rows.length,
+    data: resuktQuery.rows,
+  });
+
+ } catch (error) {
+   console.error("Fetch Orders Error:", error);
+   return res
+     .status(500)
+     .json({ success: false, message: "Internal server error" });
+ }
+ 
+  
+
+ })
+
+
+router.get("/orders/:id", async (req,res)=> {
+  try {
+    const {id}=req.params
+    const UserID=req.user.user_id
+    if(!id || isNaN(id)) {
+      return res.status(409).json("Please prove valid id")
+    }
+    const query = `SELECT id,user_id,amount,status,shipping_address,payment_method FROM orders WHERE id=$1 AND user_id=$2`;
+
+const Result =await Pool.query(query,[id,UserID])
+
+
+if(Result.rows.length===0) {
+  return res.status(404).json({success:false,message:"Order  does not  found"})
+}
+
+const itemSelect = ` SELECT  order_items.product_id,order_items.price_at_purchase,products.title,products.id
+ FROM  order_items
+ JOIN products ON order_items.products.id=products.id
+ WHERE order_items.order_id=$1;
+`;
+const QueryResult=await Pool.query(itemSelect,[id])
+return res.status(200).json({
+  success: true,
+  order: Result.rows[0],
+  items: QueryResult.rows,
+});
+
+
+  } catch (error) {
+    console.error("Fetch  single Orders Error:", error);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+  
+})
+
+
 router.post("/order", async (req, res) => {
   try {
     const UserID = req.user.user_id;
