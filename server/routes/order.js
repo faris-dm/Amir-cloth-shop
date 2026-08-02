@@ -18,7 +18,7 @@ router.use(expres.json())
 
   return res.status(200).json({
     success: true,
-    count: result.rows.length,
+    count: resuktQuery.rows.length,
     data: resuktQuery.rows,
   });
 
@@ -52,7 +52,7 @@ if(Result.rows.length===0) {
 
 const itemSelect = ` SELECT  order_items.product_id,order_items.price_at_purchase,products.title,products.id
  FROM  order_items
- JOIN products ON order_items.products.id=products.id
+ JOIN products ON order_items.product_id=products.id
  WHERE order_items.order_id=$1;
 `;
 const QueryResult=await Pool.query(itemSelect,[id])

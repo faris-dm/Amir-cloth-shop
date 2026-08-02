@@ -22,3 +22,28 @@ WHERE cart_items.user_id = $1;
 FROM cart_items :means   strat   your search   from this  cart_item table and  the join help to connect two tables as a one  
 
 WHERE cart_items.user_id = $1;: this  used as filteronly tosend some data  that neede
+
+
+###  when we send info related to the  item we sent info that are nt easily changed means  if we add the price in the front andmake it send to the backe the user  can open  the dev  tools and  change theprce so we send the user id and get the info  from the backend  then calcute the results
+
+"
+i am confused in "SELECT Cart.item_id, Cart.qantity, products.price
+      FROM Cart
+      JOIN products ON Cart.item_id = products.id
+      WHERE Cart.user_id = $1;"
+
+  in the cart it only stores qantity of the prodact and the item id and  the id
+   it does not know the title and  the price of the prodact
+   so if we  see the cart it know  who want to buy it and and  the qantity but it has not information of  what  the items is if it price is..
+    and if we use the prodact table  the tables has the all neede inforamtions  but does not know who want to buy it and howmucha and the quantity so the postgress use the join methods to add this tables as one and  retrive info
+so it  start from the  geting the cart user_id  then  go to the proact table and getthe item id  then it    select item id  qyauntitty fromthe cart that resent  with the  ids  and get the price of that prodact fromthe prodact  tables
+
+ I asked  in the  order page  why we  only asked  the shiiping address and the payment not others and it say
+  now we are  woking  on the  back so we need only the two in front we ask this inthe ui
+
+
+  i did not get why we  use "const totalAmount = cartResult.rows.reduce(
+      (sum, item) => sum + Number(item.price) * item.qantity,
+      0
+    );" means  the syntax
+    

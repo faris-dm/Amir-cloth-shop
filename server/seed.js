@@ -20,7 +20,7 @@ router.use(express.urlencoded({ extended: true }));
         items.id,items.title,items.price,items.description,items.category,items.image,JSON.stringify(items.rating)
     ])
  }
- console.log("Item Stored  succefully")
+ console.log("Item Stored succefully")
 }
 
 Seed().catch(err=> console.error("error creating seedind Database",err))
