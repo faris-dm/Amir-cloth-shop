@@ -15,9 +15,13 @@ router.get("/cartItems", async (req,res)=> {
    const userId=req.user.user_id
 
   const carQuery=`
-  SELECT Cart.qantity,
+
+  SELECT 
+  Cart.id AS cart_id,
+  Cart.qantity,
   products.title,
   products.price,
+  products.image,
   (products.price * Cart.qantity) AS total
   FROM Cart JOIN products ON Cart.item_id =products.id
   WHERE Cart.user_id=$1
@@ -102,7 +106,7 @@ return res.status(200).json({
     }
   })
 
-router.delete("remove/:id", async(req,res)=> {
+router.delete("/remove/:id", async(req,res)=> {
   try {
     const Id=req.params
     const UserId=req.user.user_id
@@ -169,9 +173,33 @@ const Result =await Pool.query(updateQery,[qantity,UserId,item_id])
   
  }
 })
+//  we need all delete all
+
+router.delete("/removeAll", async (req,res)=> {
+  try {
+   
+     const UserId=req.user.user_id
 
 
+  
 
+
+    const DeleteItem =`
+     DELETE FROM Cart WHERE    user_id=$1 RETURNING *
+    `
+    const Result= await Pool.query(DeleteItem,[UserId])
+if(Result.rows.length=== 0) {
+   return res.status(404).json({ success: false, message: "Item not found in cart" });
+}
+return res.status(200).json({success:true, message:"item delete  from the Cart",result:Result.rows.length})
+
+  } catch (error) {
+     return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+})
 
 
 
