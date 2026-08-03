@@ -62,7 +62,7 @@ function generateRefresh(user) {
             Username:result.username,
           };
           const accessToken=generateAccess(payload)
-          console.log("accessToken created in Login")
+          console.log("accessToken created in Login",accessToken)
  
 
           const refreshPlayload= {
@@ -84,11 +84,7 @@ function generateRefresh(user) {
             maxAge:60*60*7*24*1000
           });
 
-          return res.status(200).json({
-            success:true,
-            message:"SuccessFull Login",
-
-          })
+          return res.status(200).json(`accessToken created`,accessToken)
 
 console.log("incorrect password");
 
