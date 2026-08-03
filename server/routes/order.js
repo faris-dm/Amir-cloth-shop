@@ -2,14 +2,15 @@
 
 import expres, { json } from "express"
 import Pool from "../config/db.js"
+import authcateUser  from "../middle/auth.js"
 const router=expres.Router()
 router.use(expres.json())
 
 
- router.get("/ordersHistory",async (req,res)=> {
+ router.get("/ordersHistory", authcateUser,async (req,res)=> {
  try {
   
-  const UserID = req.user.user_id;
+  const UserID = req.user?.id || req.user?.user_id;
   const query = `SELECT id,amount,status,created_at FROM orders   WHERE user_id=$1 ORDER  BY  created_at DESC
   
   `;
@@ -34,10 +35,10 @@ router.use(expres.json())
  })
 
 
-router.get("/orders/:id", async (req,res)=> {
+router.get("/order/:id", authcateUser, async (req,res)=> {
   try {
     const {id}=req.params
-    const UserID=req.user.user_id
+    const UserID = req.user?.id || req.user?.user_id;
     if(!id || isNaN(id)) {
       return res.status(409).json("Please prove valid id")
     }
@@ -71,9 +72,11 @@ return res.status(200).json({
 })
 
 
-router.post("/order", async (req, res) => {
+router.post("/order", authcateUser, async (req, res) => {
   try {
-    const UserID = req.user.user_id;
+     const UserID = req.user?.id || req.user?.user_id;
+    
+    // const UserID = req.user?.id || req.user?.user_id;
     const { shippingAddress, paymentMethod } = req.body;
 
     // 1. Validate BEFORE checking out a pool connection
