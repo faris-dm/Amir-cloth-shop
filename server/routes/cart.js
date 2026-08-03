@@ -2,7 +2,7 @@ import express from "express"
 import ApiNew from "../api.json" with {type:"json" }
 import Pool  from "../config/db.js"
 // import authcateUser  from "../note/auth/token.js"
-import authcateUser  from "../middle/auth.js"
+import authcateUser     from "../middle/auth.js"
 const router=express.Router()
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -121,7 +121,7 @@ router.delete("/remove/:id", authcateUser, async(req,res)=> {
       return res.status(401).json({ success: false, message: "Unauthorized user" });
     }
 
-     if (!Id || isNaN(Id)) {
+     if (!id || isNaN(id)) {
       return res.status(400).json({
         success: false,
         message: "Valid Product ID is required",
@@ -131,7 +131,7 @@ router.delete("/remove/:id", authcateUser, async(req,res)=> {
 const deleteItem=`
 DELETE FROM Cart WHERE user_id =$1 AND  item_id =$2 RETURNING * `
 
-const Result =await Pool.query(deleteItem,[Id,UserId])
+const Result =await Pool.query(deleteItem,[UserId,id])
     
  if(Result.rows.length === 0) {
   return res.status(404).json({ success: false, message: "Item not found in cart" });
@@ -139,7 +139,7 @@ const Result =await Pool.query(deleteItem,[Id,UserId])
 
  return res.status(200).json({
   success:true,
-  message:` the item with ${Id} from the storage`
+  message:` the item with ${id} from the storage`
  })
 
 
