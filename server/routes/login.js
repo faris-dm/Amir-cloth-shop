@@ -1,3 +1,5 @@
+
+import "dotenv/config"
 import express from "express"
 import jwt from "jsonwebtoken"
 import Pool from "../config/db.js"
@@ -6,8 +8,8 @@ const router =express.Router()
 import cookiesParter from "cookie-parser"
 router.use(express.json());
 router.use(cookiesParter());
-let secret = "W$q4=25*8%v-}UV";
-let RefreshTokenSecret = "W%&7=-^#-v}XL";
+let secret = process.env.JWT_ACCESS_SECRET;
+let RefreshTokenSecret = process.env.JWT_REFRESH_SECRET;
 
 
 function generateAccess(user) {

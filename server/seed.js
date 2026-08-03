@@ -3,7 +3,7 @@ import express from "express"
 import Api from  "./api.json" with {type:"json"}
 const router=express.Router()
 router.use(express.json());
-import Pool from "./config/db.js";
+import Pool from "./co       nfig/db.js";
 router.use(express.urlencoded({ extended: true }));
 
 

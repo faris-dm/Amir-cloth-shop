@@ -1,10 +1,12 @@
+
+import "dotenv/config"
 import express from "express"
 import cookieParser from "cookie-parser"
 import Jwt from "jsonwebtoken"
 const router =express.Router()
 router.use(cookieParser())
-let secret = "W$q4=25*8%v-}UV";
-let RefreshTokenSecret = "W%&7=-^#-v}XL";
+let secret = process.env.JWT_ACCESS_SECRET;
+let RefreshTokenSecret = process.env.JWT_REFRESH_SECRET;
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 import Pool from "../config/db.js";
@@ -29,7 +31,7 @@ if (!OldRefresHToken) {
     message: "session not found ",
   });
 }
-
+// refreshToken  creations amd make  the user
 Jwt.verify(OldRefresHToken, RefreshTokenSecret, async (err, decoded) => {
   if (err) {
     return res.status(401).json("RefreshTokens are  EXPRED");
