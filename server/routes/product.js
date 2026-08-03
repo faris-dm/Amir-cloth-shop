@@ -1,11 +1,11 @@
 import express, { json } from "express";
 const router = express.Router();
-import ApiNewData from "../api.json" with { type: "json" };
+import Role from "../middle/role.js";
+// import ApiNewData from "../api.json" with { type: "json" };
 
-let ApiNew = [...ApiNewData];
+
 import Pool from "../config/db.js";
-import { Query } from "pg";
-import { resume } from "react-dom/server";
+
 
 
 router.use(express.json());
@@ -72,7 +72,7 @@ router.post("/products",  async (req,res)=> {
     
    const {title,price,category,description,image,rating}=req.body
 
-   if (!title || !price || !description || !category || isNaN((price)) ||price===undefined ) {
+   if (!title || !price || !description || !category || isNaN((price))) {
       return res.status(400).json("Please fill in all required information correctly.");
     }
     const QuryResult= await Pool.query(
