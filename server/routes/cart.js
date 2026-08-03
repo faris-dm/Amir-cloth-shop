@@ -1,18 +1,17 @@
 import express from "express"
 import ApiNew from "../api.json" with {type:"json" }
 import Pool  from "../config/db.js"
-import { resume } from "react-dom/server";
+// import authcateUser  from "../note/auth/token.js"
+import authcateUser  from "../middle/auth.js"
 const router=express.Router()
 router.use(express.json());
-
-
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/cartItems", async (req,res)=> {
+router.get("/cartItems", authcateUser, async (req,res)=> {
  try {
 
 
-   const userId=req.user.user_id
+   const UserId = req.user?.id || req.user?.user_id;
 
   const carQuery=`
 
@@ -30,7 +29,7 @@ router.get("/cartItems", async (req,res)=> {
 
   `
 
-  const Result= await Pool.query(carQuery,[userId])
+  const Result= await Pool.query(carQuery,[UserId])
 
 const AllTotal=Result.rows.reduce((sum,item)=>sum + Number(item.total),0)
 
@@ -60,10 +59,17 @@ return res.status(200).json({
 
 
 
-  router.post("/add", async (req,res)=> {
+  router.post("/add", authcateUser, async (req,res)=> {
     try {
-      const UserId=req.user.user_id
-      const {id,qantity} =req.body
+     const UserId = req.user?.id || req.user?.user_id;
+
+    // 3. Reject the request early if the user is not authenticated
+    if (!UserId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized: Missing user token",
+      });
+    } const {id,qantity} =req.body
 
       if (!id || isNaN(id)) {
       return res.status(400).json({
@@ -106,10 +112,14 @@ return res.status(200).json({
     }
   })
 
-router.delete("/remove/:id", async(req,res)=> {
+router.delete("/remove/:id", authcateUser, async(req,res)=> {
   try {
-    const Id=req.params
-    const UserId=req.user.user_id
+    const {id}=req.params
+    const UserId = req.user?.id || req.user?.user_id;
+
+    if (!UserId) {
+      return res.status(401).json({ success: false, message: "Unauthorized user" });
+    }
 
      if (!Id || isNaN(Id)) {
       return res.status(400).json({
@@ -141,9 +151,9 @@ const Result =await Pool.query(deleteItem,[Id,UserId])
   }
 })
 
-router.put("/update", async (req,res)=> {
+router.put("/update", authcateUser, async (req,res)=> {
  try {
-   const UserId=req.user.user_id
+   const UserId = req.user?.id || req.user?.user_id;
   const { item_id,qantity}=req.body
 
   if (! item_id || !qantity || qantity < 1) {
@@ -157,6 +167,7 @@ const updateQery=
  UPDATE Cart SET  qantity=$1  WHERE  user_id=$2 AND  item_id=$3
  RETURNING *
 `
+const Result =await Pool.query(updateQery,[qantity,UserId,item_id])
 if (Result.rows.length === 0) {
       return res.status(404).json({ success: false, message: "Item not found in cart" });
     }
@@ -166,7 +177,7 @@ if (Result.rows.length === 0) {
       message: "Cart updated",
       data: Result.rows[0],
     });
-const Result =await Pool.query(updateQery,[qantity,UserId,item_id])
+
  } catch (error) {
   console.error("Update Cart Error:", error);
     return res.status(500).json({ success: false, message: "Internal server error" });
@@ -175,10 +186,10 @@ const Result =await Pool.query(updateQery,[qantity,UserId,item_id])
 })
 //  we need all delete all
 
-router.delete("/removeAll", async (req,res)=> {
+router.delete("/removeAll", authcateUser, async (req,res)=> {
   try {
    
-     const UserId=req.user.user_id
+     const UserId = req.user?.id || req.user?.user_id;
 
 
   
