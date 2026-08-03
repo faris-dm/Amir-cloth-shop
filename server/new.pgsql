@@ -1,4 +1,5 @@
 -- ✅ Corrected SQL:
+
 CREATE TABLE authors (
 user_id SERIAL PRIMARY KEY,
 email VARCHAR(60) UNIQUE NOT NULL,

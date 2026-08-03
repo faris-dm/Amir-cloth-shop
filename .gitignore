@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 explain.txt
 node_modules/
+.env
