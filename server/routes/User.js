@@ -105,6 +105,13 @@ router.post("/register", async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 });
+router.post("/logout", (req, res) => {
+  res.clearCookie("refreshToken");
+  res.clearCookie("accessToken");
+  return res
+    .status(200)
+    .json({ success: true, message: "Logged out successfully" });
+});
 
 router.get("/profile", async (req, res) => {
   try {
