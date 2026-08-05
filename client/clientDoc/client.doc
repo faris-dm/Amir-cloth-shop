@@ -1,0 +1,6 @@
+ok now we created the  the uses state
+const [normal,selected]=useState("")
+so onclick=(()=>selected(item)
+then if  our normal and the item is same change the bg else normal 
+means  the user has o and when it clied some files it cahnge the elements and theitem and the sate equal  then change color
+
