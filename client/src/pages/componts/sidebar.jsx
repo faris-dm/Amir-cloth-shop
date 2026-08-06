@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
-import "../../pages/home.css"
+import "../../pages/home.css";
 
 const filterSections = [
   {
@@ -44,13 +44,8 @@ function FilterBar() {
   //  this normal  use state is for ths sizes
   const [openSection, setOpenSection] = useState("category");
 
-    const [isOpen, setIsOpen] = useState(true);
-    //  this isOpen  useState is for the avlability accordions 
-
-
-
-
-
+  const [isOpen, setIsOpen] = useState(true);
+  //  this isOpen  useState is for the avlability accordions
 
   function toggleSection(id) {
     if (openSection === id) {
@@ -59,7 +54,7 @@ function FilterBar() {
       setOpenSection(id);
     }
   }
-  //   this functions is  for the avalible accordions 
+  //   this functions is  for the avalible accordions
   function toggleOpen() {
     if (isOpen) {
       setIsOpen(false);
@@ -69,7 +64,7 @@ function FilterBar() {
   }
 
   return (
-    <div className="ml-5">
+    <div className="ml-5 ">
       <div className="">
         <h2 className={titleStyle}> Filter</h2>
       </div>
@@ -97,7 +92,7 @@ function FilterBar() {
           </div>
 
           <div>
-            <div className="border-b border-gray-200 py-4 w-64">
+            <div className="border-b border-gray-200 py-4 w-95">
               <button
                 onClick={toggleOpen}
                 className="flex items-center justify-between w-full"
@@ -110,8 +105,7 @@ function FilterBar() {
                 />
               </button>
 
-
-{/*  this isopen usesate is used  for the accordion of the avalable section */}
+              {/*  this isopen usesate is used  for the accordion of the avalable section */}
               {isOpen && (
                 <div className="flex flex-col gap-2 mt-3">
                   <div className="flex items-center gap-2">
@@ -120,10 +114,7 @@ function FilterBar() {
                       id="in-stock"
                       className="w-4 h-4 rounded border-gray-300 accent-black"
                     />
-                    <label
-                      
-                      className="text-md font-normal text-gray-900"
-                    >
+                    <label className="text-md font-normal text-gray-900">
                       Available <span className="text-gray-800">(128)</span>
                     </label>
                   </div>
@@ -133,9 +124,7 @@ function FilterBar() {
                       type="checkbox"
                       className="w-4 h-4 rounded border-gray-300 accent-black"
                     />
-                    <label
-                      className="text-sm text-gray-700"
-                    >
+                    <label className="text-sm text-gray-700">
                       Out of Stock <span className="text-gray-400">(12)</span>
                     </label>
                   </div>
@@ -144,9 +133,8 @@ function FilterBar() {
             </div>
           </div>
 
-
           {/*  this accodions is sued to diplay the category and the reating section */}
-          <div className="w-64">
+          <div className="w-94">
             {filterSections.map((section) => (
               <div key={section.id} className="border-b border-gray-200 py-4">
                 <button
