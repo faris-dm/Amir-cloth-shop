@@ -72,13 +72,13 @@ function FilterBar() {
         <div>
           {/* there is ausesate in this sections used to  shange the bg called  normal and selected */}
           <div className="sizes">
-            <h4 className="font-normal text-sm pb-3">Sizes</h4>
+            <h4 className="font-bold text-lg pb-4">Sizes</h4>
             <div className="flex gap-5">
               {Sizes.map((item) => (
                 <button
                   key={item}
                   onClick={() => selected(item)}
-                  className={`w-10 h-8 flex items-center justify-center  border text-xs font-medium
+                  className={`w-12 h-10 flex items-center justify-center  border text-base font-medium
             ${
               normal === item
                 ? "bg-black text-white border-black"
@@ -107,7 +107,7 @@ function FilterBar() {
 
               {/*  this isopen usesate is used  for the accordion of the avalable section */}
               {isOpen && (
-                <div className="flex flex-col gap-2 mt-3">
+                <div className="flex flex-col gap-3 mt-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
@@ -124,7 +124,7 @@ function FilterBar() {
                       type="checkbox"
                       className="w-4 h-4 rounded border-gray-300 accent-black"
                     />
-                    <label className="text-sm text-gray-700">
+                    <label className="text-md text-gray-700">
                       Out of Stock <span className="text-gray-400">(12)</span>
                     </label>
                   </div>
@@ -136,7 +136,7 @@ function FilterBar() {
           {/*  this accodions is sued to diplay the category and the reating section */}
           <div className="w-94">
             {filterSections.map((section) => (
-              <div key={section.id} className="border-b border-gray-200 py-4">
+              <div key={section.id} className="border-b border-gray-200 py-7">
                 <button
                   onClick={() => toggleSection(section.id)}
                   className="flex items-center justify-between w-full"
@@ -156,7 +156,7 @@ function FilterBar() {
                     {section.items.map((item) => (
                       <label
                         key={item}
-                        className="flex items-center gap-2 text-sm text-gray-700"
+                        className="flex items-center gap-2 text-md text-gray-700 mb-1"
                       >
                         <input
                           type="checkbox"
