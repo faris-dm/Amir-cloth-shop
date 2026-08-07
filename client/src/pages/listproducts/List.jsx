@@ -90,6 +90,7 @@ function ProductsList() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   // this is  for the search
   const [query, setQuery] = useState("");
+  const [old, setNew] = useState("");
 
   return (
     <div>
@@ -102,10 +103,14 @@ function ProductsList() {
         {/* MAIN CONTENT */}
         <div className="w-full lg:w-3/4 px-4">
           {/* Breadcrumb */}
-          <div className="text-sm text-gray-500">Home / Products</div>
+          <div className="text-sm text-gray-500 sm:text-center">
+            Home / Products
+          </div>
 
           {/* Title */}
-          <h1 className="text-xl font-bold text-black mt-2">PRODUCTS</h1>
+          <h1 className="text-xl font-bold text-black sm:text-center text-left  my-2">
+            PRODUCTS
+          </h1>
 
           {/* SEARCH + FILTERS LABEL + CATEGORY SECTION */}
           {/* Small & medium screens: stacked (search -> filters label -> category) */}
@@ -146,7 +151,14 @@ function ProductsList() {
               {categories.map((category) => (
                 <button
                   key={category}
-                  className="px-10 py-1.5 rounded-md border border-gray-300 text-gray-600 text-sm whitespace-nowrap"
+                  onClick={() => setNew(category)}
+                  className={`px-10 py-1.5 rounded-md border border-gray-300 text-gray-600 text-sm whitespace-nowrap
+                    ${
+                      old === category
+                        ? "bg-black text-white  border-black-900"
+                        : "bg-white text-black border-gray-300 hover:border-gray-400"
+                    }
+                    `}
                 >
                   {category}
                 </button>
@@ -164,7 +176,7 @@ function ProductsList() {
           </button>
 
           {/* PRODUCT GRID */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6 pb-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mt-8 pb-9">
             {products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -189,7 +201,7 @@ function ProductsList() {
       {/* FILTER DRAWER — slides in from the left, only relevant below lg */}
       <div
         className={`
-          fixed top-0 left-0 h-full w-3/4 sm:w-1/2
+           fixed top-0 left-0 h-full w-4/5 sm:w-110
           bg-white z-50 lg:hidden
           overflow-y-auto
           transition-transform duration-200
