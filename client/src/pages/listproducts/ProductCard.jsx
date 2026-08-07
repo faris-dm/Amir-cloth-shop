@@ -1,7 +1,7 @@
 function ProductCard({ image, category, title, price }) {
   return (
-    <div className="bg-white border border-gray-300 rounded-md overflow-hidden">
-      <img src={image} alt={title} className="w-full h-56 object-cover" />
+    <div className="bg-gray-300 border border-gray-300 rounded-md overflow-hidden">
+      <img src={image} alt={title} className="w-full h-96 object-cover" />
 
       <div className="p-3">
         <p className="text-xs text-gray-500">{category}</p>
