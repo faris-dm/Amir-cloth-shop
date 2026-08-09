@@ -12,25 +12,25 @@ import SearchSection from "./pages/componts/search";
 import Filter from "./pages/Js_Filter";
 // this is in the listProducts folder
 import ListProducts from "./pages/listproducts/List";
-
-
+import CheckOut from "./pages/componts/CheckOut";
+import Bag from "./pages/componts/Bag";
 
 function App() {
   return (
     <div>
-      {/* <Products /> */}
-      <Navbar />
-      <ProductsDetails />
+      <Products />
+      {/* <Navbar /> */}
+      {/* <ProductsDetails /> */}
+      <Bag />
+      {/* <CheckOut /> */}
       {/* <ListProducts /> */}
       {/* <Props /> */}
       {/* <Home /> */}
 
       {/* <Sidebar /> */}
       {/* <Accordion /> */}
-      {/* <counter /> */}
-      {/* <Products /> */}
+
       {/* <Filter /> */}
-      {/* <Counter /> */}
     </div>
   );
 }

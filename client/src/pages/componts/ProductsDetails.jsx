@@ -125,7 +125,7 @@ function ProductsDetails() {
           <div className="mt-8 mb-4">
             <h4 className="text-md font-medium text-black">Size</h4>
             <div className="flex flex-wrap gap-3 mt-3">
-              {sizes.map((size) => (
+              {sizes.map((size) =>                                   (
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}

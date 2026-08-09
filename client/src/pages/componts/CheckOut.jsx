@@ -476,7 +476,7 @@ export default function CheckoutPage() {
 
           {/* ================= RIGHT: order summary column ================= */}
           {/* `lg:sticky` keeps totals visible while scrolling a long form on desktop */}
-          <div className="lg:sticky lg:top-10 h-fit">
+          <div className="lg:sticky lg:top-10 h-[400px]">
             <OrderSummary
               subtotal={subtotal}
               shipping={step === "information" ? 0 : 10}
