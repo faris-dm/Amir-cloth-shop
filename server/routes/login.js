@@ -20,7 +20,7 @@ function generateRefresh(user) {
     return jwt.sign(user,RefreshTokenSecret,{expiresIn:"7d"})
 }
 
- router.post("/login", async (req,res)=> {
+ router.post("/login", aasync (req,res)=> {
  const {email,password}=req.body
   if (!email || password.trim() === "") {
     return res.status(400).json({
