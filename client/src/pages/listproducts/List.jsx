@@ -19,7 +19,7 @@ const categories = [
   "COATS",
 ];
 
-const products = [
+const products = [   
   {
     id: 1,
     image: Sitman, // fixed: was already correct
