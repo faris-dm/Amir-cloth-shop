@@ -14,14 +14,16 @@ import Filter from "./pages/Js_Filter";
 import ListProducts from "./pages/listproducts/List";
 import CheckOut from "./pages/componts/CheckOut";
 import Bag from "./pages/componts/Bag";
+import Register    from "./pages/Register/Register"
 
 function App() {
   return (
     <div>
-      <Products />
+      {/* <Products /> */}
+      <Register />
       {/* <Navbar /> */}
       {/* <ProductsDetails /> */}
-      <Bag />
+      {/* <Bag /> */}
       {/* <CheckOut /> */}
       {/* <ListProducts /> */}
       {/* <Props /> */}
