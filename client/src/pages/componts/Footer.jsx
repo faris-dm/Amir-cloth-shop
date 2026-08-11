@@ -6,17 +6,17 @@ import "../home.css";
 
 function Footer() {
   const fotterDev =
-    "grid grid-cols-1 sm:grid-cols-2 items-center px-6 pb-8 gap-8";
-  const footerLinks = "hover:underline font-bold text-[12px] py-1";
+    "grid grid-cols-1 sm:grid-cols-2 items-center px-6  gap-8";
+  const footerLinks = "hover:underline font-bold text-[12px] ";
   const footerBrand =
     "font-show text-[24px] sm:text-[30px] font-black text-[#262626] mt-7 flex items-center gap-2";
 
   return (
     <div>
-      <footer className="bg-[#EBEBEB] pt-6 pb-8">
+      <footer className="bg-[#EBEBEB]  mt-40">
         <div className={fotterDev}>
-          <div className="text-[9px] text-[#9a9393] font-lg grid grid-cols-2 sm:flex sm:gap-16 gap-5 pt-6 px-4 sm:px-0 sm:m-15 md:mx-40">
-            <div className="mb-7 lowercase">
+          <div className="text-[9px] text-[#9a9393] font-lg grid grid-cols-2 sm:flex sm:gap-16 gap-5 pt-2 px-4 sm:px-0 sm:m-15 md:mx-40">
+            <div className="mb-2 lowercase">
               <p className="hover:underline text-[12px] py-1">INFO</p>
               <section>
                 <p className={footerLinks}>PRICING</p>
