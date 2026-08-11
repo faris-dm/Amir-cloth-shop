@@ -21,6 +21,7 @@ import WhiteMan from "../images/whiteMan.png";
 import glass from "../images/glass.png";
 import standMan from "../images/standMan.png";
 import Icon from "./icon";
+import Footer   from "./componts/Footer"
 
 const smallImages = [
   {
@@ -208,7 +209,7 @@ function Home() {
   const footerBrand = "font-show text-[30px]  font-black text-[#262626] mt-7";
   return (
     <div>
-      <div className="w-full p-6 md:p-10 lg:p-16">
+      <div className="w-full p-6 md:p-10 lg:p-16 lg:mt-17">
         <div className="mb-[30%] md:mb-[20%] relative">
           <div className="block md:flex lg:flex gap-10 ">
             {/* LEFT SIDE — TITLE/SEARCH SECTION */}
@@ -438,39 +439,8 @@ function Home() {
         </div>
       </div>
       {/* grid grid-cols-2 place-items-center h-40 justify-around */}
-      <footer className="bg-[#EBEBEB]   pt-6 pb-8">
-        <div className={fotterDev}>
-          <div className="text-[9px] text-[#9a9393]  font-lg   grid gap-5 pt-6 m-15 md:mx-40">
-            <div className="mb-7 lowrcase ">
-              <p className="hover:underline text-[12px] py-1">INFO</p>
-              <section>
-                <p className={footerLinks}>PRICING</p>
-                <p className={footerLinks}>ABOUT</p>
-                <p className={footerLinks}>CONTACT</p>
-              </section>
-            </div>
-            <div>
-              <p className="hover:underline text-[12px] py-1">LANGUAGE</p>
-              <section className="text-[10px] md:text-[15px]">
-                <p className={footerLinks}>ENG</p>
-                <p className={footerLinks}>ESP</p>
-                <p className={footerLinks}>SVE</p>
-              </section>
-            </div>
-          </div>
-          {/*   this dev is for text */}
-          <article className="">
-            {" "}
-            <h3 className="text-xs text-[#D6D6D6]">TECHNOLOGIES</h3>
-            <div className={footerBrand}>
-              <img src={PlayLogo} alt="" />
-
-              <h2 className="">XlV</h2>
-              <h3 className="mt">QR</h3>
-            </div>
-          </article>
-        </div>
-      </footer>
+     {/* footer space */}
+     <Footer />
 
       {/* end here */}
     </div>
