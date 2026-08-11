@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, X, User, Heart, ShoppingBag } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import PlayLogo from "../images/playLogo.png";
 
 function Navbar() {
@@ -22,8 +22,12 @@ function Navbar() {
             {/* Desktop nav links — hidden on small screens, shown from md up */}
             <div className="hidden md:block">
               <ul className="flex items-center gap-5 font-gork text-[#282828] font-medium last:cursor-pointer">
-                <li>Home</li>
-                <li>Collection</li>
+                <Link to="/">
+                  <li>Home</li>
+                </Link>
+                <Link to="/products">
+                  <li>Collection</li>
+                </Link>
                 <li>New</li>
               </ul>
             </div>
@@ -38,13 +42,26 @@ function Navbar() {
           <div className="md:flex items-center gap-4">
             <div className="hidden md:flex items-center gap-5 font-gork text-[#282828] font-medium last:cursor-pointer">
               <Heart />
-              <h3>Cart</h3>
-              <ShoppingBag />
+              {/* <Link to="/cart">
+                <h3>Cart</h3>
+              </Link> */}
+              <Link to="/Bag">
+                <ShoppingBag />
+              </Link>
             </div>
-            <User
-              className="text-[#b0b0b0] bg-black p-1 rounded-xl"
-              size={25}
-            />
+            <div className="flex items-center gap-3">
+              <Link to="/profile">
+                <User
+                  className="text-[#b0b0b0] bg-black p-1 rounded-xl"
+                  size={25}
+                />
+              </Link>
+              <div className="hidden sm:block font-gork text-[#282828] font-medium last:cursor-pointer">
+                <Link to="/cart">
+                  <h3>Cart</h3>
+                </Link>
+              </div>
+            </div>
           </div>
         </nav>
       </div>
@@ -75,15 +92,19 @@ function Navbar() {
 
         {/* Nav links inside the mobile menu */}
         <ul className="flex flex-col gap-5 font-gork text-[#282828] font-medium">
-          <li>Home</li>
-          <li>Collection</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/products">
+            <li>Collection</li>
+          </Link>
           <li>New</li>
         </ul>
 
         {/* Cart/heart links repeated here since they're hidden on mobile in the top bar */}
         <div className="flex items-center gap-5 mt-8 font-gork text-[#282828] font-medium">
           <Heart />
-          <h3>Cart</h3>
+          {/* <h3>Cart</h3> */}
           <ShoppingBag />
         </div>
       </div>
