@@ -28,9 +28,6 @@ const INITIAL_ITEMS = [
   },
 ];
 
-
-
-
 /**
  * QtyStepper
  * Vertical +/- stepper matching the reference design.
@@ -241,9 +238,7 @@ export default function ShoppingBagPage() {
 
   return (
     // FIXED TYPO: `w-ful` → `w-full`
-    <div className="min-h-screen w-full bg-neutral-50 text-neutral-900">
-      
-
+    <div className="min-h-screen w-full bg-white text-neutral-900 pt-20">
       {/* Page padding scales down on mobile, up on larger screens */}
       <div className="px-4 sm:px-6 lg:px-10 py-6 sm:py-8 mt-10">
         {/* "Shopping Bag" / "Favourites" tabs */}
