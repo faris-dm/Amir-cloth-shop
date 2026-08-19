@@ -19,8 +19,8 @@ function generateAccess(user) {
 function generateRefresh(user) {
     return jwt.sign(user,RefreshTokenSecret,{expiresIn:"7d"})
 }
-
- router.post("/login", aasync (req,res)=> {
+// https://www.instagram.com/reel/DYCRMu6iice/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==
+ router.post("/login", async (req,res)=> {
  const {email,password}=req.body
   if (!email || password.trim() === "") {
     return res.status(400).json({
