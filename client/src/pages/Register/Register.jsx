@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function BrandPanel() {
   return (
@@ -17,7 +18,7 @@ function BrandPanel() {
         </p>
         <p className="mt-4 text-sm text-center text-neutral-400 max-w-xs">
           Minimal essentials, made to last.
-          <p className=" pt-1">Join now</p>
+          <div className=" pt-1">Join now</div>
         </p>
       </div>
 
@@ -155,15 +156,66 @@ function PasswordField({ label, id, value, defaultValue, onChange, ...props }) {
 }
 
 function LoginForm() {
-  const handleSubmit = (e) => {
+   const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign in submitted");
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setError(null);
+
+    const email = e.target.email.value;
+
+    const loginData = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch("http://localhost:2300/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // ← add this to both login and register fetch calls
+        body: JSON.stringify(loginData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Invalid email or password.");
+      }
+
+      const result = await response.json();
+      console.log("Login success:", result);
+      // redirect, save token, etc. — next step
+      navigate("/products");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <Field id="login-email" label="Email" type="email" required />
-      <PasswordField id="login-password" label="Password" required />
+      <Field
+        id="login-email"
+        name="email"
+        label="Email"
+        type="email"
+        required
+      />
+      <PasswordField
+        id="login-password"
+        label="Password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
       <div className="flex items-center justify-between">
         <label className="flex items-center gap-2">
@@ -173,6 +225,7 @@ function LoginForm() {
           />
           <span className="text-sm text-neutral-600">Remember me</span>
         </label>
+
         <a
           href="#"
           className="text-sm font-medium text-neutral-600 hover:text-neutral-900 underline underline-offset-2"
@@ -181,42 +234,95 @@ function LoginForm() {
         </a>
       </div>
 
+      {error && <p className="text-sm text-red-600">{error}</p>}
+
       <button
         type="submit"
-        className="w-full rounded-md bg-neutral-900 text-white text-base font-semibold tracking-widest uppercase py-4 hover:bg-neutral-800 transition-colors"
+        disabled={isSubmitting}
+        className="w-full rounded-md bg-neutral-900 text-white text-base font-semibold tracking-widest uppercase py-4 hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
-        Sign In
+        {isSubmitting && (
+          <span className="h-4 w-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+        )}
+        {isSubmitting ? "Signing In..." : "Sign In"}
       </button>
     </form>
   );
 }
 
 function RegisterForm() {
+  const navigate = useNavigate( )
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const passwordsMatch =
     confirmPassword.length === 0 || password === confirmPassword;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!agreed || !passwordsMatch || isSubmitting) return;
+
     setIsSubmitting(true);
-    console.log("Register submitted");
-    setTimeout(() => setIsSubmitting(false), 1500);
+    setError(null);
+
+    const username = e.target.username.value;
+    const email = e.target.email.value;
+
+    const userData = {
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch("http://localhost:2300/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // ← add this to both login and register fetch calls
+        body: JSON.stringify(userData),
+      });
+navigate("/products");
+      if (!response.ok) {
+        throw new Error("Registration failed. Try again.");
+      }
+
+      const result = await response.json();
+      console.log("Success:", result);
+      
+      ("/dashboard");
+      // redirect, show success message, whatever you want next
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <Field id="register-username" label="Username" type="text" required />
-      <Field id="register-email" label="Email" type="email" required />
-
       <Field
+        id="register-username"
+        name="username"
+        label="Username"
+        type="text"
+        required
+      />
+      <Field
+        id="register-email"
+        name="email"
+        label="Email"
+        type="email"
+        required
+      />
+
+      <PasswordField
         id="register-password"
         label="Password"
-        type="text"
         minLength={8}
         required
         value={password}
@@ -248,6 +354,8 @@ function RegisterForm() {
         </span>
       </label>
 
+      {error && <p className="text-sm text-red-600">{error}</p>}
+
       <button
         type="submit"
         disabled={!agreed || !passwordsMatch || isSubmitting}
@@ -274,7 +382,7 @@ export default function AuthPage() {
         <div className="w-full max-w-lg">
           <div className="lg:hidden mb-8 text-center">
             <span className="font-black uppercase tracking-tight text-2xl">
-              {/* <label htmlFor="" className="capitalize">Cloth</label> Store. */}
+              Amir Store.
             </span>
           </div>
 
