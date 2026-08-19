@@ -3,12 +3,20 @@ import "dotenv/config"
 import productZRoute from "./routes/product.js";
 import User from "./routes/User.js";
 import Login from "./routes/login.js";
+import cors from "cors"
 // import Pool from "./config/db.js";
 import Pool from "./config/db.js";
 import Cart from "./routes/cart.js";
 import Order  from "./routes/order.js"
 import RefreshTokens  from "./routes/RefreshToken.js"
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 app.use(RefreshTokens)
 app.use(express.json());
 app.use("/api", productZRoute);
@@ -16,6 +24,7 @@ app.use("/api", User);
 app.use("/api", Login);
 app.use("/api/cart", Cart);
 app.use("/api", Order);
+
 
 
 app.get("/", (req, res) => {
