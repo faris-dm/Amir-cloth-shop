@@ -23,7 +23,7 @@ function AllRoute() {
       <Route path="/Bag" element={<Bag />} />
       <Route path="/login" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
-      {/* Catch-all 404 Route */}
+      {/*  404 Route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
