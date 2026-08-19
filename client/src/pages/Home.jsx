@@ -121,7 +121,46 @@ const products = [
     img: butyBlack,
   },
 ];
+const INK = "#282828";
+const ACCENT = "#db2777";
 
+const FONTS_HERO = `
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;1,9..144,420&family=Inter:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap');
+.f-display{font-family:'Fraunces',serif;}
+.f-body{font-family:'Inter',sans-serif;}
+.f-label{font-family:'Space Grotesk',sans-serif;}
+`;
+
+function Placeholder({ tone = 1, className = "", image, alt = "", children }) {
+  const tones = {
+    1: "linear-gradient(160deg, #ded9cd 0%, #b8b2a4 48%, #8b8577 100%)",
+    4: "linear-gradient(160deg, #c9c2b3 0%, #97907f 50%, #5c574c 100%)",
+  };
+
+  return (
+    <div
+      className={`relative overflow-hidden ${className}`}
+      style={!image ? { background: tones[tone] || tones[1] } : undefined}
+    >
+      {image ? (
+        <img
+          src={image}
+          alt={alt}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      ) : (
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 7px)",
+          }}
+        />
+      )}
+      {children}
+    </div>
+  );
+}
 function Home() {
   const slideRef = useRef(null);
   const NewSlide = useRef(null);
@@ -179,55 +218,83 @@ function Home() {
   const appriochText = "text-xs pb-1 md:text-sm lg:text-base";
   const footerImages =
     "w-full h-56 sm:h-64 md:h-[70vh] object-cover rounded-md";
+  const tones = {
+    1: "linear-gradient(160deg, #ded9cd 0%, #b8b2a4 48%, #8b8577 100%)",
+    4: "linear-gradient(160deg, #c9c2b3 0%, #97907f 50%, #5c574c 100%)",
+  };
 
   return (
     <div>
       <div className="w-full p-6 md:p-10 lg:p-16 lg:mt-17">
-        <div className="mb-16 sm:mb-24 md:mb-[15%] relative">
-          <div className="flex flex-col md:flex-row gap-8 md:gap-10">
-            {/* LEFT SIDE — TITLE/SEARCH SECTION */}
-            <div className={smallTitle}>
-              <div className="text-sm uppercase tracking-widest font-light">
-                <p>NEW</p>
-                <p>WOMEN</p>
-                <p>KIDS</p>
+        <>
+          <style>{FONTS_HERO}</style>
+
+          <section className="max-w-[1800px] mx-auto px-6 md:px-10 pt-14 pb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              <div className="">
+                <p className="f-label text-xs uppercase tracking-[0.25em] text-gray-500 mb-6">
+                  Summer 2026
+                </p>
+                <h1 className="f-display text-6xl md:text-7xl leading-[0.95]">
+                  XlV
+                  <br />
+                  <span className="italic">Collection</span>
+                </h1>
+                <p className="f-body text-sm text-gray-500 mt-6 max-w-sm leading-relaxed">
+                  Fashion that transcends trends and stands the test of time —
+                  each piece meticulously crafted for lasting quality.
+                </p>
+
+                {/* <div
+                  className="flex items-center rounded-md px-4 py-3 mt-8 max-w-sm"
+                  style={{ background: "#e9e6dd" }}
+                >
+                  <Search className="w-4 h-4 text-gray-500 shrink-0" />
+                  <input
+                    type="text"
+                    placeholder="Search the collection"
+                    className="ml-3 w-full outline-none bg-transparent f-body text-sm placeholder:text-gray-500"
+                  />
+                </div> */}
               </div>
 
-              <div className={searchDev}>
-                <Search className="w-5 h-5 text-gray-500 shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className={searchInputStyle}
+              <div className="grid grid-cols-2 gap-4 h-[420px] md:h-[520px]">
+                <Placeholder
+                  image={SitMan}
+                  alt="White man wearing shirt"
+                  className="w-full h-full rounded-md mt-10"
+                />
+                <Placeholder
+                  image={WhiteMan}
+                  alt="White man wearing shirt"
+                  className="w-full h-full rounded-md"
                 />
               </div>
-
-              <div className="mt-8 md:mt-10">
-                <h1 className={headingH1}>NEW</h1>
-                <h1 className={collectionHeading}>COLLECTION</h1>
-              </div>
-              <p className="text-lg text-black-600 font-show">Summer</p>
-              <p className="text-gray-600 text-show">2026</p>
+              <Link to="/products">
+                <button
+                  className="f-label hidden md:inline-flex lg:inline-flex md:w-50 lg:w-50 items-center gap-2 sm:mt-12 md:mt-1 lg:mt-1 px-7 py-4 rounded-md text-sm uppercase tracking-widest text-white transition-colors hover:opacity-90"
+                  style={{ background: INK }}
+                >
+                  <p className="flex gap-2 items-between">
+                    Go to Shop
+                    <ArrowRight className="w-4 h-4" />
+                  </p>
+                </button>
+              </Link>
+              {/* big screen  */}
             </div>
-
-            {/* RIGHT SIDE — IMAGES SECTION */}
-            <div className={rightSideImages}>
-              <img src={SitMan} alt="Image 1" className={RightImagesStyle} />
-              <img src={Black} alt="Image 2" className={RightImagesStyle} />
-            </div>
-          </div>
-
-          {/* Go to shop button + arrow */}
-          <Link to="/products">
-            <div className="flex items-center gap-3 mt-6">
-              <button className={GoToShopButton}>
-                Go to Shop
-                <ArrowRight className="w-7 h-7 hidden md:block" />
-              </button>
-              <ArrowRight className="w-8 h-8 md:hidden text-black shrink-0" />
-            </div>
+          </section>
+          <Link
+            to="/products"
+            className="f-label w-77 md:hidden inline-flex items-center gap-2 mt-12 px-7 py-4 rounded-md text-sm uppercase tracking-widest text-white transition-colors hover:opacity-90"
+            style={{ background: INK }}
+          >
+            <p className="flex gap-2 items-between">
+              Go to Shop
+              <ArrowRight className="w-4 h-4" />
+            </p>
           </Link>
-        </div>
+        </>
 
         {/* --- PRODUCT SLIDER SECTION --- */}
         <div className="mt-10">
@@ -270,14 +337,37 @@ function Home() {
               </div>
             ))}
           </div>
-
-          <div className="flex justify-center items-center space-x-4 mt-6">
+          <div
+            ref={slideRef}
+            id="slide"
+            className="no-scrollbar  w-full h-fit overflow-x-scroll whitespace-nowrap scroll-smooth"
+          >
+            {products.map((items, i) => (
+              <div key={`${items.id}-${i}`} className={ImageSLideContainer}>
+                <div className={ImagesChildeDiv}>
+                  <img
+                    src={items.img}
+                    alt={items.title}
+                    className="w-full h-[28vh] sm:h-[35vh] md:h-[42vh] rounded-md object-cover"
+                  />
+                  <div className={imageDescribtionContainer}>
+                    <div>
+                      <h3 className={imagesMapTitle}>{items.title}</h3>
+                      <p className={materialName}>{items.material}</p>
+                    </div>
+                    <p className={itemPrice}>{items.price}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* <div className="flex justify-center items-center space-x-4 mt-6">
             <ArrowLeft onClick={slideLeft} className={LeftArrow} />
             <ArrowRight onClick={slideRight} className={LeftArrow} />
-          </div>
+          </div> */}
         </div>
 
-        <div className="flex items-end justify-between my-7">
+        {/* <div className="flex items-end justify-between my-7">
           <section className="font-gork">
             <h3 className={xlv}>XlV</h3>
             <h3 className={xlv}>COLLECTIONS</h3>
@@ -296,9 +386,9 @@ function Home() {
               see all
             </a>
           </article>
-        </div>
+        </div> */}
 
-        <div
+        {/* <div
           ref={NewSlide}
           id="slide"
           className="no-scrollbar  w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth"
@@ -330,13 +420,11 @@ function Home() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
-        <div className="mb-4">
-          <p className="text-center font-gork text-sm text-[#262626] ml-5">
-            Show more
-          </p>
-          <Icon onClick={handleToggle} isOpen={isAccordionVisible} />
+        <div className="flex justify-center items-center space-x-4 mt-6">
+          <ArrowLeft onClick={slideLeft} className={LeftArrow} />
+          <ArrowRight onClick={slideRight} className={LeftArrow} />
         </div>
 
         <h2 className={ApprochHeading}>Our Approach To Fashion Design</h2>
