@@ -4,7 +4,7 @@ import Home  from "../Home"
 import Navbar from '../Navbar'
 import Sidebar from "../componts/sidebar"
 import ListProducts from "../listproducts/List"
-import PeodactDetails from "../componts/ProductsDetails"
+import ProductsDetails from "../componts/ProductsDetails"
 import NotFound from "../Register/notFound"
 import CheckOut from "../componts/CheckOut"
 import Bag from "../componts/Bag"
@@ -18,7 +18,7 @@ function AllRoute() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/products" element={<ListProducts />} />
-      <Route path="/details" element={<PeodactDetails />} />
+      <Route path="/products/:id" element={<ProductsDetails />} />
       <Route path="/cart" element={<CheckOut />} />
       <Route path="/Bag" element={<Bag />} />
       <Route path="/login" element={<Register />} />
