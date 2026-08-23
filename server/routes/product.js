@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express from "express";
 const router = express.Router();
 import Role from "../middle/role.js";
 // import ApiNewData from "../api.json" with { type: "json" };
@@ -195,13 +195,6 @@ return  res.status(200).json({
 
 
   }) 
-
-
-
-
-
-
-
 
 
 

@@ -181,7 +181,7 @@ function LoginForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // ← add this to both login and register fetch calls
+        credentials: "include", // ← add this to both login and regi
         body: JSON.stringify(loginData),
       });
 

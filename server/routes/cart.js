@@ -1,5 +1,5 @@
 import express from "express"
-import ApiNew from "../api.json" with {type:"json" }
+// import ApiNew from "../api.js"
 import Pool  from "../config/db.js"
 // import authcateUser  from "../note/auth/token.js"
 import authcateUser     from "../middle/auth.js"
