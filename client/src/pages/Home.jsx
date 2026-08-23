@@ -224,7 +224,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="bg-[#FAFAF8]">
       <div className="w-full p-6 md:p-10 lg:p-16 lg:mt-17">
         <>
           <style>{FONTS_HERO}</style>
@@ -275,10 +275,12 @@ function Home() {
                   className="f-label hidden md:inline-flex lg:inline-flex md:w-50 lg:w-50 items-center gap-2 sm:mt-12 md:mt-1 lg:mt-1 px-7 py-4 rounded-md text-sm uppercase tracking-widest text-white transition-colors hover:opacity-90"
                   style={{ background: INK }}
                 >
-                  <p className="flex gap-2 items-between">
-                    Go to Shop
-                    <ArrowRight className="w-4 h-4" />
-                  </p>
+                  <Link to="/products">
+                    <p className="flex gap-2 items-between">
+                      Go to Shop
+                      <ArrowRight className="w-4 h-4" />
+                    </p>
+                  </Link>
                 </button>
               </Link>
               {/* big screen  */}
