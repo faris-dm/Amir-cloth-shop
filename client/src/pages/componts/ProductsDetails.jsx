@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+
+
+
 import mainImg from "../../images/back.png";
 import angle1 from "../../images/back.png";
 import angle2 from "../../images/small.png";
 import angle3 from "../../images/whiteMan.png";
 import angle4 from "../../images/back.png";
 import angle5 from "../../images/small.png";
+
 
 // Thumbnail list (Section B) — each one is a different angle of the same product
 const thumbnails = [angle1, angle2, angle3, angle4, angle5];
@@ -24,12 +30,31 @@ const sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
 function ProductsDetails() {
   const [activeImage, setActiveImage] = useState(mainImg);
+  const {id}=useParams()
+  const [product,setProduct]=useState(null)
+  const [loading, setLoading] = useState(true);
 
   // Tracks which color swatch is selected
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   // Tracks which size is selected
   const [selectedSize, setSelectedSize] = useState("M");
+
+
+
+
+  useEffect(()=> {fetch(`http://localhost:2300/api/products/${id}`)
+    .then((response) => response.json())
+    .then((json) => {
+      setProduct(json.data);
+      setLoading(false);
+    });
+
+},[id])
+
+  if (loading) return <div>Loading...</div>;
+  if (!product) return <div>Product not found</div>;
+
 
   return (
     <div>
@@ -45,7 +70,7 @@ function ProductsDetails() {
             {/* SECTION A — big image display, gray background, rectangle shape */}
             <div className="bg-gray-100 rounded-md w-full h-90.5 sm:h-112.5 lg:h-200 flex items-center justify-center overflow-hidden">
               <img
-                src={activeImage}
+                src={`http://localhost:2300${product.image}`}
                 alt="Selected product angle"
                 className="w-full h-full object-cover"
               />
@@ -85,16 +110,15 @@ function ProductsDetails() {
         {/* ============ DETAILS SECTION ============ */}
         <div className="w-full lg:w-1/2 lg:min-h-[600px] lg:mt-20 xl:min-h-[700px]">
           <h1 className="text-2xl font-bold text-black lg:pb-2">
-            Abstract Print Shirt
+           { product.title}
           </h1>
 
-          <p className="text-xl font-semibold text-black mt-2">$99</p>
+          <p className="text-xl font-semibold text-black mt-2">{product.price}</p>
 
           <p className="text-lg text-gray-500 mt-1">MRP incl. of all taxes</p>
 
           <p className="text-black text-lg mt-4 leading-relaxed">
-            Relaxed-fit shirt. Camp collar and short sleeves. Button-up front.
-          </p>
+           {product.description}</p>
 
           {/* ===== COLOR SECTION ===== */}
           {/* Now styled like the Sizes buttons — bigger rectangles with a border, not small squares */}
@@ -125,7 +149,7 @@ function ProductsDetails() {
           <div className="mt-8 mb-4">
             <h4 className="text-md font-medium text-black">Size</h4>
             <div className="flex flex-wrap gap-3 mt-3">
-              {sizes.map((size) =>                                   (
+              {sizes.map((size) => (
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
