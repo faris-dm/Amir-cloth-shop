@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <>
       {/* fixed typo: clasName -> className */}
-      <div className="fixed w-full top-0 z-50 bg-white">
+      <div className="fixed w-full top-0 z-50 bg-[#fafaf8]">
         <nav className="flex items-center justify-between px-9 py-6">
           <div className="flex items-center">
             {/* Burger icon — only clickable/relevant on small screens */}
@@ -28,7 +28,9 @@ function Navbar() {
                 <Link to="/products">
                   <li>Collection</li>
                 </Link>
-                <li>New</li>
+                {/* <Link to="/products/:id">
+                  <li>New</li>
+                </Link> */}
               </ul>
             </div>
           </div>
