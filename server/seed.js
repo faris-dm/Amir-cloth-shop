@@ -1,6 +1,7 @@
 import express from "express";
 // import Api from './api.json' with {   type: "json"}
 import Api from "./api.js";
+
 const router = express.Router();
 router.use(express.json());
 import Pool from "./config/db.js";
