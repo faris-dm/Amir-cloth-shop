@@ -33,7 +33,7 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
 
-
+--   this table is used for storing elements in   that the used is added in the cart
 CREATE TABLE Cart (
     id  SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES authors(user_id) ON DELETE CASCADE,
@@ -43,7 +43,7 @@ CREATE TABLE Cart (
   UNIQUE(user_id, item_id)
 )
 
-
+--  this below table used  for storing the items  which the user orderd
 CREATE TABLE order_items (
   id SERIAL PRIMARY KEY,
   order_id INT NOT NULL,
@@ -53,3 +53,15 @@ CREATE TABLE order_items (
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
 );
+
+
+--  this   table is used  for s toreing  images that describe about the onr image
+CREATE TABLE product_images (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    image_url TEXT NOT NULL,
+    position INTEGER DEFAULT 0   -- controls display order 
+);
+
+
+
