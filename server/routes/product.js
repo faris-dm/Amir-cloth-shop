@@ -111,6 +111,40 @@ return res.status(201).json({
 
 
 
+router.get("/imageDetails/:id", async (req,res)=> {
+  try {
+    const  {id}=req.params
+    const result = await Pool.query(
+      " SELECT * FROM product_images WHERE product_id=$1 ORDER BY position ASC",
+      [id]
+    );
+
+  if (result.rows.length === 0) {
+    return res.status(404).json({
+      success: false,
+      message: `Product with ID ${id} not found`,
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: result.rows
+  });
+
+
+  } catch (error) {
+    console.error("Database error in GET /IMAGES/:id:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error retrieving IMAGES details",
+      error: error.message,
+    });
+    
+  }
+})
+
+
+
 
 
 router.put("/products/:id", async (req,res)=> {
