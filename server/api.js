@@ -11,21 +11,22 @@ const img10 = "/images/small.png";
 const img11 = "/images/sitMan.png";
 const img12 = "/images/whiteMan.png";
 const img13 = "/images/glass.png";
-const img14 = "/images/standMan.png";
+const img14 = "/i mages/frontModel(1).png";
+ 
 const img15 = "/images/t-shirt.png";
 const img16 = "/images/sitMan.png";
 const img17 = "/images/Black_shirt.png";
-const img18 = "/images/sitMan.png";
+const img18 = "/images/image.png";
 const img19 = "/images/blackshirt.png";
 const img20 = "/images/sitMan.png";
 
 const products = [
   {
     id: 1,
-    title: "Classic White Tailored Trousers",
+    title: "Boxy Cream T-Shirt with Grid & Line-Art Illustrations",
     price: 109.95,
     description:
-      "Elegant white tailored trousers with a relaxed fit, suitable for casual or semi-formal wear.",
+      "Designed with thin black grid lines forming panels across the shirt, detailed with minimal black line-art drawings of a bird",
     category: "men's clothing",
     image: img1,
     rating: { rate: 3.9, count: 120 },
@@ -82,10 +83,10 @@ const products = [
   },
   {
     id: 7,
-    title: "Coffee Brown Relaxed Jacket",
+    title: "white T-shirt Relaxed ",
     price: 9.99,
     description:
-      "Warm coffee-brown jacket with a relaxed cut, ideal for cooler weather layering.",
+      "Warm white  T-shirt with a relaxed cut, ideal for cooler weather layering.",
     category: "men's clothing",
     image: img7,
     rating: { rate: 3, count: 400 },
@@ -102,10 +103,10 @@ const products = [
   },
   {
     id: 9,
-    title: "Soft White Everyday T-Shirt",
+    title: "Abstract Line Art Short-Sleeve Cuban Collar Shirt",
     price: 64,
     description:
-      "Soft white t-shirt with a relaxed fit and durable stitching for everyday comfort.",
+      "abstract Line t-shirt with a relaxed fit and durable stitching for everyday comfort.",
     category: "men's clothing",
     image: img9,
     rating: { rate: 3.3, count: 203 },
@@ -132,7 +133,7 @@ const products = [
   },
   {
     id: 12,
-    title: "Grey T-Shirt with Circle Graphic",
+    title: "white T-Shirt ",
     price: 114,
     description:
       "Grey t-shirt with a bold black circular graphic print at the center.",
@@ -142,31 +143,31 @@ const products = [
   },
   {
     id: 13,
-    title: "White Floral Print T-Shirt",
+    title: "Gray Floral Print T-Shirt",
     price: 599,
     description:
-      "White t-shirt with a delicate floral print, adding a soft feminine touch to a casual outfit.",
-    category: "women's clothing",
+      "Gary t-shirt with a delicate floral print, adding a soft man touch to a casual outfit.",
+    category: "Man's clothing",
     image: img13,
     rating: { rate: 2.9, count: 250 },
   },
   {
     id: 14,
-    title: "Soft White Versatile T-Shirt",
+    title: "Slim-Fit Olive Green Utility Trousers",
     price: 999.99,
     description:
       "Soft white t-shirt, a versatile piece easy to pair with any outfit.",
-    category: "women's clothing",
+    category: "Man's clothing",
     image: img14,
     rating: { rate: 2.2, count: 140 },
   },
   {
     id: 15,
-    title: "Lightweight White Cotton T-Shirt",
+    title: "hort-sleeve button-up shirt",
     price: 56.99,
     description:
       "Lightweight white t-shirt with a comfortable, breathable fabric.",
-    category: "women's clothing",
+    category: "Man's clothing",
     image: img15,
     rating: { rate: 2.6, count: 235 },
   },
@@ -182,49 +183,44 @@ const products = [
   },
   {
     id: 17,
-    title: "Tailored Two-Piece Suit Set",
+    title: "Black Bird & Botanical Line-Art T-Shirt   ",
     price: 39.99,
     description:
-      "Structured suit set with a tailored fit for a polished, professional appearance.",
+      "Features off-white line-art illustrations, including a bird and floral motifs positioned on the upper-left chest and a flower graphic on the lower-right hem..",
     category: "men's clothing",
     image: img17,
     rating: { rate: 3.8, count: 679 },
   },
   {
     id: 18,
-    title: "Classic White Cotton T-Shirt",
+    title: "Classic black Cotton trousers",
     price: 9.85,
     description:
-      "Classic white t-shirt made from soft cotton, perfect for casual wear.",
+      "Classic Black t-shirt made from soft cotton, perfect for casual wear.",
     category: "women's clothing",
     image: img18,
     rating: { rate: 4.7, count: 130 },
   },
   {
     id: 19,
-    title: "Elegant White Suit Set",
+    title: "Elegant black T-shirt ",
     price: 7.95,
     description:
-      "Elegant suit set combining comfort and style for formal or semi-formal occasions.",
+      "Elegant T-shirt set combining comfort and style for formal or semi-formal occasions.",
     category: "men's clothing",
     image: img19,
     rating: { rate: 4.5, count: 146 },
   },
   {
     id: 20,
-    title: "White T-Shirt with Printed Design",
+    title: "White T-pants ",
     price: 12.99,
     description:
-      "White t-shirt with a distinctive printed design, adding personality to a simple silhouette.",
-    category: "women's clothing",
+      "White Pants with a distinctive  design, adding personality to a simple silhouette.",
+    category: "Man's clothing",
     image: img20,
     rating: { rate: 3.6, count: 145 },
   },
 ];
-
-
-
-
-
 
 export default products;
