@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 
-
+const API_BASE_URL = "http://localhost:2300"; 
 
 import mainImg from "../../images/back.png";
 import angle1 from "../../images/back.png";
@@ -13,7 +13,7 @@ import angle5 from "../../images/small.png";
 
 
 // Thumbnail list (Section B) — each one is a different angle of the same product
-const thumbnails = [angle1, angle2, angle3, angle4, angle5];
+// const thumbnails = [angle1, angle2, angle3, angle4, angle5];
 
 // Available colors — later these could come from the product's DB data
 const colors = [
@@ -29,8 +29,10 @@ const colors = [
 const sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
 function ProductsDetails() {
-  const [activeImage, setActiveImage] = useState(mainImg);
+ const [activeImage, setActiveImage] = useState(null);
+  // const [activeImage, setActiveImage] = useState(mainImg);
   const {id}=useParams()
+    const [images, setImages] = useState([]);
   const [product,setProduct]=useState(null)
   const [loading, setLoading] = useState(true);
 
@@ -40,10 +42,19 @@ function ProductsDetails() {
   // Tracks which size is selected
   const [selectedSize, setSelectedSize] = useState("M");
 
+useEffect(()=> {
+  fetch(`${API_BASE_URL}/api/imageDetails/${id}`)
+    .then((res) => res.json())
+    .then((json) => {
+      setImages(json.data); // array of { id, product_id, image_url, position }
+      if (json.data.length > 0) {
+        setActiveImage(json.data[0].image_url); // default to first image
+      }
+    });
+},[id])
 
 
-
-  useEffect(()=> {fetch(`http://localhost:2300/api/products/${id}`)
+  useEffect(()=> {fetch(`${API_BASE_URL}/api/products/${id}`)
     .then((response) => response.json())
     .then((json) => {
       setProduct(json.data);
@@ -80,12 +91,12 @@ function ProductsDetails() {
             {/* Row on small/medium (below the big image) */}
             {/* Vertical column on large screens, now sitting on the LEFT of the big image */}
             <div className="flex sm:flex-col gap-3 justify-center sm:justify-start">
-              {thumbnails.map((thumb, index) => (
+              {/* {thumbnails.map((thumb, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveImage(thumb)}
-                  // Selected thumbnail = fully bright + black border
-                  // Unselected = dimmed so the active one clearly stands out
+                  
+                  
                   className={`
                   w-22 h-20 sm:w-16 sm:h-16 rounded-md overflow-hidden border-2 shrink-0
                   transition-opacity duration-150
@@ -102,6 +113,28 @@ function ProductsDetails() {
                     className="w-full h-full object-cover"
                   />
                 </button>
+              ))} */}
+
+              {images.map((img) => (
+                <button
+                  key={img.id}
+                  onClick={() => setActiveImage(img.image_url)}
+                  className={`
+                    w-22 h-20 sm:w-16 sm:h-16 rounded-md overflow-hidden border-2 shrink-0
+                    transition-opacity duration-150
+                    ${
+                      activeImage === img.image_url
+                        ? "opacity-100 border-black"
+                        : "opacity-50 border-gray-200 hover:opacity-75"
+                    }
+                  `}
+                >
+                  <img
+                    src={`${API_BASE_URL}${activeImage}`} // ✅ now responds to thumbnail clicks
+                    alt="Selected product angle"
+                    className="w-full h-full object-cover"
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -110,15 +143,18 @@ function ProductsDetails() {
         {/* ============ DETAILS SECTION ============ */}
         <div className="w-full lg:w-1/2 lg:min-h-[600px] lg:mt-20 xl:min-h-[700px]">
           <h1 className="text-2xl font-bold text-black lg:pb-2">
-           { product.title}
+            {product.title}
           </h1>
 
-          <p className="text-xl font-semibold text-black mt-2">{product.price}</p>
+          <p className="text-xl font-semibold text-black mt-2">
+            {product.price}
+          </p>
 
           <p className="text-lg text-gray-500 mt-1">MRP incl. of all taxes</p>
 
           <p className="text-black text-lg mt-4 leading-relaxed">
-           {product.description}</p>
+            {product.description}
+          </p>
 
           {/* ===== COLOR SECTION ===== */}
           {/* Now styled like the Sizes buttons — bigger rectangles with a border, not small squares */}
