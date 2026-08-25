@@ -24,6 +24,7 @@ app.use(
 );
 
 app.use("/images", express.static(path.join(__dirname, "./images")));
+app.use("/images", express.static(path.join(__dirname, "detailImages")));
 app.use(RefreshTokens);
 app.use(express.json());
 app.use("/api", productZRoute);
