@@ -15,21 +15,20 @@ const img12 = "/images/whiteMan.png";
 const img13 = "/images/glass.png";
 const img14 = "/images/frontModel(1).png";
 
-
 const img15 = "/images/t-shirt.png";
 const img16 = "/images/sitMan.png";
 const img17 = "/images/Black_shirt.png";
 const img18 = "/images/image.png";
 const img19 = "/images/blackshirt.png";
 const img20 = "/images/cream_pants_front.png";
-const img21= "/images/gugutFront(1).png"
+const img21 = "/images/gugutFront(1).png";
 // server/images/gugutFront(1).png
 // c:\Users\Administrator\Downloads\gugutOnly(1).png
 
 const products = [
   {
     id: 1,
-    title: "white t-shirt& Line-Art Illustrations",
+    title: "white t-shirt & Line-Art Illustrations",
     price: 109.95,
     description:
       "Designed with thin black grid lines forming panels across the shirt, detailed with minimal black line-art drawings of a bird",
@@ -87,20 +86,20 @@ const products = [
     image: img6,
     rating: { rate: 3.9, count: 70 },
   },
-  // {
-  //   id: 7,
-  //   title: "white T-shirt Relaxed ",
-  //   price: 9.99,
-  //   description:
-  //     "Warm white  T-shirt with a relaxed cut, ideal for cooler weather layering.",
-  //   category: "men's clothing",
-  //   image: img7,
-  //   rating: { rate: 3, count: 400 },
-  // },
+  {
+    id: 7,
+    title: "white T-shirt Relaxed ",
+    price: 9.99,
+    description:
+      "Warm white  T-shirt with a relaxed cut, ideal for cooler weather layering.",
+    category: "men's clothing",
+    image: img7,
+    rating: { rate: 3, count: 400 },
+  },
   {
     id: 8,
     title: "Burgundy Casual T-Shirt",
-    price: 10.99,
+    price: 11.99,
     description:
       "Rich burgundy t-shirt with a soft, comfortable fit suited for everyday casual wear.",
     category: "men's clothing",
@@ -220,7 +219,7 @@ const products = [
   {
     id: 20,
     title: "black  with white woodie ",
-    price: 12.20,
+    price: 12.2,
     description:
       "White Pants with a distinctive  design, adding personality to a simple silhouette.",
     category: "Man's clothing",
@@ -228,15 +227,25 @@ const products = [
     rating: { rate: 3.6, count: 145 },
   },
 
-
-   {
-    id: 22,
+  {
+    id: 21,
     title: "black Woodie  ",
     price: 12.99,
     description:
       "black white  woodie with a distinctive  design, adding personality to a simple silhouette.",
     category: "Man's clothing",
-    image: img20,
+    image: img10,
+    rating: { rate: 3.6, count: 145 },
+  },
+
+  {
+    id: 22,
+    title: "white Woodie  ",
+    price: 12.99,
+    description:
+      "black white  woodie with a distinctive  design, adding personality to a simple silhouette.",
+    category: "Man's clothing",
+    image: img16,
     rating: { rate: 3.6, count: 145 },
   },
 ];
