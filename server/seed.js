@@ -24,7 +24,7 @@ async function Seed() {
       JSON.stringify(items.rating),
     ]);
   }
-  console.log("Item Stored succefully");
+  console.log("Item Stored succefully  with updates");
 }
 
 Seed().catch((err) => console.error("error creating seedind Database", err));

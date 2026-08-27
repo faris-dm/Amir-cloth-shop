@@ -4,7 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "ecom": "nodemon server"
+    "ecom": "nodemon server",
+    "de":"nodemon config/detailImages.js",
+    "seed":"nodemon seed.js"
   },
   "keywords": [],
   "author": "",
