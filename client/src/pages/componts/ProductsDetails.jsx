@@ -1,8 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-
-const API_BASE_URL = "http://localhost:2300"; 
+const API_BASE_URL = "http://localhost:2300";
 
 import mainImg from "../../images/back.png";
 import angle1 from "../../images/back.png";
@@ -10,7 +9,6 @@ import angle2 from "../../images/small.png";
 import angle3 from "../../images/whiteMan.png";
 import angle4 from "../../images/back.png";
 import angle5 from "../../images/small.png";
-
 
 // Thumbnail list (Section B) — each one is a different angle of the same product
 // const thumbnails = [angle1, angle2, angle3, angle4, angle5];
@@ -29,11 +27,11 @@ const colors = [
 const sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
 function ProductsDetails() {
- const [activeImage, setActiveImage] = useState(null);
+  const [activeImage, setActiveImage] = useState(null);
   // const [activeImage, setActiveImage] = useState(mainImg);
-  const {id}=useParams()
-    const [images, setImages] = useState([]);
-  const [product,setProduct]=useState(null)
+  const { id } = useParams();
+  const [images, setImages] = useState([]);
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Tracks which color swatch is selected
@@ -42,30 +40,30 @@ function ProductsDetails() {
   // Tracks which size is selected
   const [selectedSize, setSelectedSize] = useState("M");
 
-useEffect(()=> {
-  fetch(`${API_BASE_URL}/api/imageDetails/${id}`)
-    .then((res) => res.json())
-    .then((json) => {
-      setImages(json.data); // array of { id, product_id, image_url, position }
-      if (json.data.length > 0) {
-        setActiveImage(json.data[0].image_url); // default to first image
-      }
-    });
-},[id])
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/imageDetails/${id}`)
+      .then((res) => res.json())
+      .then((json) => {
+        const data = json.data || [];
+        setImages(data);
+        if (data.length > 0) {
+          setActiveImage(data[0].image_url);
+        }
+      })
+      .catch((err) => console.error("Failed to load images:", err));
+  }, [id]);
 
-
-  useEffect(()=> {fetch(`${API_BASE_URL}/api/products/${id}`)
-    .then((response) => response.json())
-    .then((json) => {
-      setProduct(json.data);
-      setLoading(false);
-    });
-
-},[id])
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/products/${id}`)
+      .then((response) => response.json())
+      .then((json) => {
+        setProduct(json.data);
+        setLoading(false);
+      });
+  }, [id]);
 
   if (loading) return <div>Loading...</div>;
   if (!product) return <div>Product not found</div>;
-
 
   return (
     <div>
@@ -81,7 +79,7 @@ useEffect(()=> {
             {/* SECTION A — big image display, gray background, rectangle shape */}
             <div className="bg-gray-100 rounded-md w-full h-90.5 sm:h-112.5 lg:h-200 flex items-center justify-center overflow-hidden">
               <img
-                src={`http://localhost:2300${product.image}`}
+                src={`${API_BASE_URL}${activeImage}`} // ✅ use this thumbnail's own image
                 alt="Selected product angle"
                 className="w-full h-full object-cover"
               />
@@ -130,7 +128,7 @@ useEffect(()=> {
                   `}
                 >
                   <img
-                    src={`${API_BASE_URL}${activeImage}`} // ✅ now responds to thumbnail clicks
+                    src={`${API_BASE_URL}${img.image_url}`} // ✅ now responds to thumbnail clicks
                     alt="Selected product angle"
                     className="w-full h-full object-cover"
                   />
