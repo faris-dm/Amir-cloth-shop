@@ -10,8 +10,10 @@ import CheckOut from "../componts/CheckOut"
 import Bag from "../componts/Bag"
 import Register from "../Register/Register";
 import Profile   from  "../componts/Profile"
+import Admin  from "../Admin"
 
 
+// C:\Users\Administrator\Desktop\e-com\Amir-cloth-shop\client\src\pages\Admin.jsx
 
 function AllRoute() {
   return (
@@ -23,6 +25,7 @@ function AllRoute() {
       <Route path="/Bag" element={<Bag />} />
       <Route path="/login" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path = "/admin" element={<Admin />} />
       {/*  404 Route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
