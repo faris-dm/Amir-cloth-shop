@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const API_BASE_URL = "http://localhost:2300";
 
@@ -27,6 +28,7 @@ const colors = [
 const sizes = ["XS", "S", "M", "L", "XL", "2XL"];
 
 function ProductsDetails() {
+  const navigate = useNavigate();
   const [activeImage, setActiveImage] = useState(null);
   // const [activeImage, setActiveImage] = useState(mainImg);
   const { id } = useParams();
@@ -67,6 +69,24 @@ function ProductsDetails() {
 
   return (
     <div>
+      {/* BACK BUTTON — fixed on top, responsive size + spacing */}
+      <button
+        onClick={() => navigate(-1)}
+        className="
+          fixed top-20 left-4 sm:left-8 lg:left-16 z-30
+          flex items-center gap-2
+          bg-white/90 backdrop-blur-sm
+          border border-gray-300 rounded-full
+          px-3 py-2 sm:px-4 sm:py-2.5
+          text-sm sm:text-base text-gray-700
+          shadow-sm hover:bg-gray-100 hover:border-gray-400
+          transition-colors duration-150
+        "
+      >
+        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        <span className="hidden sm:inline">Back</span>
+      </button>
+
       {/* // gap-16 / gap-24 creates a big, clearly visible gap between the two */}
       {/* sections on large screens */}
       <div className="flex flex-col lg:flex-row gap-14 lg:gap-30 xl:gap-38 mx-4 sm:mx-8 lg:mx-16 my-6 lg:my-20 pt-30 ">
