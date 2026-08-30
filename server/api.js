@@ -1,27 +1,36 @@
 const img1 = "/images/front.png";
-const img2 = "/images/standMan.png";
-const img3 = "/images/halfCloth.png";
+
+const img2 = "/images/hoodieFront(1).png";
+const img3 = "/images/penFront(1).png";
+
 const img4 = "/images/pantFront(3).png";
 
 const img5 = "/images/blackshirt.png";
 const img6 = "/images/Black_shirt.png";
+
 const img7 = "/images/pw_Tishirt.png";
 const img8 = "/images/goman_shirt_back (2) - Copy.png";
 const img9 = "/images/duckFont.png";
 
-const img10 = "/images/front.png";
-const img11 = "/images/sitMan.png";
+const img10 = "/images/hoodieFront.png";
+const img11 = "/images/hoodieFront(2).png";
 const img12 = "/images/whiteMan.png";
 const img13 = "/images/glass.png";
 const img14 = "/images/frontModel(1).png";
 
-const img15 = "/images/t-shirt.png";
-const img16 = "/images/sitMan.png";
-const img17 = "/images/Black_shirt.png";
-const img18 = "/images/image.png";
+const img15 = "/images/pattern_shirt_back (2).png";
+const img16 = "/images/leazerFront(1).png";
+
+const img17 = "/images/KisFront(2).png";
+
+const img18 = "/images/blackFront.png";
+
 const img19 = "/images/blackshirt.png";
 const img20 = "/images/cream_pants_front.png";
 const img21 = "/images/gugutFront(1).png";
+const img22 = "/images/jeansFront(1).png";
+
+// server/images/
 // server/images/gugutFront(1).png
 // c:\Users\Administrator\Downloads\gugutOnly(1).png
 
@@ -223,7 +232,7 @@ const products = [
     description:
       "White Pants with a distinctive  design, adding personality to a simple silhouette.",
     category: "Man's clothing",
-    image: img21,
+    image: img20,
     rating: { rate: 3.6, count: 145 },
   },
 
@@ -234,18 +243,18 @@ const products = [
     description:
       "black white  woodie with a distinctive  design, adding personality to a simple silhouette.",
     category: "Man's clothing",
-    image: img10,
+    image: img21,
     rating: { rate: 3.6, count: 145 },
   },
 
   {
     id: 22,
     title: "white Woodie  ",
-    price: 12.99,
+    price: 12.45,
     description:
       "black white  woodie with a distinctive  design, adding personality to a simple silhouette.",
     category: "Man's clothing",
-    image: img16,
+    image: img22,
     rating: { rate: 3.6, count: 145 },
   },
 ];
