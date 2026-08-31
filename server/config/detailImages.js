@@ -7,18 +7,16 @@ async function detaiImages() {
     { product_id: 1, image_url: "/images/ash_tshirt_back (2).png" },
     { product_id: 1, image_url: "/images/ash_tshirt_back (2).png" },
 
-    { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
+    { product_id: 2, image_url: "/images/painFront(1).png" },
+    { product_id: 2, image_url: "/images/painLeft(1).png" },
+    { product_id: 2, image_url: "/images/painFrontOnly(1).png" },
+    { product_id: 2, image_url: "/images/painManBack(1).png" },
+    // { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
 
     { product_id: 3, image_url: "/images/penBack(1).png" },
     { product_id: 3, image_url: "/images/penFront(1).png" },
     { product_id: 3, image_url: "/images/penLeft(1).png" },
     { product_id: 3, image_url: "/images/PenOnly(1).png" },
- 
-
 
     { product_id: 4, image_url: "/images/pantBack(3).png" },
     { product_id: 4, image_url: "/images/pantFront(3).png" },
@@ -44,10 +42,10 @@ async function detaiImages() {
     { product_id: 7, image_url: "/images/ash_tshirt_back (2).png" },
     { product_id: 7, image_url: "/images/ash_tshirt_back (2).png" },
 
-    { product_id: 8, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 8, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 8, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 8, image_url: "/images/ash_tshirt_back (2).png" },
+    { product_id: 8, image_url: "/images/goman_shirt_rleft(4) - Copy.png" },
+    { product_id: 8, image_url: "/images/goman_shirt_right(3) - Copy.png" },
+    { product_id: 8, image_url: "/images/goman_shirt_front(2).png" },
+    { product_id: 8, image_url: "/images/goman_shirt_back (1) - Copy.png" },
     { product_id: 8, image_url: "/images/ash_tshirt_back (2).png" },
 
     { product_id: 9, image_url: "/images/ash_tshirt_back (2).png" },
@@ -57,16 +55,16 @@ async function detaiImages() {
     { product_id: 9, image_url: "/images/ash_tshirt_back (2).png" },
 
     { product_id: 10, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 10, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 10, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 10, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 10, image_url: "/images/ash_tshirt_back (2).png" },
+    { product_id: 10, image_url: "/images/hoodieLeftOnly.png" },
+    { product_id: 10, image_url: "/images/hoodieRight.png" },
+    { product_id: 10, image_url: "/images/hoodieLeft.png" },
+    { product_id: 10, image_url: "/images/hoodieFrontOnly.png" },
 
-    { product_id: 11, image_url: "/images/cream_pants_back.png" },
-    { product_id: 11, image_url: "/images/cream_pants_front.png" },
-    { product_id: 11, image_url: "/images/cream_pants_side.png" },
-    { product_id: 11, image_url: "/images/cream_pants_three_quarter.png" },
-    { product_id: 11, image_url: "/images/ash_tshirt_back (2).png" },
+    { product_id: 11, image_url: "/images/hoodieFront(2).png" },
+    { product_id: 11, image_url: "/images/hoodieLeft(2).png" },
+    { product_id: 11, image_url: "/images/hoodieRight(2).png" },
+    { product_id: 11, image_url: "/images/hoodieBack(2).png" },
+    { product_id: 11, image_url: "/images/hoodieFrontOnly(2).png" },
 
     { product_id: 12, image_url: "/images/ash_tshirt_back (2).png" },
     { product_id: 12, image_url: "/images/ash_tshirt_back (2).png" },
@@ -80,11 +78,11 @@ async function detaiImages() {
     { product_id: 13, image_url: "/images/ash_side.png" },
     { product_id: 13, image_url: "/images/ash_tshirt_left (3).png" },
 
+    { product_id: 14, image_url: "/images/rigthModel(1).png" },
+    { product_id: 14, image_url: "/images/backModel(1).png" },
     { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
+    // { product_id: 14, image_url: "/images/leftModel(1).png" },
+    // { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
 
     { product_id: 15, image_url: "/images/pattern_shirt_back (1).png" },
     { product_id: 15, image_url: "/images/pattern_shirt_back (2).png" },
@@ -99,23 +97,18 @@ async function detaiImages() {
     { product_id: 16, image_url: "/images/leazerBack(1).png" },
     { product_id: 16, image_url: "/images/leazerFront(1).png" },
     { product_id: 16, image_url: "/images/leazerLeft(1).png" },
-    { product_id: 16, image_url: "/images/leazerLeft(1).png" },
+    // { product_id: 16, image_url: "/images/leazerLeft(1).png" },
     { product_id: 16, image_url: "/images/leazerOnly(1).png" },
-
 
     { product_id: 17, image_url: "/images/KisRight(2).png" },
     { product_id: 17, image_url: "/images/KisFront(2).png" },
     { product_id: 17, image_url: "/images/KisBack(3).png" },
     { product_id: 17, image_url: "/images/KisLeft(1).png" },
 
-
-
-
-    { product_id: 18, image_url: "/images/trousers_back.png" },
-    { product_id: 18, image_url: "/images/trousers_front.png" },
+      { product_id: 18, image_url: "/images/trousers_front.png" },
+    { product_id: 18, image_url: "/images/jensBack.png" },
     { product_id: 18, image_url: "/images/trousers_left_side.png" },
     { product_id: 18, image_url: "/images/trousers_right_side.png" },
-   
 
     { product_id: 19, image_url: "/images/black_back.png" },
     { product_id: 19, image_url: "/images/black_front.png" },
@@ -123,11 +116,12 @@ async function detaiImages() {
     { product_id: 19, image_url: "/images/black_right.png" },
     { product_id: 19, image_url: "/images/black_tshirt.png" },
 
-    { product_id: 20, image_url: "/images/gugutBack(1).png" },
-    { product_id: 20, image_url: "/images/gugutFront(1).png" },
-    { product_id: 20, image_url: "/images/gugutLeft(1).png" },
-    { product_id: 20, image_url: "/images/gugutOnly(1).png" },
-    { product_id: 20, image_url: "/images/gugutRight(1).png" },
+    // server/detailImages/
+    { product_id: 20, image_url: "/images/cream_pants_back.png" },
+    { product_id: 20, image_url: "/images/cream_pants_front.png" },
+    { product_id: 20, image_url: "/images/cream_pants_side.png" },
+    { product_id: 20, image_url: "/images/cream_pants_three_quarter.png" },
+    // { product_id: 20, image_url: "/images/gugutRight(1).png" },
 
     { product_id: 21, image_url: "/images/gugutBack(1).png" },
     { product_id: 21, image_url: "/images/gugutFront(1).png" },
@@ -135,13 +129,12 @@ async function detaiImages() {
     { product_id: 21, image_url: "/images/gugutOnly(1).png" },
     { product_id: 21, image_url: "/images/gugutRight(1).png" },
 
-
-
+    { product_id: 22, image_url: "/images/jeansFront(1).png" },
+    { product_id: 22, image_url: "/images/jeansBack.png" },
+    { product_id: 22, image_url: "/images/jeansLeft.png" },
+    { product_id: 22, image_url: "/images/jeansRight.png" },
     { product_id: 22, image_url: "/images/pantsFront.png" },
-    { product_id: 22, image_url: "/images/pantsLeft.png" },
-    { product_id: 22, image_url: "/images/pantsRight.png" },
- 
-];
+  ];
   await Pool.query("TRUNCATE TABLE product_images RESTART IDENTITY CASCADE;");
   const saveDetailImages = `INSERT INTO  product_images (product_id,image_url,position) VALUES ($1,$2,$3)    `;
   const positionTracker = {};
