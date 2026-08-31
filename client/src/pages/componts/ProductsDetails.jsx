@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import "../home.css";
+
+// C:\Users\Administrator\Desktop\e-com\Amir-cloth-shop\client\src\pages\home.css
 
 const API_BASE_URL = "http://localhost:2300";
 
-import mainImg from "../../images/back.png";
-import angle1 from "../../images/back.png";
-import angle2 from "../../images/small.png";
-import angle3 from "../../images/whiteMan.png";
-import angle4 from "../../images/back.png";
-import angle5 from "../../images/small.png";
 
 // Thumbnail list (Section B) — each one is a different angle of the same product
 // const thumbnails = [angle1, angle2, angle3, angle4, angle5];
@@ -41,6 +38,46 @@ function ProductsDetails() {
 
   // Tracks which size is selected
   const [selectedSize, setSelectedSize] = useState("M");
+
+  // used to send the data
+  // Add near your other useState calls
+  const [adding, setAdding] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  // Add this function inside the component, above the return
+  const handleAddToCart = async () => {
+    setAdding(true);
+    try {
+    
+
+      const response = await fetch(`${API_BASE_URL}/api/cart/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // this is what actually matters now
+        body: JSON.stringify({
+          id: product.id,
+          qantity: 1,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(
+          errData.message || `Server responded with ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+      console.log("Added to cart:", data);
+
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2500);
+    } catch (err) {
+      console.error("Failed to add to cart:", err.message);
+    } finally {
+      setAdding(false);
+    }
+  };
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/imageDetails/${id}`)
@@ -232,17 +269,32 @@ function ProductsDetails() {
 
           {/* ===== ADD TO CART BUTTON ===== */}
           <button
+            onClick={handleAddToCart}
+            disabled={adding}
             className="
-            sm:w-full lg:w-95 mt-8 py-5  rounded-md
-            bg-gray-200 text-black font-medium
-            hover:bg-gray-300 active:bg-gray-400
-            transition-colors duration-150 cursor-pointer
-          "
+    sm:w-full lg:w-95 mt-8 py-5  rounded-md
+    bg-gray-200 text-black font-medium
+    hover:bg-gray-300 active:bg-gray-400
+    transition-colors duration-150 cursor-pointer
+    disabled:opacity-50 disabled:cursor-not-allowed
+  "
           >
-            ADD
+            {adding ? "Adding..." : "ADD"}
           </button>
         </div>
       </div>
+      {showToast && (
+        <div
+          className="
+            fixed bottom-8 left-1/2 -translate-x-1/2 z-50
+            bg-black text-white text-sm sm:text-base
+            px-5 py-3 rounded-full shadow-lg
+            animate-fade-in
+          "
+        >
+          Added to cart successfully
+        </div>
+      )}
     </div>
   );
 }
