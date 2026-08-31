@@ -1,5 +1,16 @@
 -- ✅ Corrected SQL:
 
+
+
+
+
+
+
+ALTER TABLE orders
+  ADD COLUMN full_name VARCHAR(255),
+  ADD COLUMN email VARCHAR(255),
+  ADD COLUMN phone VARCHAR(50);
+
 CREATE TABLE authors (
 user_id SERIAL PRIMARY KEY,
 email VARCHAR(60) UNIQUE NOT NULL,
@@ -19,6 +30,8 @@ CREATE TABLE products (
     image TEXT,
     rating JSONB                        -- Fixed to JSONB and removed the trailing comma
 );
+
+
 
 
 CREATE  TABLE orders (
