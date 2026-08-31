@@ -1,38 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import Sitman from "../../images/back.png";
-import Slow from "../../images/blackshirt.png";
-import Tshirt from "../../images/whiteMan.png";
-
-// ---- Mock cart data — replace with real cart state / API response ----
-const INITIAL_ITEMS = [
-  {
-    id: 1,
-    category: "Cotton T Shirt",
-    name: "Full Sleeve Zipper",
-    price: 99,
-    qty: 1,
-    color: "#111111",
-    size: "L",
-    img: Slow,
-  },
-  {
-    id: 2,
-    category: "Cotton T Shirt",
-    name: "Basic Slim Fit T-Shirt",
-    price: 99,
-    qty: 1,
-    color: "#111111",
-    size: "L",
-    img: Sitman,
-  },
-];
-
-/**
- * QtyStepper
- * Vertical +/- stepper matching the reference design.
- * Purely controlled — parent owns the qty value and update logic.
- */
 function QtyStepper({ qty, onIncrease, onDecrease }) {
   return (
     <div className="flex flex-col items-center border border-neutral-300 rounded-md overflow-hidden w-7 sm:w-8">
@@ -65,25 +33,18 @@ function QtyStepper({ qty, onIncrease, onDecrease }) {
  */
 function ProductCard({ item, onRemove, onIncrease, onDecrease }) {
   return (
-    // `mainImage` kept as a class hook for your own CSS if needed.
-    // flex-col + gap: stacks the image row above the name/price row.
-    // w-fit: card only takes as much width as its content needs, so
-    // cards can sit side-by-side and wrap cleanly in the parent.
     <div className="mainImage flex flex-col gap-4 w-fit">
-      {/* Top row: image + side control column, side-by-side always.
-          gap scales up with screen size instead of being one fixed value. */}
       <div className="flex items-start gap-4 sm:gap-6 md:gap-8 lg:gap-10">
         <div className="relative w-[110px] h-[140px] sm:w-[160px] sm:h-[200px] md:w-[200px] md:h-[260px] lg:w-[260px] lg:h-[320px] shrink-0 overflow-hidden rounded-lg bg-neutral-100">
           <img
-            src={item.img}
-            alt={item.name}
+            src={`http://localhost:2300${item.image}`}
+            alt={item.title}
             className="h-full w-full object-cover"
           />
-          {/* Remove item */}
           <button
             type="button"
-            onClick={() => onRemove(item.id)}
-            aria-label={`Remove ${item.name}`}
+            onClick={() => onRemove(item.item_id)}
+            aria-label={`Remove ${item.title}`}
             className="absolute top-2 right-2 h-6 w-6 rounded-full bg-white/90 flex items-center justify-center text-neutral-700 hover:bg-white transition-colors"
           >
             <svg
@@ -99,52 +60,22 @@ function ProductCard({ item, onRemove, onIncrease, onDecrease }) {
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          {/* Reset / undo — wire up to revert to a previous variant if needed */}
-          <button
-            type="button"
-            aria-label="Undo change"
-            className="absolute bottom-2 left-2 h-6 w-6 rounded-full bg-white/90 flex items-center justify-center text-neutral-700 hover:bg-white transition-colors"
-          >
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="1 4 1 10 7 10" />
-              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
-            </svg>
-          </button>
         </div>
 
-        {/* Control column: size label, color swatch, qty stepper */}
+        {/* Control column — just the qty stepper now, no size/color */}
         <div className="quantity flex flex-col items-center gap-2 sm:gap-3 pt-1">
-          <span className="text-xs sm:text-sm font-medium text-neutral-700">
-            {item.size}
-          </span>
-          <span
-            className="h-6 w-6 rounded-sm border border-neutral-300"
-            style={{ backgroundColor: item.color }}
-            aria-label="Selected color"
-          />
           <QtyStepper
-            qty={item.qty}
-            onIncrease={() => onIncrease(item.id)}
-            onDecrease={() => onDecrease(item.id)}
+            qty={item.qantity}
+            onIncrease={() => onIncrease(item.item_id)}
+            onDecrease={() => onDecrease(item.item_id)}
           />
         </div>
       </div>
 
-      {/* Bottom row: category / name on the left, price on the right */}
       <div className="flex items-start justify-between gap-4 border-b border-neutral-200 pb-4">
         <div>
-          <p className="text-xs text-neutral-500">{item.category}</p>
           <p className="text-sm sm:text-base font-semibold text-neutral-900">
-            {item.name}
+            {item.title}
           </p>
         </div>
         <p className="text-sm sm:text-base font-semibold text-neutral-900 whitespace-nowrap">
@@ -204,37 +135,105 @@ function OrderSummary({ subtotal, shipping, agreed, onToggleAgree }) {
         </span>
       </label>
 
-      <button
-        type="button"
-        disabled={!agreed}
-        className="w-full mt-6 rounded-md bg-neutral-900 text-white text-sm md:text-base font-semibold tracking-widest uppercase py-4 md:py-5 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-800"
-      >
-        Continue
-      </button>
+      <Link to="/cart">
+        <button
+          type="button"
+          disabled={!agreed}
+          className="w-full mt-6 rounded-md bg-neutral-900 text-white text-sm md:text-base font-semibold tracking-widest uppercase py-4 md:py-5 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-800"
+        >
+          Order Now
+        </button>
+      </Link>
     </div>
   );
 }
 
 export default function ShoppingBagPage() {
-  // Local cart state — replace with real cart context/API in production.
-  const [items, setItems] = useState(INITIAL_ITEMS);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [agreed, setAgreed] = useState(false);
 
-  const removeItem = (id) =>
-    setItems((prev) => prev.filter((i) => i.id !== id));
+  useEffect(() => {
+    fetch("http://localhost:2300/api/cart/cartItems", {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setItems(json.data || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load cart:", err);
+        setLoading(false);
+      });
+  }, []);
 
-  const increaseQty = (id) =>
-    setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i))
-    );
+  //   this is used to remove elemts foorm the bag
+  const removeItem = async (item_id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:2300/api/cart/remove/${item_id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
 
-  const decreaseQty = (id) =>
-    setItems((prev) =>
-      prev.map((i) => (i.id === id && i.qty > 1 ? { ...i, qty: i.qty - 1 } : i))
-    );
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(
+          errData.message || `Server responded with ${response.status}`
+        );
+      }
 
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+      // Only remove it from what's shown on screen after the backend confirms it's really deleted
+      setItems((prev) => prev.filter((i) => i.item_id !== item_id));
+    } catch (err) {
+      console.error("Failed to remove item:", err.message);
+    }
+  };
+
+  const updateQuantity = async (item_id, newQty) => {
+    try {
+      const response = await fetch("http://localhost:2300/api/cart/update", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ item_id, qantity: newQty }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(
+          errData.message || `Server responded with ${response.status}`
+        );
+      }
+
+      setItems((prev) =>
+        prev.map((i) => (i.item_id === item_id ? { ...i, qantity: newQty } : i))
+      );
+    } catch (err) {
+      console.error("Failed to update quantity:", err.message);
+    }
+  };
+
+  const increaseQty = (item_id) => {
+    const item = items.find((i) => i.item_id === item_id);
+    if (item) updateQuantity(item_id, item.qantity + 1);
+  };
+
+  const decreaseQty = (item_id) => {
+    const item = items.find((i) => i.item_id === item_id);
+    if (item && item.qantity > 1) updateQuantity(item_id, item.qantity - 1);
+  };
+
+  const subtotal = items.reduce(
+    (sum, i) => sum + Number(i.price) * i.qantity,
+    0
+  );
   const shipping = items.length > 0 ? 10 : 0;
+
+  if (loading) return <div className="pt-20 px-6">Loading your bag...</div>;
 
   return (
     // FIXED TYPO: `w-ful` → `w-full`
@@ -285,7 +284,7 @@ export default function ShoppingBagPage() {
           <div className="flex flex-wrap items-start gap-8 sm:gap-10 md:gap-8 lg:gap-12">
             {items.map((item) => (
               <ProductCard
-                key={item.id}
+                key={item.cart_id}
                 item={item}
                 onRemove={removeItem}
                 onIncrease={increaseQty}
