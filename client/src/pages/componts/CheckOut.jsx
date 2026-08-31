@@ -93,13 +93,15 @@ function StepTabs({ active }) {
  * `label` is visually hidden but kept for screen readers — pass a real
  * htmlFor/id pair if you wire this to a form library.
  */
-function Field({ label, placeholder, type = "text" }) {
+function Field({ label, placeholder, type = "text", value, onChange }) {
   return (
     <div className="w-full">
       {label && <label className="sr-only">{label}</label>}
       <input
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         className="w-full rounded-md border border-neutral-300 bg-white px-3.5 py-6 text-md text-neutral-900 placeholder:text-neutral-400 outline-none transition-colors focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900"
       />
     </div>
@@ -112,30 +114,12 @@ function Field({ label, placeholder, type = "text" }) {
  * Pure UI — pass `subtotal` and `shipping` from parent so the total
  * always reflects the current step.
  */
-function OrderSummary({ subtotal, shipping }) {
-const [order,setOrder]=useState([])
-const [loading,setLoading]=useState(true)
-const [error,setError]=useState(null)
+function OrderSummary({ item,subtotal, shipping }) {
+// const [order,setOrder]=useState([])
+// const [loading,setLoading]=useState(true)
+// const [error,setError]=useState(null)
 
-useEffect(()=> {
-fetch(`${APi_Base}/api/cart/cartItems`, {
-  credentials: "include",
-})
-  .then((res) => {
-    if (!res.ok) throw new Error("failed to get orders");
-    return res.json();
-  })
-  .then((json) => {
-    setOrder(json.data || []);
-    setLoading(false);
-  })
-  .catch((err) => {
-    setError(err.message);
-    setLoading(false);
-  });
-},[])
-if(loading) return <div>Loading  your Order</div>
-if(error) return <div> Error:{error}</div>
+
 
   const total = subtotal + shipping;
   return (
@@ -145,20 +129,20 @@ if(error) return <div> Error:{error}</div>
           Your Order
         </h2>
         <span className="text-[11px] font-medium text-neutral-500">
-          ({ORDER_ITEMS.length})
+          ({item.length})
         </span>
       </div>
 
       <ul className="space-y-8">
-        {order.length === 0 ? (
+        {item.length === 0 ? (
           <div> there is no order yet</div>
         ) : (
-          order.map((item) => (
-            <li key={item.id} className="flex gap-5">
+          item.map((item) => (
+            <li key={item.card_id} className="flex gap-5">
               <div className="h-28 w-24 sm:h-36 sm:w-28 shrink-0 overflow-hidden rounded-md bg-neutral-100">
                 <img
                   src={`${APi_Base}${item.image}`}
-                  alt={item.title}
+                  alt={item.name}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -203,13 +187,9 @@ if(error) return <div> Error:{error}</div>
         <div className="flex items-center justify-between text-sm">
           <span className="text-neutral-500">Shipping</span>
           <span className="font-medium text-neutral-900">
-            shipping:
-            <label>
-              {" "}
-              {shipping > 0
-                ? `$${shipping.toFixed(2)}`
-                : "Calculated at next step"}
-            </label>
+            {shipping > 0
+              ? `$${shipping.toFixed(2)}`
+              : "Calculated at next step"}
           </span>
         </div>
       </div>
@@ -226,17 +206,48 @@ if(error) return <div> Error:{error}</div>
 
 export default function CheckoutPage() {
   // Active checkout step. Drives both the tabs and which form renders.
-  const [step, setStep] = useState("information");
-  const subtotal = ORDER_ITEMS.reduce((s, i) => s + i.price * i.qty, 0);
+ const [step, setStep] = useState("information");
+ const subtotal = ORDER_ITEMS.reduce((s, i) => s + i.price * i.qty, 0);
+ const [fullName, setFullName] = useState("");
+ const [email, setEmail] = useState("");
+ const [phone, setPhone] = useState("");
+ const [shippingAddress, setShippingAddress] = useState("");
+ const [paymentMethod, setPaymentMethod] = useState("card");
+ const [placingOrder, setPlacingOrder] = useState(false);
+ const [orderError, setOrderError] = useState(null);
+ const [firstName, setFirstName] = useState("");
+ const [lastName, setLastName] = useState("");
+ const [addressLine, setAddressLine] = useState("");
+ const [city, setCity] = useState("");
+ const [country, setCountry] = useState("");
 
-  /**
-   * handleExit
-   * Called when the top "Back" button is clicked.
-   * Replace this with real navigation, e.g.:
-   *   navigate("/cart")            // react-router
-   *   router.push("/cart")         // next.js
-   * Falls back to browser history so the button works out of the box.
-   */
+ const [cartItems, setCartItems] = useState([]);
+ const [loadingCart, setLoadingCart] = useState(true);
+ const [cartError, setCartError] = useState(null);
+
+
+ useEffect(() => {
+   fetch(`${APi_Base}/api/cart/cartItems`, {
+     credentials: "include",
+   })
+     .then((res) => {
+       if (!res.ok) throw new Error("failed to get orders");
+       return res.json();
+     })
+     .then((json) => {
+       setCartItems(json.data || []);
+       setLoadingCart(false);
+     })
+     .catch((err) => {
+       setCartError(err.message);
+       setLoadingCart(false);
+     });
+ }, []);
+
+ 
+if (loadingCart) return <div>Loading your Order</div>;
+if (cartError) return <div> Error:{cartError}</div>;
+ 
   const handleExit = () => {
     if (typeof window !== "undefined" && window.history.length > 1) {
       window.history.back();
@@ -255,7 +266,40 @@ export default function CheckoutPage() {
     const currentIndex = STEPS.findIndex((s) => s.key === step);
     if (currentIndex > 0) setStep(STEPS[currentIndex - 1].key);
   };
+const handlePlaceOrder = async () => {
+  setPlacingOrder(true);
+  setOrderError(null);
+  try {
+    const response = await fetch(`${APi_Base}/api/order`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        full_name: fullName,
+        email,
+        phone,
+        shippingAddress,
+        paymentMethod,
+      }),
+    });
 
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(
+        errData.message || `Server responded with ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+    console.log("Order placed:", data);
+    // TODO: navigate to a success/confirmation page, e.g. navigate(`/order-success/${data.orderId}`)
+  } catch (err) {
+    setOrderError(err.message);
+    console.error("Failed to place order:", err.message);
+  } finally {
+    setPlacingOrder(false);
+  }
+};
   return (
     <div className="min-h-screen w-full bg-neutral-50 text-neutral-900">
       {/*
@@ -315,8 +359,18 @@ export default function CheckoutPage() {
                     Contact Info
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Field placeholder="Email" type="email" />
-                    <Field placeholder="Phone" type="tel" />
+                    <Field
+                      placeholder="Email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Field
+                      placeholder="Phone"
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
                   </div>
                 </section>
 
@@ -325,12 +379,24 @@ export default function CheckoutPage() {
                     Shipping Address
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <Field placeholder="First Name" />
-                    <Field placeholder="Last Name" />
+                    <Field
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <Field
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
 
                     <div className="sm:col-span-2 relative">
-                      <select className="w-full appearance-none rounded-md border border-neutral-300 bg-white px-3.5 py-3 text-sm text-neutral-500 outline-none transition-colors focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900">
-                        <option>Country</option>
+                      <select
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        className="w-full appearance-none rounded-md border border-neutral-300 bg-white px-3.5 py-3 text-sm text-neutral-500 outline-none transition-colors focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900"
+                      >
+                        <option value="">Country</option>
                         <option>United States</option>
                         <option>United Kingdom</option>
                         <option>Ethiopia</option>
@@ -352,8 +418,16 @@ export default function CheckoutPage() {
                     </div>
 
                     <Field placeholder="State / Region" />
-                    <Field placeholder="Address" />
-                    <Field placeholder="City" />
+                    <Field
+                      placeholder="Address"
+                      value={addressLine}
+                      onChange={(e) => setAddressLine(e.target.value)}
+                    />
+                    <Field
+                      placeholder="City"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
                     <Field placeholder="Postal Code" />
                   </div>
                 </section>
@@ -362,7 +436,11 @@ export default function CheckoutPage() {
                 <div className="flex justify-end pt-2">
                   <button
                     type="button"
-                    onClick={() => setStep("shipping")}
+                    onClick={() => {
+                      setFullName(`${firstName} ${lastName}`.trim());
+                      setShippingAddress(`${addressLine}, ${city}, ${country}`);
+                      setStep("shipping");
+                    }}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-neutral-900 px-17 py-8 text-sm font-semibold text-white transition-colors hover:bg-neutral-800"
                   >
                     Shipping
@@ -415,7 +493,7 @@ export default function CheckoutPage() {
                             defaultChecked={option.name === "Standard Shipping"}
                             className="h-4 w-4 shrink-0 accent-neutral-900"
                           />
-                          <div className="min-w-0">
+                          <div className="min-w-0 ">
                             <p className="text-lg font-medium text-neutral-900 truncate">
                               {option.name}
                             </p>
@@ -503,9 +581,13 @@ export default function CheckoutPage() {
                   </button>
                   <button
                     type="button"
-                    className="w-full  sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-neutral-900 px-15  py-6 text-md font-semibold text-white transition-colors hover:bg-neutral-800"
+                    disabled={placingOrder}
+                    onClick={handlePlaceOrder}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-neutral-900 px-15 py-6 text-md font-semibold text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Pay ${(subtotal + 10).toFixed(2)}
+                    {placingOrder
+                      ? "Placing Order..."
+                      : `Pay $${(subtotal + 10).toFixed(2)}`}
                   </button>
                 </div>
               </div>
@@ -516,6 +598,7 @@ export default function CheckoutPage() {
           {/* `lg:sticky` keeps totals visible while scrolling a long form on desktop */}
           <div className="lg:sticky lg:top-10 h-[400px]">
             <OrderSummary
+            item={cartItems}
               subtotal={subtotal}
               shipping={step === "information" ? 0 : 10}
             />
