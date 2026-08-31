@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Sitman from "../../images/back.png";
 import Slow from "../../images/small.png";
 import Tshirt from "../../images/whiteMan.png";
 
+
+const APi_Base="http://localhost:2300"
 /**
  * ------------------------------------------------------------------
  *  CHECKOUT PAGE
@@ -111,6 +113,30 @@ function Field({ label, placeholder, type = "text" }) {
  * always reflects the current step.
  */
 function OrderSummary({ subtotal, shipping }) {
+const [order,setOrder]=useState([])
+const [loading,setLoading]=useState(true)
+const [error,setError]=useState(null)
+
+useEffect(()=> {
+fetch(`${APi_Base}/api/cart/cartItems`, {
+  credentials: "include",
+})
+  .then((res) => {
+    if (!res.ok) throw new Error("failed to get orders");
+    return res.json();
+  })
+  .then((json) => {
+    setOrder(json.data || []);
+    setLoading(false);
+  })
+  .catch((err) => {
+    setError(err.message);
+    setLoading(false);
+  });
+},[])
+if(loading) return <div>Loading  your Order</div>
+if(error) return <div> Error:{error}</div>
+
   const total = subtotal + shipping;
   return (
     <div className="w-full lg:w-[520px] rounded-xl border border-neutral-200 bg-white p-6 sm:p-8">
@@ -124,39 +150,47 @@ function OrderSummary({ subtotal, shipping }) {
       </div>
 
       <ul className="space-y-8">
-        {ORDER_ITEMS.map((item) => (
-          <li key={item.id} className="flex gap-5">
-            <div className="h-28 w-24 sm:h-36 sm:w-28 shrink-0 overflow-hidden rounded-md bg-neutral-100">
-              <img
-                src={item.img}
-                alt={item.name}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            {/* ...rest unchanged */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between gap-2">
-                <p className="text-sm font-medium text-neutral-900 leading-snug">
-                  {item.name}
+        {order.length === 0 ? (
+          <div> there is no order yet</div>
+        ) : (
+          order.map((item) => (
+            <li key={item.id} className="flex gap-5">
+              <div className="h-28 w-24 sm:h-36 sm:w-28 shrink-0 overflow-hidden rounded-md bg-neutral-100">
+                <img
+                  src={`${APi_Base}${item.image}`}
+                  alt={item.title}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              {/* ...rest unchanged */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-sm font-medium text-neutral-900 leading-snug">
+                    {item.title}
+                  </p>
+                  {/* TODO: wire this up to open an edit/variant-change modal */}
+                  <button
+                    type="button"
+                    className="text-[11px] font-medium text-neutral-500 underline underline-offset-2 hover:text-neutral-900 whitespace-nowrap"
+                  >
+                    Change
+                  </button>
+                </div>
+                <p className="text-xs text-neutral-500 mt-0.5">
+                  {item.variant}
                 </p>
-                {/* TODO: wire this up to open an edit/variant-change modal */}
-                <button
-                  type="button"
-                  className="text-[11px] font-medium text-neutral-500 underline underline-offset-2 hover:text-neutral-900 whitespace-nowrap"
-                >
-                  Change
-                </button>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-xs text-neutral-500">
+                    ({item.qantity})
+                  </span>
+                  <span className="text-sm font-semibold text-neutral-900">
+                    ${item.price}
+                  </span>
+                </div>
               </div>
-              <p className="text-xs text-neutral-500 mt-0.5">{item.variant}</p>
-              <div className="flex items-center justify-between mt-2">
-                <span className="text-xs text-neutral-500">({item.qty})</span>
-                <span className="text-sm font-semibold text-neutral-900">
-                  ${item.price}
-                </span>
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))
+        )}
       </ul>
 
       <div className="mt-6 space-y-2 border-t border-neutral-200 pt-4">
@@ -169,9 +203,13 @@ function OrderSummary({ subtotal, shipping }) {
         <div className="flex items-center justify-between text-sm">
           <span className="text-neutral-500">Shipping</span>
           <span className="font-medium text-neutral-900">
-            {shipping > 0
-              ? `$${shipping.toFixed(2)}`
-              : "Calculated at next step"}
+            shipping:
+            <label>
+              {" "}
+              {shipping > 0
+                ? `$${shipping.toFixed(2)}`
+                : "Calculated at next step"}
+            </label>
           </span>
         </div>
       </div>
