@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
+import cookieParser from "cookie-parser";
 
 import productZRoute from "./routes/product.js";
 import User from "./routes/User.js";
@@ -22,7 +23,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(cookieParser());
 app.use("/images", express.static(path.join(__dirname, "./images")));
 app.use("/images", express.static(path.join(__dirname, "detailImages")));
 app.use(RefreshTokens);
