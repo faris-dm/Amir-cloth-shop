@@ -4,12 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "gc": "nodemon App.js",
-  "seed":"nodemon seed.js",
+  "seed": "nodemon seed.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gc": "nodemon server/App.js",
+    "seed": "nodemon server/seed.js",
+    "deen": "nodemon server/config/detailImages.js"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",

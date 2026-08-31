@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Home  from "../"
 
 import slow from "../../images/slow.png";
 import small from "../../images/small.png";
