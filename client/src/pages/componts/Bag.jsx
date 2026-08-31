@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+
+
+
 function QtyStepper({ qty, onIncrease, onDecrease }) {
   return (
     <div className="flex flex-col items-center border border-neutral-300 rounded-md overflow-hidden w-7 sm:w-8">
