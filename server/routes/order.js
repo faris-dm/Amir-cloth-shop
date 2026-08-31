@@ -77,7 +77,7 @@ router.post("/order", authcateUser, async (req, res) => {
      const UserID = req.user?.id || req.user?.user_id;
     
     // const UserID = req.user?.id || req.user?.user_id;
-    const { shippingAddress, paymentMethod } = req.body;
+    const { full_name, email,phone ,shippingAddress, paymentMethod } = req.body;
 
     // 1. Validate BEFORE checking out a pool connection
     if (!shippingAddress || !paymentMethod) {
@@ -117,15 +117,17 @@ router.post("/order", authcateUser, async (req, res) => {
         0
       );
 
-      const CreateOrderQuery = `
-        INSERT INTO orders (user_id, amount, shipping_address, payment_method, status) 
-        VALUES ($1, $2, $3, $4, 'PENDING')
-        RETURNING id;
-      `;
+     const CreateOrderQuery = `
+  INSERT INTO orders (user_id, full_name,email,phone, shipping_address, payment_method, status) 
+  VALUES ($1, $2, $3, $4, $5, $6, 'PENDING')
+  RETURNING id;
+`;
 
       const orderResult = await client.query(CreateOrderQuery, [
         UserID,
-        TotalPrice,
+        full_name,
+        email,
+        phone,
         shippingAddress,
         paymentMethod,
       ]);
