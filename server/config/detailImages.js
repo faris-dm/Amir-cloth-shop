@@ -13,11 +13,12 @@ async function detaiImages() {
     { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
     { product_id: 2, image_url: "/images/ash_tshirt_back (2).png" },
 
-    { product_id: 3, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 3, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 3, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 3, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 3, image_url: "/images/ash_tshirt_back (2).png" },
+    { product_id: 3, image_url: "/images/penBack(1).png" },
+    { product_id: 3, image_url: "/images/penFront(1).png" },
+    { product_id: 3, image_url: "/images/penLeft(1).png" },
+    { product_id: 3, image_url: "/images/PenOnly(1).png" },
+ 
+
 
     { product_id: 4, image_url: "/images/pantBack(3).png" },
     { product_id: 4, image_url: "/images/pantFront(3).png" },
@@ -76,7 +77,7 @@ async function detaiImages() {
     { product_id: 13, image_url: "/images/ash_tshirt_front.png" },
     { product_id: 13, image_url: "/images/ash_Only.png" },
     { product_id: 13, image_url: "/images/ash_tshirt_new (1).png" },
-    { product_id: 13, image_url: "/images/detailImages/ash_side.png" },
+    { product_id: 13, image_url: "/images/ash_side.png" },
     { product_id: 13, image_url: "/images/ash_tshirt_left (3).png" },
 
     { product_id: 14, image_url: "/images/ash_tshirt_back (2).png" },
@@ -95,27 +96,30 @@ async function detaiImages() {
       image_url: "/images/pattern_shirt_three_quarter (2).png",
     },
 
-    { product_id: 16, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 16, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 16, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 16, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 16, image_url: "/images/ash_tshirt_back (2).png" },
+    { product_id: 16, image_url: "/images/leazerBack(1).png" },
+    { product_id: 16, image_url: "/images/leazerFront(1).png" },
+    { product_id: 16, image_url: "/images/leazerLeft(1).png" },
+    { product_id: 16, image_url: "/images/leazerLeft(1).png" },
+    { product_id: 16, image_url: "/images/leazerOnly(1).png" },
 
-    { product_id: 17, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 17, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 17, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 17, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 17, image_url: "/images/goman_shirt_back (2).png" },
 
-    { product_id: 18, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 18, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 18, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 18, image_url: "/images/goman_shirt_back (2).png" },
-    { product_id: 18, image_url: "/images/goman_shirt_back (2).png" },
+    { product_id: 17, image_url: "/images/KisRight(2).png" },
+    { product_id: 17, image_url: "/images/KisFront(2).png" },
+    { product_id: 17, image_url: "/images/KisBack(3).png" },
+    { product_id: 17, image_url: "/images/KisLeft(1).png" },
+
+
+
+
+    { product_id: 18, image_url: "/images/trousers_back.png" },
+    { product_id: 18, image_url: "/images/trousers_front.png" },
+    { product_id: 18, image_url: "/images/trousers_left_side.png" },
+    { product_id: 18, image_url: "/images/trousers_right_side.png" },
+   
 
     { product_id: 19, image_url: "/images/black_back.png" },
     { product_id: 19, image_url: "/images/black_front.png" },
-    { product_id: 19, image_url: "/images//black_left.png" },
+    { product_id: 19, image_url: "/images/black_left.png" },
     { product_id: 19, image_url: "/images/black_right.png" },
     { product_id: 19, image_url: "/images/black_tshirt.png" },
 
@@ -125,18 +129,19 @@ async function detaiImages() {
     { product_id: 20, image_url: "/images/gugutOnly(1).png" },
     { product_id: 20, image_url: "/images/gugutRight(1).png" },
 
-    { product_id: 21, image_url: "/images/grapicBack.png" },
-    { product_id: 21, image_url: "/images/grapicFont.png" },
-    { product_id: 21, image_url: "/images/grapicLeft.png" },
-    { product_id: 21, image_url: "/images/grapicOnly.png" },
-    { product_id: 21, image_url: "/images/grapicRight.png" },
-    //  server/detailImages/
-    { product_id: 22, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 22, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 22, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 22, image_url: "/images/ash_tshirt_back (2).png" },
-    { product_id: 22, image_url: "/images/ash_tshirt_back (2).png" },
-  ];
+    { product_id: 21, image_url: "/images/gugutBack(1).png" },
+    { product_id: 21, image_url: "/images/gugutFront(1).png" },
+    { product_id: 21, image_url: "/images/gugutLeft(1).png" },
+    { product_id: 21, image_url: "/images/gugutOnly(1).png" },
+    { product_id: 21, image_url: "/images/gugutRight(1).png" },
+
+
+
+    { product_id: 22, image_url: "/images/pantsFront.png" },
+    { product_id: 22, image_url: "/images/pantsLeft.png" },
+    { product_id: 22, image_url: "/images/pantsRight.png" },
+ 
+];
   await Pool.query("TRUNCATE TABLE product_images RESTART IDENTITY CASCADE;");
   const saveDetailImages = `INSERT INTO  product_images (product_id,image_url,position) VALUES ($1,$2,$3)    `;
   const positionTracker = {};
