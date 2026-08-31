@@ -47,7 +47,7 @@ function Navbar() {
               {/* <Link to="/cart">
                 <h3>Cart</h3>
               </Link> */}
-              <Link to="/Bag">
+              <Link to="/cart">
                 <ShoppingBag />
               </Link>
             </div>
@@ -59,7 +59,7 @@ function Navbar() {
                 />
               </Link>
               <div className="hidden sm:block font-gork text-[#282828] font-medium last:cursor-pointer">
-                <Link to="/cart">
+                <Link to="/bag">
                   <h3>Cart</h3>
                 </Link>
               </div>
@@ -107,7 +107,9 @@ function Navbar() {
         <div className="flex items-center gap-5 mt-8 font-gork text-[#282828] font-medium">
           <Heart />
           {/* <h3>Cart</h3> */}
-          <ShoppingBag />
+          <Link to="/cart">
+            <ShoppingBag />
+          </Link>
         </div>
       </div>
     </>
