@@ -23,12 +23,12 @@ updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) UNIQUE NOT NULL, -- Increased 60 to 255 because long API titles will break 60!
+    title VARCHAR(255) UNIQUE NOT NULL, 
     price DECIMAL(10,2) NOT NULL,
-    description TEXT,                   -- Fixed spelling
-    category VARCHAR(100),              -- Fixed spelling
+    description TEXT,                  
+    category VARCHAR(100),              
     image TEXT,
-    rating JSONB                        -- Fixed to JSONB and removed the trailing comma
+    rating JSONB                       
 );
 
 
@@ -73,7 +73,7 @@ CREATE TABLE product_images (
     id SERIAL PRIMARY KEY,
     product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
     image_url TEXT NOT NULL,
-    position INTEGER DEFAULT 0   -- controls display order 
+    position INTEGER DEFAULT 0    
 );
 
 
