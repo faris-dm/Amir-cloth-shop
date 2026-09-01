@@ -1,83 +1,76 @@
 // routes/order.jsHTTP MethodRoute EndpointRole / ActionRequires Request Body?POST/ordersCheckout: Convert cart into a placed orderYes ({ shippingAddress, paymentMethod })GET/ordersFetch full order history for userNoGET/orders/:idFetch specific invoice/receipt by order IDNo
 
-import expres, { json } from "express"
-import Pool from "../config/db.js"
-import authcateUser  from "../middle/auth.js"
-const router=expres.Router()
-router.use(expres.json())
+import expres, { json } from "express";
+import Pool from "../config/db.js";
+import authcateUser from "../middle/auth.js";
+const router = expres.Router();
+router.use(expres.json());
 
-
- router.get("/ordersHistory", authcateUser,async (req,res)=> {
- try {
-  
-  const UserID = req.user?.id || req.user?.user_id;
-  const query = `SELECT id,amount,status,created_at FROM orders   WHERE user_id=$1 ORDER  BY  created_at DESC
+router.get("/ordersHistory", authcateUser, async (req, res) => {
+  try {
+    const UserID = req.user?.id || req.user?.user_id;
+    const query = `SELECT id,amount,status,created_at FROM orders   WHERE user_id=$1 ORDER  BY  created_at DESC
   
   `;
 
-  const resuktQuery = await Pool.query(query, [UserID]);
+    const resuktQuery = await Pool.query(query, [UserID]);
 
-  return res.status(200).json({
-    success: true,
-    count: resuktQuery.rows.length,
-    data: resuktQuery.rows,
-  });
+    return res.status(200).json({
+      success: true,
+      count: resuktQuery.rows.length,
+      data: resuktQuery.rows,
+    });
+  } catch (error) {
+    console.error("Fetch Orders Error:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+});
 
- } catch (error) {
-   console.error("Fetch Orders Error:", error);
-   return res
-     .status(500)
-     .json({ success: false, message: "Internal server error" });
- }
- 
-  
-
- })
-
-
-router.get("/order/:id", authcateUser, async (req,res)=> {
+router.get("/order/:id", authcateUser, async (req, res) => {
   try {
-    const {id}=req.params
+    const { id } = req.params;
     const UserID = req.user?.id || req.user?.user_id;
-    if(!id || isNaN(id)) {
-      return res.status(409).json("Please prove valid id")
+    if (!id || isNaN(id)) {
+      return res.status(409).json("Please prove valid id");
     }
     const query = `SELECT id,user_id,amount,status,shipping_address,payment_method FROM orders WHERE id=$1 AND user_id=$2`;
 
-const Result =await Pool.query(query,[id,UserID])
+    const Result = await Pool.query(query, [id, UserID]);
 
+    if (Result.rows.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Order  does not  found" });
+    }
 
-if(Result.rows.length===0) {
-  return res.status(404).json({success:false,message:"Order  does not  found"})
-}
-
-const itemSelect = ` SELECT  order_items.product_id,order_items.price_at_purchase,products.title,products.id
+    const itemSelect = ` SELECT  order_items.product_id,order_items.price_at_purchase,products.title,products.id
  FROM  order_items
  JOIN products ON order_items.product_id=products.id
  WHERE order_items.order_id=$1;
 `;
-const QueryResult=await Pool.query(itemSelect,[id])
-return res.status(200).json({
-  success: true,
-  order: Result.rows[0],
-  items: QueryResult.rows,
-});
-
-
+    const QueryResult = await Pool.query(itemSelect, [id]);
+    return res.status(200).json({
+      success: true,
+      order: Result.rows[0],
+      items: QueryResult.rows,
+    });
   } catch (error) {
     console.error("Fetch  single Orders Error:", error);
-    return res.status(500).json({ success: false, message: "Internal server error" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
   }
-  
-})
-
+});
 
 router.post("/order", authcateUser, async (req, res) => {
   try {
-     const UserID = req.user?.id || req.user?.user_id;
-    
+    const UserID = req.user?.id || req.user?.user_id;
+
     // const UserID = req.user?.id || req.user?.user_id;
-    const { full_name, email,phone ,shippingAddress, paymentMethod } = req.body;
+    const { full_name, email, phone, shippingAddress, paymentMethod } =
+      req.body;
 
     // 1. Validate BEFORE checking out a pool connection
     if (!shippingAddress || !paymentMethod) {
@@ -117,9 +110,9 @@ router.post("/order", authcateUser, async (req, res) => {
         0
       );
 
-     const CreateOrderQuery = `
-  INSERT INTO orders (user_id, full_name,email,phone, shipping_address, payment_method, status) 
-  VALUES ($1, $2, $3, $4, $5, $6, 'PENDING')
+      const CreateOrderQuery = `
+  INSERT INTO orders (user_id, full_name,email,phone, shipping_address, payment_method, status,amount) 
+  VALUES ($1, $2, $3, $4, $5, $6, 'PENDING' ,$7)
   RETURNING id;
 `;
 
@@ -130,6 +123,7 @@ router.post("/order", authcateUser, async (req, res) => {
         phone,
         shippingAddress,
         paymentMethod,
+        TotalPrice,
       ]);
 
       const newItem = orderResult.rows[0].id;
@@ -171,11 +165,4 @@ router.post("/order", authcateUser, async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-export default router
+export default router;
