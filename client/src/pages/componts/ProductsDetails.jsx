@@ -7,7 +7,6 @@ import "../home.css";
 
 const API_BASE_URL = "http://localhost:2300";
 
-
 // Thumbnail list (Section B) — each one is a different angle of the same product
 // const thumbnails = [angle1, angle2, angle3, angle4, angle5];
 
@@ -48,8 +47,6 @@ function ProductsDetails() {
   const handleAddToCart = async () => {
     setAdding(true);
     try {
-    
-
       const response = await fetch(`${API_BASE_URL}/api/cart/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -281,20 +278,19 @@ function ProductsDetails() {
           >
             {adding ? "Adding..." : "ADD"}
           </button>
-        </div>
-      </div>
-      {showToast && (
-        <div
-          className="
-            fixed bottom-8 left-1/2 -translate-x-1/2 z-50
+          {showToast && (
+            <div
+              className=" z-50
             bg-black text-white text-sm sm:text-base
             px-5 py-3 rounded-full shadow-lg
-            animate-fade-in
+            
           "
-        >
-          Added to cart successfully
+            >
+              Added to cart successfully
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
