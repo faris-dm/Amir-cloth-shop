@@ -51,7 +51,7 @@ const products = [
     price: 22.3,
     description:
       "Classic black crew-neck t-shirt with a minimalist graphic print, made from soft breathable cotton.",
-    category: "men's clothing",
+    category: "T-SHIRT",
     image: img2,
     rating: { rate: 4.1, count: 259 },
   },
