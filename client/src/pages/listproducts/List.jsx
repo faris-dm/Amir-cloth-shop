@@ -15,6 +15,7 @@ const categories = [
   "JEANS",
   "JACKETS",
   "COATS",
+  "Woodie",
 ];
 
 function ProductsList() {
@@ -24,7 +25,7 @@ function ProductsList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [input, setInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function ProductsList() {
 
   // FILTER: search by title
   let filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(query.toLowerCase())
+    product.title.toLowerCase().includes(input.toLowerCase())
   );
 
   // FILTER: by selected category pill (skip when nothing selected)
@@ -96,8 +97,8 @@ function ProductsList() {
               <Search className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-gray-500 shrink-0" />
               <input
                 type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Search.."
                 className="bg-transparent outline-none text-sm sm:text-base lg:text-lg text-gray-700 placeholder:text-gray-500 w-full"
               />
@@ -141,7 +142,7 @@ function ProductsList() {
           </button>
 
           {filteredProducts.length === 0 ? (
-            <p>No products available.</p>
+            <p>No products match with the input.</p>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mt-8 pb-9">
               {filteredProducts.map((product) => (
