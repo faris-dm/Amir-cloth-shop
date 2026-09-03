@@ -4,7 +4,7 @@ const Pool = new pg.Pool({
   host: "localhost",
   database: "ecom",
   password: "admin",
-  port: 5432,
+  port: 5434,
 });
 
 export default Pool;
