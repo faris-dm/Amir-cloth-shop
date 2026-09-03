@@ -286,15 +286,17 @@ function RegisterForm() {
         credentials: "include", // ← add this to both login and register fetch calls
         body: JSON.stringify(userData),
       });
-navigate("/products");
-      if (!response.ok) {
-        throw new Error("Registration failed. Try again.");
-      }
 
-      const result = await response.json();
-      console.log("Success:", result);
+            if (!response.ok) {
+              throw new Error("Registration failed. Try again.");
+            }
+
+            const result = await response.json();
+            console.log("Success:", result);
       
-      ("/dashboard");
+               navigate("/products");
+
+  
       // redirect, show success message, whatever you want next
     } catch (err) {
       setError(err.message);
