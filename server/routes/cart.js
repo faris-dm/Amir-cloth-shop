@@ -25,7 +25,6 @@ router.get("/cartItems", authcateUser, async (req, res) => {
   WHERE Cart.user_id=$1
   ORDER BY Cart.created_at DESC;
   
-
   `;
 
     const Result = await Pool.query(carQuery, [UserId]);
