@@ -106,11 +106,15 @@ function OrderSummary({ subtotal, shipping, agreed, onToggleAgree }) {
       <div className="space-y-3 md:space-y-4">
         <div className="flex items-center justify-between text-base md:text-lg">
           <span className="text-neutral-500">Subtotal</span>
-          <span className="font-medium text-neutral-900">${subtotal}</span>
+          <span className="font-medium text-neutral-900">
+            ${subtotal.toFixed(2)}
+          </span>
         </div>
         <div className="flex items-center justify-between text-base md:text-lg">
           <span className="text-neutral-500">Shipping</span>
-          <span className="font-medium text-neutral-900">${shipping}</span>
+          <span className="font-medium text-neutral-900">
+            ${shipping.toFixed(2)}
+          </span>
         </div>
       </div>
 
@@ -122,7 +126,7 @@ function OrderSummary({ subtotal, shipping, agreed, onToggleAgree }) {
           </span>
         </span>
         <span className="text-xl md:text-2xl font-bold text-neutral-900">
-          ${total}
+          ${total.toFixed(2)}
         </span>
       </div>
 

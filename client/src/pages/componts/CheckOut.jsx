@@ -173,7 +173,7 @@ export default function CheckoutPage() {
   const [addressLine, setAddressLine] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-
+  const [showTost, setShowTost] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [loadingCart, setLoadingCart] = useState(true);
   const [cartError, setCartError] = useState(null);
@@ -253,6 +253,9 @@ export default function CheckoutPage() {
 
       const data = await response.json();
       console.log("Order placed:", data);
+      setCartItems([]);
+      setShowTost(true);
+      setTimeout(() => setShowTost(false), 3000);
       // TODO: navigate to a success/confirmation page, e.g. navigate(`/order-success/${data.orderId}`)
     } catch (err) {
       setOrderError(err.message);
@@ -287,6 +290,8 @@ export default function CheckoutPage() {
           breathing room on the right, matching the source design.
         - Padding scales down on mobile (px-4) up to desktop (lg:px-16).
       */}
+
+      {orderError && <p className="text-sm text-red-600 mt-2">{orderError}</p>}
       <div className="w-full max-w-[1400px] px-4 sm:px-8 lg:px-16 py-6 sm:py-10">
         {/* Back button — always visible, exits the checkout flow */}
         <button
@@ -370,13 +375,11 @@ export default function CheckoutPage() {
                       <Field
                         placeholder="First Name"
                         value={firstName}
-                        required
                         onChange={(e) => setFirstName(e.target.value)}
                       />
                       <Field
                         placeholder="Last Name"
                         value={lastName}
-                        required
                         onChange={(e) => setLastName(e.target.value)}
                       />
 
@@ -454,7 +457,7 @@ export default function CheckoutPage() {
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                     setStep("payment");
+                    setStep("payment");
                   }}
                 >
                   <section>
@@ -533,19 +536,21 @@ export default function CheckoutPage() {
             {/* ---------- STEP 3: Payment ---------- */}
             {step === "payment" && (
               <div className="mt-8 space-y-6">
-                <form onSubmit={(e)=> {
-                  e.preventDefault()
-                  handlePlaceOrder()
-                }}>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handlePlaceOrder();
+                  }}
+                >
                   <section>
                     <h2 className="text-md font-semibold tracking-widest uppercase text-neutral-900 mb-6">
                       Payment Details
                     </h2>
                     <div className="grid grid-cols-1 gap-8">
-                      <Field placeholder="Card Number" required min={8} />
+                      <Field placeholder="Card Number" min={8} />
                       <div className="grid grid-cols-2 gap-7">
-                        <Field placeholder="MM / YY" required />
-                        <Field placeholder="CVC"  required/>
+                        <Field placeholder="MM / YY" required type="date" />
+                        <Field placeholder="CVC" required />
                       </div>
                       <Field placeholder="Name on Card" required />
                     </div>
@@ -585,6 +590,11 @@ export default function CheckoutPage() {
               </div>
             )}
           </div>
+          {showTost && (
+            <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white text-sm sm:text-base px-6 py-3 rounded-full shadow-lg">
+              ✅ Order placed successfully
+            </div>
+          )}
 
           {/* ================= RIGHT: order summary column ================= */}
           {/* `lg:sticky` keeps totals visible while scrolling a long form on desktop */}
