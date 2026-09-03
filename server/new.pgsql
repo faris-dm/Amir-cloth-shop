@@ -3,7 +3,8 @@
 
 
 
-
+ ALTER TABLE  authors 
+ ADD COLUMN username VARCHAR(100) NOT NULL UNIQUE
 
 
 ALTER TABLE orders
